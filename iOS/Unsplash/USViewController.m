@@ -9,6 +9,7 @@
 #import "USViewController.h"
 
 @interface USViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
