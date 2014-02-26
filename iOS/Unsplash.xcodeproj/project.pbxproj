@@ -15,13 +15,15 @@
 		225168A118BE9F2400085AE8 /* USAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168A018BE9F2400085AE8 /* USAppDelegate.m */; };
 		225168A418BE9F2400085AE8 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225168A218BE9F2400085AE8 /* Main_iPhone.storyboard */; };
 		225168A718BE9F2400085AE8 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225168A518BE9F2400085AE8 /* Main_iPad.storyboard */; };
-		225168AA18BE9F2400085AE8 /* USViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168A918BE9F2400085AE8 /* USViewController.m */; };
 		225168AC18BE9F2400085AE8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 225168AB18BE9F2400085AE8 /* Images.xcassets */; };
 		225168B318BE9F2400085AE8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225168B218BE9F2400085AE8 /* XCTest.framework */; };
 		225168B418BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		225168B518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
 		225168BD18BE9F2400085AE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 225168BB18BE9F2400085AE8 /* InfoPlist.strings */; };
 		225168BF18BE9F2400085AE8 /* UnsplashTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168BE18BE9F2400085AE8 /* UnsplashTests.m */; };
+		225168CB18BEA29500085AE8 /* USViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168CA18BEA29500085AE8 /* USViewController.m */; };
+		225168D218BEA2D200085AE8 /* UIERealTimeBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168CF18BEA2D200085AE8 /* UIERealTimeBlurView.m */; };
+		225168D318BEA2D200085AE8 /* UIImage+BoxBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168D118BEA2D200085AE8 /* UIImage+BoxBlur.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,14 +49,18 @@
 		225168A018BE9F2400085AE8 /* USAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USAppDelegate.m; sourceTree = "<group>"; };
 		225168A318BE9F2400085AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		225168A618BE9F2400085AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		225168A818BE9F2400085AE8 /* USViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USViewController.h; sourceTree = "<group>"; };
-		225168A918BE9F2400085AE8 /* USViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USViewController.m; sourceTree = "<group>"; };
 		225168AB18BE9F2400085AE8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		225168B118BE9F2400085AE8 /* UnsplashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		225168B218BE9F2400085AE8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		225168BA18BE9F2400085AE8 /* UnsplashTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnsplashTests-Info.plist"; sourceTree = "<group>"; };
 		225168BC18BE9F2400085AE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		225168BE18BE9F2400085AE8 /* UnsplashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnsplashTests.m; sourceTree = "<group>"; };
+		225168C918BEA29500085AE8 /* USViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USViewController.h; sourceTree = "<group>"; };
+		225168CA18BEA29500085AE8 /* USViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USViewController.m; sourceTree = "<group>"; };
+		225168CE18BEA2D200085AE8 /* UIERealTimeBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIERealTimeBlurView.h; path = Libraries/RealTimeBlur/RealTimeBlur/Classes/UIERealTimeBlurView.h; sourceTree = "<group>"; };
+		225168CF18BEA2D200085AE8 /* UIERealTimeBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIERealTimeBlurView.m; path = Libraries/RealTimeBlur/RealTimeBlur/Classes/UIERealTimeBlurView.m; sourceTree = "<group>"; };
+		225168D018BEA2D200085AE8 /* UIImage+BoxBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+BoxBlur.h"; path = "Libraries/RealTimeBlur/RealTimeBlur/Classes/UIImage+BoxBlur.h"; sourceTree = "<group>"; };
+		225168D118BEA2D200085AE8 /* UIImage+BoxBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+BoxBlur.m"; path = "Libraries/RealTimeBlur/RealTimeBlur/Classes/UIImage+BoxBlur.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,12 +120,12 @@
 		2251689618BE9F2400085AE8 /* Unsplash */ = {
 			isa = PBXGroup;
 			children = (
+				225168CC18BEA2B400085AE8 /* Libraries */,
+				225168C818BEA29500085AE8 /* ViewControllers */,
 				2251689F18BE9F2400085AE8 /* USAppDelegate.h */,
 				225168A018BE9F2400085AE8 /* USAppDelegate.m */,
 				225168A218BE9F2400085AE8 /* Main_iPhone.storyboard */,
 				225168A518BE9F2400085AE8 /* Main_iPad.storyboard */,
-				225168A818BE9F2400085AE8 /* USViewController.h */,
-				225168A918BE9F2400085AE8 /* USViewController.m */,
 				225168AB18BE9F2400085AE8 /* Images.xcassets */,
 				2251689718BE9F2400085AE8 /* Supporting Files */,
 			);
@@ -153,6 +159,34 @@
 				225168BB18BE9F2400085AE8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		225168C818BEA29500085AE8 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				225168C918BEA29500085AE8 /* USViewController.h */,
+				225168CA18BEA29500085AE8 /* USViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		225168CC18BEA2B400085AE8 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				225168CD18BEA2C900085AE8 /* RealTimeBlur */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		225168CD18BEA2C900085AE8 /* RealTimeBlur */ = {
+			isa = PBXGroup;
+			children = (
+				225168CE18BEA2D200085AE8 /* UIERealTimeBlurView.h */,
+				225168CF18BEA2D200085AE8 /* UIERealTimeBlurView.m */,
+				225168D018BEA2D200085AE8 /* UIImage+BoxBlur.h */,
+				225168D118BEA2D200085AE8 /* UIImage+BoxBlur.m */,
+			);
+			name = RealTimeBlur;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +289,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				225168A118BE9F2400085AE8 /* USAppDelegate.m in Sources */,
-				225168AA18BE9F2400085AE8 /* USViewController.m in Sources */,
+				225168CB18BEA29500085AE8 /* USViewController.m in Sources */,
+				225168D218BEA2D200085AE8 /* UIERealTimeBlurView.m in Sources */,
+				225168D318BEA2D200085AE8 /* UIImage+BoxBlur.m in Sources */,
 				2251689D18BE9F2400085AE8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,6 +511,7 @@
 				225168C418BE9F2400085AE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		225168C518BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "UnsplashTests" */ = {
 			isa = XCConfigurationList;
@@ -483,6 +520,7 @@
 				225168C718BE9F2400085AE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
