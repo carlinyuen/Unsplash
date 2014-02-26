@@ -10,4 +10,10 @@
 
 @interface USImageViewController : UIViewController
 
+    /** Imageview for image */
+    @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+    /** Scrollview so we can zoom for viewing images */
+    @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @end
