@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface USImageViewController : UIViewController
+@interface USImageViewController : UIViewController <
+    UIScrollViewDelegate
+>
 
     /** Imageview for image */
     @property (weak, nonatomic) IBOutlet UIImageView *imageView;
