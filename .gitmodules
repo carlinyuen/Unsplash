@@ -1,0 +1,3 @@
+[submodule "iOS/Unsplash/Libraries/RealTimeBlur"]
+	path = iOS/Unsplash/Libraries/RealTimeBlur
+	url = git@github.com:alexdrone/ios-realtimeblur.git
