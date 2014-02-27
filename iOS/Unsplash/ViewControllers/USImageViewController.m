@@ -46,7 +46,7 @@
     [self.scrollView addGestureRecognizer:tap];
 
     // Adding parallax effect for iOS 7
-    if (false)  // TODO: check for iOS 7
+    if (!deviceOSVersionLessThan(iOS7))
     {
         // Set vertical effect
         UIInterpolatingMotionEffect *verticalMotionEffect
@@ -69,6 +69,14 @@
         // Add both effects to your view
         [self.scrollView addMotionEffect:group];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    // Show loading indicator
+    [self displayLoadingIndicator:true];
 }
 
 - (void)didReceiveMemoryWarning

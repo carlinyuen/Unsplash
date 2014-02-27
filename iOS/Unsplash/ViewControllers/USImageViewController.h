@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface USImageViewController : UIViewController <
+#import "USLoadingViewController.h"
+
+@interface USImageViewController : USLoadingViewController <
     UIScrollViewDelegate
 >
 

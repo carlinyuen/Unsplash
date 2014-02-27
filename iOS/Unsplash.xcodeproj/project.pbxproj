@@ -30,6 +30,7 @@
 		225168E618BF888700085AE8 /* USWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225168E418BF888700085AE8 /* USWebViewController.xib */; };
 		225168E918BFD1DA00085AE8 /* USImageDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168E818BFD1DA00085AE8 /* USImageDatasource.m */; };
 		225168ED18BFD36400085AE8 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168EB18BFD36400085AE8 /* Constants.m */; };
+		225168F018BFE3C100085AE8 /* USLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168EF18BFE3C100085AE8 /* USLoadingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		225168EA18BFD36400085AE8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		225168EB18BFD36400085AE8 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		225168EC18BFD36400085AE8 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
+		225168EE18BFE3C100085AE8 /* USLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USLoadingViewController.h; sourceTree = "<group>"; };
+		225168EF18BFE3C100085AE8 /* USLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USLoadingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,11 +188,13 @@
 		225168C818BEA29500085AE8 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				225168C918BEA29500085AE8 /* USViewController.h */,
-				225168CA18BEA29500085AE8 /* USViewController.m */,
 				225168D418BEA79F00085AE8 /* USImageViewController.h */,
 				225168D518BEA79F00085AE8 /* USImageViewController.m */,
 				225168D618BEA79F00085AE8 /* USImageViewController.xib */,
+				225168EE18BFE3C100085AE8 /* USLoadingViewController.h */,
+				225168EF18BFE3C100085AE8 /* USLoadingViewController.m */,
+				225168C918BEA29500085AE8 /* USViewController.h */,
+				225168CA18BEA29500085AE8 /* USViewController.m */,
 				225168E218BF888700085AE8 /* USWebViewController.h */,
 				225168E318BF888700085AE8 /* USWebViewController.m */,
 				225168E418BF888700085AE8 /* USWebViewController.xib */,
@@ -335,6 +340,7 @@
 				225168D318BEA2D200085AE8 /* UIImage+BoxBlur.m in Sources */,
 				2251689D18BE9F2400085AE8 /* main.m in Sources */,
 				225168ED18BFD36400085AE8 /* Constants.m in Sources */,
+				225168F018BFE3C100085AE8 /* USLoadingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

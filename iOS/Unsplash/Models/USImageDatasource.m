@@ -14,6 +14,7 @@
 
     /** Cached array of image urls */
     @property (nonatomic, strong, readwrite) NSMutableArray *imageURLCache;
+    @property (nonatomic, strong, readwrite) NSMutableArray *imageCache;
 
     /** Webview that we're using as datasource */
     @property (nonatomic, strong) USWebViewController *webVC;
@@ -44,6 +45,9 @@
     {
         _jQueryInjected = false;
 
+        _imageCache = [NSMutableArray new];
+        _imageURLCache = [NSMutableArray new];
+
         // Add notification observers
         [[NSNotificationCenter defaultCenter] addObserver:self
             selector:@selector(pageLoaded:)
@@ -51,6 +55,12 @@
             object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [_imageCache removeAllObjects];
+    [_imageURLCache removeAllObjects];
 }
 
 
@@ -79,10 +89,10 @@
             return;
         }
 
-        // If we have images, store in "cache"
+        // If we have images, replace url cache
         if (imageURLs && [imageURLs count])
         {
-            // Add urls to cache
+            // Replace urls in cache
             [self.imageURLCache removeAllObjects];
             [self.imageURLCache addObjectsFromArray:imageURLs];
 
@@ -90,6 +100,9 @@
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:NOTIFICATION_IMAGE_URL_CACHE_UPDATED
                 object:self userInfo:@{ @"data":self.imageURLCache }];
+
+            // Start downloading images asynchronously
+            [self downloadImages];
         }
     }];
 }
@@ -99,6 +112,13 @@
 {
     NSLog(@"Injecting jQuery");
     [self.webVC injectJSFromURL:[NSURL URLWithString:URL_JQUERY] completion:completion];
+}
+
+/** @brief Asynchronously downloading images that aren't cached yet */
+- (void)downloadImages
+{
+    // Only download the ones that aren't in the cache already
+
 }
 
 

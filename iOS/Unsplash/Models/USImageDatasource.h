@@ -12,8 +12,9 @@
 
 @interface USImageDatasource : NSObject
 
-    /** Cached array of image urls */
+    /** Cached array of images and urls */
     @property (nonatomic, strong, readonly) NSMutableArray *imageURLCache;
+    @property (nonatomic, strong, readonly) NSMutableArray *imageCache;
 
     /** @brief Convenience constructor to pass in webVC */
     - (id)initWithWebView:(USWebViewController *)webVC;

@@ -21,9 +21,6 @@
     /** Flag for first load */
     @property (assign, nonatomic) BOOL initialLoad;
 
-    /** Loading indicator */
-    @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
-
 @end
 
 @implementation USWebViewController
@@ -43,8 +40,6 @@
 
     // Loading indicator
     self.initialLoad = true;
-    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.loadingIndicator.alpha = 0;
 
     // Webview
     self.webView.delegate = self;
@@ -76,26 +71,6 @@
 
 #pragma mark - Class Methods
 
-/** @brief Show / hide loading indicator */
-- (void)displayLoadingIndicator:(BOOL)show
-{
-    if (show) {
-        [self.loadingIndicator startAnimating];
-        [self.view addSubview:self.loadingIndicator];
-    }
-    [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
-        options:UIViewAnimationOptionBeginFromCurrentState
-        animations:^{
-            self.loadingIndicator.alpha = (show ? 1 : 0);
-        } completion:^(BOOL finished) {
-            if (finished) {
-                if (!show) {
-                    [self.loadingIndicator stopAnimating];
-                    [self.loadingIndicator removeFromSuperview];
-                }
-            }
-        }];
-}
 
 /** @brief Reload page with url */
 - (void)reloadWebView

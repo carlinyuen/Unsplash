@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "USLoadingViewController.h"
+
     typedef void(^CompletionBlock)(NSString *result);
 
-@interface USWebViewController : UIViewController
+@interface USWebViewController : USLoadingViewController
 
     /** URL to load */
     @property (copy, nonatomic) NSString *urlString;
