@@ -28,6 +28,7 @@
 		225168D818BEA79F00085AE8 /* USImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225168D618BEA79F00085AE8 /* USImageViewController.xib */; };
 		225168E518BF888700085AE8 /* USWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168E318BF888700085AE8 /* USWebViewController.m */; };
 		225168E618BF888700085AE8 /* USWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225168E418BF888700085AE8 /* USWebViewController.xib */; };
+		225168E918BFD1DA00085AE8 /* USImageDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168E818BFD1DA00085AE8 /* USImageDatasource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		225168E218BF888700085AE8 /* USWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USWebViewController.h; sourceTree = "<group>"; };
 		225168E318BF888700085AE8 /* USWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USWebViewController.m; sourceTree = "<group>"; };
 		225168E418BF888700085AE8 /* USWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = USWebViewController.xib; sourceTree = "<group>"; };
+		225168E718BFD1DA00085AE8 /* USImageDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = USImageDatasource.h; path = Models/USImageDatasource.h; sourceTree = "<group>"; };
+		225168E818BFD1DA00085AE8 /* USImageDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = USImageDatasource.m; path = Models/USImageDatasource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +133,7 @@
 		2251689618BE9F2400085AE8 /* Unsplash */ = {
 			isa = PBXGroup;
 			children = (
-				225168DC18BEA85100085AE8 /* Model */,
+				225168DC18BEA85100085AE8 /* Models */,
 				225168AB18BE9F2400085AE8 /* Images.xcassets */,
 				225168CC18BEA2B400085AE8 /* Libraries */,
 				225168A518BE9F2400085AE8 /* Main_iPad.storyboard */,
@@ -206,11 +209,13 @@
 			name = RealTimeBlur;
 			sourceTree = "<group>";
 		};
-		225168DC18BEA85100085AE8 /* Model */ = {
+		225168DC18BEA85100085AE8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				225168E718BFD1DA00085AE8 /* USImageDatasource.h */,
+				225168E818BFD1DA00085AE8 /* USImageDatasource.m */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +323,7 @@
 				225168D718BEA79F00085AE8 /* USImageViewController.m in Sources */,
 				225168A118BE9F2400085AE8 /* USAppDelegate.m in Sources */,
 				225168CB18BEA29500085AE8 /* USViewController.m in Sources */,
+				225168E918BFD1DA00085AE8 /* USImageDatasource.m in Sources */,
 				225168D218BEA2D200085AE8 /* UIERealTimeBlurView.m in Sources */,
 				225168D318BEA2D200085AE8 /* UIImage+BoxBlur.m in Sources */,
 				2251689D18BE9F2400085AE8 /* main.m in Sources */,

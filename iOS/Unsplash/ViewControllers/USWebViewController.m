@@ -167,8 +167,24 @@
     [self executeJS:@"$.noConflict();" completion:nil];
 
     // Get list of img elements inside list of posts
-    [self executeJS:@"JSON.stringify(jQuery('#posts').find('img').map(function() { return this.src; }).get())" completion:^(NSString *result) {
-        NSLog(@"Result: %@", result);
+    [self executeJS:@"JSON.stringify(jQuery('#posts').find('img').map(function() { return this.src; }).get())" completion:^(NSString *result)
+    {
+        NSLog(@"Images: %@", result);
+
+        // Parse json into array
+        NSError *error;
+        NSArray *images = [NSJSONSerialization JSONObjectWithData:[result
+                dataUsingEncoding:NSUTF8StringEncoding]
+            options:kNilOptions error:&error];
+        if (error) {
+            NSLog(@"Error parsing json: %@", result);
+            return;
+        }
+
+        // If we have images, store in "cache"
+        if (images && [images count]) {
+
+        }
     }];
 }
 
