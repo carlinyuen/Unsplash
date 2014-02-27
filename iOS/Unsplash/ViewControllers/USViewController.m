@@ -29,9 +29,9 @@
     [super viewDidLoad];
 
     // Setup datasource
-    self.datasource = [[USImageDatasource alloc] initWithWebView:
-        [[USWebViewController alloc] initWithURLString:URL_UNSPLASH]];
-    [self.scrollView addSubview:self.datasource.webVC.view];
+    USWebViewController *webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
+    self.datasource = [[USImageDatasource alloc] initWithWebView:webVC];
+    [self.scrollView addSubview:webVC.view];
 }
 
 - (void)didReceiveMemoryWarning

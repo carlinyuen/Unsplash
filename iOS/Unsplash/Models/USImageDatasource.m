@@ -25,12 +25,21 @@
 /** @brief Convenience constructor to pass in webVC */
 - (id)initWithWebView:(USWebViewController *)webVC
 {
+    self = [self init];
+    if (self)
+    {
+        _webVC = webVC;
+    }
+    return self;
+}
+
+/** @brief Overridden init */
+- (id)init
+{
     self = [super init];
     if (self)
     {
         _jQueryInjected = false;
-
-        _webVC = webVC;
 
         // Add notification observers
         [[NSNotificationCenter defaultCenter] addObserver:self
