@@ -68,7 +68,7 @@
 
         // Parse json into array
         NSError *error;
-        NSArray *images = [NSJSONSerialization JSONObjectWithData:[result
+        NSArray *imageURLs = [NSJSONSerialization JSONObjectWithData:[result
                 dataUsingEncoding:NSUTF8StringEncoding]
             options:kNilOptions error:&error];
         if (error) {
@@ -77,8 +77,9 @@
         }
 
         // If we have images, store in "cache"
-        if (images && [images count]) {
-
+        if (imageURLs && [imageURLs count]) {
+            [self.imageURLCache removeAllObjects];
+            [self.imageURLCache addObjectsFromArray:imageURLs];
         }
     }];
 }
