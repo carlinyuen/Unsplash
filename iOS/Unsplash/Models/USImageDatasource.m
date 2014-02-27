@@ -12,6 +12,9 @@
 
 @interface USImageDatasource ()
 
+    /** Webview that we're using as datasource */
+    @property (nonatomic, strong) USWebViewController *webVC;
+
     /** Flag to make sure we only inject jQuery once */
     @property (assign, nonatomic) BOOL jQueryInjected;
 
@@ -84,6 +87,8 @@
 /** @brief When we get the page loaded notification */
 - (void)pageLoaded:(NSNotification *)notification
 {
+    NSLog(@"pageLoaded: %@", notification.userInfo);
+
     // Inject jQuery so we can use it
     if (!self.jQueryInjected)
     {

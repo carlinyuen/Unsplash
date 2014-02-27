@@ -218,7 +218,7 @@
     // Track webview loads
     self.webViewLoads--;
 
-    // Not done loading yet
+    // Not done loading yet? Return
     if (self.webViewLoads > 0) {
         return;
     }
