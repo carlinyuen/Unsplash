@@ -19,6 +19,9 @@
     /** Webview to load url */
     @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
+    /** Track loads to find out when page is finished loading */
+    @property (assign, nonatomic) NSInteger webViewLoads;
+
 @end
 
 @implementation USWebViewController
@@ -70,6 +73,7 @@
 /** @brief Inject jQuery */
 - (void)injectJQueryWithCompletionHandler:(CompletionBlock)completion
 {
+    NSLog(@"Injecting jQuery");
     [self injectJSFromURL:[NSURL URLWithString:URL_JQUERY] completion:completion];
 }
 
@@ -139,9 +143,12 @@
 /** @brief Executes JS on webpage */
 - (void)executeJS:(NSString *)jsString completion:(CompletionBlock)completion
 {
+    NSLog(@"Executing JS on webview");
     NSString *result = [self.webView stringByEvaluatingJavaScriptFromString:jsString];
     if (!result) {
         NSLog(@"Error from executing js: %@", jsString);
+    } else {
+       NSLog(@"Result: %@", result);
     }
     if (completion) {
         completion(result);
@@ -151,12 +158,16 @@
 /** @brief Scrape page for image elements */
 - (void)scrapePageForImages
 {
+    NSLog(@"scrapePageForImages");
+
     // First set noConflict for jQuery
     [self executeJS:@"$.noConflict();" completion:nil];
 
+    [self executeJS:@"window.jQuery" completion:nil];
+
     // Get list of img elements inside list of posts
     [self executeJS:@"jQuery('#posts').find('img');" completion:^(NSString *result) {
-        NSLog(@"%@", result);
+        NSLog(@"Result: %@", result);
     }];
 }
 
@@ -165,18 +176,29 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    NSLog(@"shouldStartLoadWithRequest: %@", [request URL]);
+
     // Default to yes
     return YES;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    NSLog(@"webViewDidStartLoad");
+    NSLog(@"didStartLoad, stillLoading: %@", @(webView.loading));
+
+    self.webViewLoads++;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"webViewDidFinishLoad");
+    NSLog(@"didFinishLoad, stillLoading: %@", @(webView.loading));
+
+    self.webViewLoads--;
+
+    // Not done loading yet
+    if (self.webViewLoads > 0) {
+        return;
+    }
 
     // Inject jQuery so we can use it
     __block USWebViewController *this = self;
@@ -185,6 +207,11 @@
             [this scrapePageForImages];
         }
     }];
+}
+
+- (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
+{
+    self.webViewLoads--;
 }
 
 @end
