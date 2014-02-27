@@ -151,6 +151,13 @@
 /** @brief Scrape page for image elements */
 - (void)scrapePageForImages
 {
+    // First set noConflict for jQuery
+    [self executeJS:@"$.noConflict();" completion:nil];
+
+    // Get list of img elements inside list of posts
+    [self executeJS:@"jQuery('#posts').find('img');" completion:^(NSString *result) {
+        NSLog(@"%@", result);
+    }];
 }
 
 
