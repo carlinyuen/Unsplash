@@ -13,4 +13,7 @@
     /** URL to load */
     @property (copy, nonatomic) NSString *urlString;
 
+    /** @brief Convenience constructor to start with urlString */
+    - (id)initWithURLString:(NSString *)urlString;
+
 @end

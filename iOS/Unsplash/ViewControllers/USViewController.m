@@ -8,9 +8,16 @@
 
 #import "USViewController.h"
 
+#import "USWebViewController.h"
+#import "USImageViewController.h"
+
+    #define URL_UNSPLASH @"http://unsplash.com/"
+
 @interface USViewController ()
 
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+    @property (strong, nonatomic) USWebViewController *webVC;
 
 @end
 
@@ -19,7 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    // Setup webview
+    self.webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
+    [self.scrollView addSubview:self.webVC.view];
 }
 
 - (void)didReceiveMemoryWarning
