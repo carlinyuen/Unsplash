@@ -99,7 +99,7 @@
             // Notify that cache is updated
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:NOTIFICATION_IMAGE_URL_CACHE_UPDATED
-                object:self userInfo:@{ @"data":self.imageURLCache }];
+                object:self userInfo:nil];
         }
     }];
 }
@@ -111,18 +111,34 @@
     [self.webVC injectJSFromURL:[NSURL URLWithString:URL_JQUERY] completion:completion];
 }
 
-/** @brief Asynchronously download image and store into imageCache */
-- (void)downloadImage:(NSURL *)url
+/** @brief Asynchronously download image and store into imageCache.
+    @param index Index of */
+- (void)downloadImageAtIndex:(NSInteger)index
 {
+    __block USImageDatasource *this = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
         // Download image data
-        UIImage* data = [NSData dataWithContentsOfURL:url];
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
+        if (this)
+        {
+            NSString *urlString = [this.imageURLCache objectAtIndex:index];
+            NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
             if (data)
             {
+                UIImage *image = [UIImage imageWithData:data];
+                if (image) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        if (this) {
+                            [this.imageCache replaceObjectAtIndex:index withObject:image];
+                        }
+                    });
+                } else {
+                    NSLog(@"Could not create image from data.");
+                }
+            } else {
+                NSLog(@"Could not download image data from url: %@", urlString);
             }
-        });
+        }
     });
 }
 
