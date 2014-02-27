@@ -8,10 +8,6 @@
 
 #import "USWebViewController.h"
 
-    #define URL_JQUERY @"http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"
-
-    typedef void(^CompletionBlock)(NSString *result);
-
 @interface USWebViewController () <
     UIWebViewDelegate
 >
@@ -21,9 +17,6 @@
 
     /** Track loads to find out when page is finished loading */
     @property (assign, nonatomic) NSInteger webViewLoads;
-
-    /** Flag to make sure we only inject jQuery once */
-    @property (assign, nonatomic) BOOL jQueryInjected;
 
 @end
 
@@ -41,8 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.jQueryInjected = false;
 
     self.webView.delegate = self;
 
@@ -73,13 +64,6 @@
     [self.webView loadRequest:[NSURLRequest
         requestWithURL:[NSURL
             URLWithString:self.urlString]]];
-}
-
-/** @brief Inject jQuery */
-- (void)injectJQueryWithCompletionHandler:(CompletionBlock)completion
-{
-    NSLog(@"Injecting jQuery");
-    [self injectJSFromURL:[NSURL URLWithString:URL_JQUERY] completion:completion];
 }
 
 /** @brief Scrolls to an offset that is normalized to 0-1 in reference to the total width / height of the page */
@@ -158,36 +142,6 @@
     }
 }
 
-/** @brief Scrape page for image elements */
-- (void)scrapePageForImages
-{
-    NSLog(@"scrapePageForImages");
-
-    // First set noConflict for jQuery
-    [self executeJS:@"$.noConflict();" completion:nil];
-
-    // Get list of img elements inside list of posts
-    [self executeJS:@"JSON.stringify(jQuery('#posts').find('img').map(function() { return this.src; }).get())" completion:^(NSString *result)
-    {
-        NSLog(@"Images: %@", result);
-
-        // Parse json into array
-        NSError *error;
-        NSArray *images = [NSJSONSerialization JSONObjectWithData:[result
-                dataUsingEncoding:NSUTF8StringEncoding]
-            options:kNilOptions error:&error];
-        if (error) {
-            NSLog(@"Error parsing json: %@", result);
-            return;
-        }
-
-        // If we have images, store in "cache"
-        if (images && [images count]) {
-
-        }
-    }];
-}
-
 
 #pragma mark - UIWebViewDelegate
 
@@ -222,18 +176,6 @@
         postNotificationName:NOTIFICATION_PAGE_LOADED
         object:self userInfo:nil];
 
-    // Inject jQuery so we can use it
-    if (!self.jQueryInjected)
-    {
-        __block USWebViewController *this = self;
-        [self injectJQueryWithCompletionHandler:^(NSString *result) {
-            if (this) {
-                [this scrapePageForImages];
-            }
-        }];
-    } else {
-        [self scrapePageForImages];
-    }
 }
 
 - (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error

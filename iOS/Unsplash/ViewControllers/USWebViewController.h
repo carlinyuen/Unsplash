@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+    typedef void(^CompletionBlock)(NSString *result);
+
 @interface USWebViewController : UIViewController
 
     /** URL to load */
@@ -15,5 +17,11 @@
 
     /** @brief Convenience constructor to start with urlString */
     - (id)initWithURLString:(NSString *)urlString;
+
+    /** @brief Inject javascript from file into webpage */
+    - (void)injectJSFromURL:(NSURL *)jsUrl completion:(CompletionBlock)completion;
+
+    /** @brief Executes JS on webpage */
+    - (void)executeJS:(NSString *)jsString completion:(CompletionBlock)completion;
 
 @end

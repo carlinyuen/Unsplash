@@ -9,6 +9,7 @@
 #import "USViewController.h"
 
 #import "USWebViewController.h"
+#import "USImageDatasource.h"
 #import "USImageViewController.h"
 
     #define URL_UNSPLASH @"http://unsplash.com/"
@@ -17,7 +18,7 @@
 
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-    @property (strong, nonatomic) USWebViewController *webVC;
+    @property (strong, nonatomic) USImageDatasource *datasource;
 
 @end
 
@@ -27,9 +28,10 @@
 {
     [super viewDidLoad];
 
-    // Setup webview
-    self.webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
-    [self.scrollView addSubview:self.webVC.view];
+    // Setup datasource
+    self.datasource = [[USImageDatasource alloc] initWithWebView:
+        [[USWebViewController alloc] initWithURLString:URL_UNSPLASH]];
+    [self.scrollView addSubview:self.datasource.webVC.view];
 }
 
 - (void)didReceiveMemoryWarning

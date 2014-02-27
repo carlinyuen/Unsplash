@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "USWebViewController.h"
+
 @interface USImageDatasource : NSObject
+
+    @property (nonatomic, strong) USWebViewController *webVC;
+
+    /** @brief Convenience constructor to pass in webVC */
+    - (id)initWithWebView:(USWebViewController *)webVC;
 
 @end
