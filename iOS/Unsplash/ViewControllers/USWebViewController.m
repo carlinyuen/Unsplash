@@ -217,6 +217,11 @@
         return;
     }
 
+    // Finished loading spree, notify anyone waiting for it
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:NOTIFICATION_PAGE_LOADED
+        object:self userInfo:nil];
+
     // Inject jQuery so we can use it
     if (!self.jQueryInjected)
     {
