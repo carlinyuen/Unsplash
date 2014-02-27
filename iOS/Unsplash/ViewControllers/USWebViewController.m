@@ -18,6 +18,12 @@
     /** Track loads to find out when page is finished loading */
     @property (assign, nonatomic) NSInteger webViewLoads;
 
+    /** Flag for first load */
+    @property (assign, nonatomic) BOOL initialLoad;
+
+    /** Loading indicator */
+    @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+
 @end
 
 @implementation USWebViewController
@@ -35,9 +41,21 @@
 {
     [super viewDidLoad];
 
-    self.webView.delegate = self;
+    // Loading indicator
+    self.initialLoad = true;
+    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.loadingIndicator.alpha = 0;
 
+    // Webview
+    self.webView.delegate = self;
     [self reloadWebView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    self.loadingIndicator.center = self.view.center;
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,6 +75,27 @@
 
 
 #pragma mark - Class Methods
+
+/** @brief Show / hide loading indicator */
+- (void)displayLoadingIndicator:(BOOL)show
+{
+    if (show) {
+        [self.loadingIndicator startAnimating];
+        [self.view addSubview:self.loadingIndicator];
+    }
+    [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
+        options:UIViewAnimationOptionBeginFromCurrentState
+        animations:^{
+            self.loadingIndicator.alpha = (show ? 1 : 0);
+        } completion:^(BOOL finished) {
+            if (finished) {
+                if (!show) {
+                    [self.loadingIndicator stopAnimating];
+                    [self.loadingIndicator removeFromSuperview];
+                }
+            }
+        }];
+}
 
 /** @brief Reload page with url */
 - (void)reloadWebView
@@ -157,6 +196,12 @@
 {
     NSLog(@"didStartLoad, stillLoading: %@", @(webView.loading));
 
+    // If first load, show loading indicator
+    if (self.initialLoad) {
+        [self displayLoadingIndicator:true];
+    }
+
+    // Track webview loads
     self.webViewLoads++;
 }
 
@@ -164,6 +209,13 @@
 {
     NSLog(@"didFinishLoad, stillLoading: %@", @(webView.loading));
 
+    // If first load, hide loading indicator
+    if (self.initialLoad) {
+        [self displayLoadingIndicator:false];
+        self.initialLoad = false;
+    }
+
+    // Track webview loads
     self.webViewLoads--;
 
     // Not done loading yet
