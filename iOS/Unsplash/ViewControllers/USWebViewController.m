@@ -22,6 +22,9 @@
     /** Track loads to find out when page is finished loading */
     @property (assign, nonatomic) NSInteger webViewLoads;
 
+    /** Flag to make sure we only inject jQuery once */
+    @property (assign, nonatomic) BOOL jQueryInjected;
+
 @end
 
 @implementation USWebViewController
@@ -38,6 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.jQueryInjected = false;
 
     self.webView.delegate = self;
 
@@ -147,8 +152,6 @@
     NSString *result = [self.webView stringByEvaluatingJavaScriptFromString:jsString];
     if (!result) {
         NSLog(@"Error from executing js: %@", jsString);
-    } else {
-       NSLog(@"Result: %@", result);
     }
     if (completion) {
         completion(result);
@@ -163,10 +166,8 @@
     // First set noConflict for jQuery
     [self executeJS:@"$.noConflict();" completion:nil];
 
-    [self executeJS:@"window.jQuery" completion:nil];
-
     // Get list of img elements inside list of posts
-    [self executeJS:@"jQuery('#posts').find('img');" completion:^(NSString *result) {
+    [self executeJS:@"JSON.stringify(jQuery('#posts').find('img').map(function() { return this.src; }).get())" completion:^(NSString *result) {
         NSLog(@"Result: %@", result);
     }];
 }
@@ -201,12 +202,17 @@
     }
 
     // Inject jQuery so we can use it
-    __block USWebViewController *this = self;
-    [self injectJQueryWithCompletionHandler:^(NSString *result) {
-        if (this) {
-            [this scrapePageForImages];
-        }
-    }];
+    if (!self.jQueryInjected)
+    {
+        __block USWebViewController *this = self;
+        [self injectJQueryWithCompletionHandler:^(NSString *result) {
+            if (this) {
+                [this scrapePageForImages];
+            }
+        }];
+    } else {
+        [self scrapePageForImages];
+    }
 }
 
 - (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
