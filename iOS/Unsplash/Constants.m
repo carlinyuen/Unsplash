@@ -20,6 +20,7 @@ NSString* const ONCE_KEY_APP_OPENED = @"onceAppOpened";
 // Notifications
 NSString* const NOTIFICATION_PAGE_LOADED = @"notificationPageLoaded";
 NSString* const NOTIFICATION_IMAGE_URL_CACHE_UPDATED = @"notificationImageUrlCacheUpdated";
+NSString* const NOTIFICATION_IMAGE_LOADED = @"notificationImageLoaded";
 
 // Fonts
 NSString* const FONT_NAME_BRANDING = @"Courier New";

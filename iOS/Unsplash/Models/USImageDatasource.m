@@ -100,9 +100,6 @@
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:NOTIFICATION_IMAGE_URL_CACHE_UPDATED
                 object:self userInfo:@{ @"data":self.imageURLCache }];
-
-            // Start downloading images asynchronously
-            [self downloadImages];
         }
     }];
 }
@@ -114,11 +111,19 @@
     [self.webVC injectJSFromURL:[NSURL URLWithString:URL_JQUERY] completion:completion];
 }
 
-/** @brief Asynchronously downloading images that aren't cached yet */
-- (void)downloadImages
+/** @brief Asynchronously download image and store into imageCache */
+- (void)downloadImage:(NSURL *)url
 {
-    // Only download the ones that aren't in the cache already
-
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+        // Download image data
+        UIImage* data = [NSData dataWithContentsOfURL:url];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if (data)
+            {
+            }
+        });
+    });
 }
 
 

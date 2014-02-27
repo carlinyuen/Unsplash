@@ -20,6 +20,7 @@ extern NSString* const ONCE_KEY_APP_OPENED;
 // Notifications
 extern NSString* const NOTIFICATION_PAGE_LOADED;
 extern NSString* const NOTIFICATION_IMAGE_URL_CACHE_UPDATED;
+extern NSString* const NOTIFICATION_IMAGE_LOADED;
 
 // Fonts
 extern NSString* const FONT_NAME_BRANDING;
