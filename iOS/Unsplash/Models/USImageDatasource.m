@@ -12,6 +12,9 @@
 
 @interface USImageDatasource ()
 
+    /** Cached array of image urls */
+    @property (nonatomic, strong, readwrite) NSMutableArray *imageURLCache;
+
     /** Webview that we're using as datasource */
     @property (nonatomic, strong) USWebViewController *webVC;
 
@@ -77,9 +80,16 @@
         }
 
         // If we have images, store in "cache"
-        if (imageURLs && [imageURLs count]) {
+        if (imageURLs && [imageURLs count])
+        {
+            // Add urls to cache
             [self.imageURLCache removeAllObjects];
             [self.imageURLCache addObjectsFromArray:imageURLs];
+
+            // Notify that cache is updated
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:NOTIFICATION_IMAGE_URL_CACHE_UPDATED
+                object:self userInfo:@{ @"data":self.imageURLCache }];
         }
     }];
 }

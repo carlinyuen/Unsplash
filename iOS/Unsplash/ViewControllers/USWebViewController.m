@@ -227,7 +227,6 @@
     [[NSNotificationCenter defaultCenter]
         postNotificationName:NOTIFICATION_PAGE_LOADED
         object:self userInfo:nil];
-
 }
 
 - (void)webView:(UIWebView*)webView didFailLoadWithError:(NSError*)error
