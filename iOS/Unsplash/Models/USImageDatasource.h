@@ -18,5 +18,9 @@
 
     /** @brief Convenience constructor to pass in webVC */
     - (id)initWithWebView:(USWebViewController *)webVC;
+    
+    /** @brief Asynchronously download image and store into imageCache.
+        @param index Index of */
+    - (void)downloadImageAtIndex:(NSInteger)index;
 
 @end

@@ -96,6 +96,11 @@
             [self.imageURLCache removeAllObjects];
             [self.imageURLCache addObjectsFromArray:imageURLs];
 
+            // Add NSNulls to fill in image cache if it hasn't downloaded yet
+            for (NSInteger i = self.imageCache.count; i < self.imageURLCache.count; ++i) {
+                [self.imageCache addObject:[NSNull null]];
+            }
+
             // Notify that cache is updated
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:NOTIFICATION_IMAGE_URL_CACHE_UPDATED
