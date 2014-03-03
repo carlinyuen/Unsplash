@@ -154,7 +154,11 @@
 /** @brief When new image urls are scraped from the page */
 - (void)imageURLsFetched:(NSNotification *)notification
 {
+    // Resize scrollview contentsize
     [self updateScrollView:self.scrollView.bounds];
+
+    // Get first image
+    [self fetchImageAtIndex:0];
 }
 
 /** @brief When new image has been loaded */
@@ -162,8 +166,8 @@
 {
     NSInteger index = [notification.userInfo[@"index"] integerValue];
     debugLog(@"imageLoaded: %i", index);
-    if (!index) {
-        NSLog(@"No index passed from imageLoaded notification!");
+    if (index >= self.imageButtons.count) {
+        NSLog(@"Index from imageLoaded notification out of bounds!");
         return;
     }
 
