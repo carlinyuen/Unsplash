@@ -196,8 +196,8 @@
 {
 	// Change page control accordingly:
 	//	Update the page when more than 50% of the previous/next page is visible
-    CGFloat pageSize = scrollView.bounds.size.height;
-    int page = floor((scrollView.contentOffset.y - pageSize / 2) / pageSize) + 1;
+    CGFloat pageSize = CGRectGetWidth(scrollView.bounds);
+    int page = floor((scrollView.contentOffset.x - pageSize / 2) / pageSize) + 1;
 
 	// Bound page limits
 	if (page >= self.datasource.imageURLCache.count) {
