@@ -23,4 +23,7 @@
         @param index Index of */
     - (void)downloadImageAtIndex:(NSInteger)index;
 
+    /** @brief Call to request more images from the datasource */
+    - (void)fetchMoreImages;
+
 @end

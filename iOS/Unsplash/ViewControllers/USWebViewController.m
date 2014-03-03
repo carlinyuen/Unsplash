@@ -95,7 +95,7 @@
     [self executeJS:[NSString stringWithFormat:
         @"jQuery('html, body').animate({"
             @"scrollTop: %@"
-        @"}, 2000);", @(yOffset)] completion:nil];
+        @"}, 200);", @(yOffset)] completion:nil];
 
     return true;
 }
@@ -112,7 +112,7 @@
     [self executeJS:[NSString stringWithFormat:
         @"jQuery('html, body').animate({"
             @"scrollTop: jQuery('#%@').offset().top"
-        @"}, 2000);", elementID] completion:nil];
+        @"}, 200);", elementID] completion:nil];
 
     return true;
 }

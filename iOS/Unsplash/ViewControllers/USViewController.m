@@ -63,6 +63,8 @@
     self.scrollView.directionalLockEnabled = true;
     self.scrollView.showsVerticalScrollIndicator = false;
     self.scrollView.showsHorizontalScrollIndicator = true;
+    [self.scrollView addObserver:self forKeyPath:@"contentSize"
+        options:kNilOptions context:nil];   // For clean rotations
     [self.scrollView addSubview:webVC.view]; // TODO: Remove at some point
 
     // Adding parallax effect for iOS 7
@@ -89,6 +91,12 @@
         // Add both effects to your view
         [self.scrollView addMotionEffect:group];
     }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // Reposition images
+    [self updateScrollView:self.scrollView.bounds];
 }
 
 - (void)didReceiveMemoryWarning
@@ -199,6 +207,14 @@
         }];
 }
 
+/** @brief When content size is being changed on scrollview */
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    // Update content offset based on content size for smooth rotation change
+    self.scrollView.contentOffset = CGPointMake(
+        self.lastShownPage * CGRectGetWidth(self.scrollView.bounds), 0);
+}
+
 
 #pragma mark - Protocols
 #pragma mark - UIScrollViewDelegate
@@ -211,8 +227,9 @@
     int page = floor((scrollView.contentOffset.x - pageSize / 2) / pageSize) + 1;
 
 	// Bound page limits
-	if (page >= self.datasource.imageURLCache.count) {
-		page = self.datasource.imageURLCache.count - 1;
+    NSInteger numImages = [self.datasource.imageURLCache count];
+	if (page >= numImages) {
+		page = numImages - 1;
 	} else if (page < 0) {
 		page = 0;
 	}
@@ -223,7 +240,13 @@
         // If image cache doesn't have next image, start loading it
         [self fetchImageAtIndex:page];
 
+        // Update last shown page number
         self.lastShownPage = page;
+
+        // If page number is last page, ask for more images
+        if (page == numImages - 1) {
+            [self.datasource fetchMoreImages];
+        }
 	}
 }
 

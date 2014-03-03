@@ -26,4 +26,10 @@
     /** @brief Executes JS on webpage */
     - (void)executeJS:(NSString *)jsString completion:(CompletionBlock)completion;
 
+    /** @brief Scrolls to an offset that is normalized to 0-1 in reference to the total width / height of the page */
+    - (BOOL)scrollToNormalizedOffset:(CGPoint)offset;
+
+    /** @brief Scrolls to element on page */
+    - (BOOL)scrollToElementId:(NSString *)elementID;
+
 @end

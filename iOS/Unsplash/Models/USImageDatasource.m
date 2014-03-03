@@ -156,6 +156,12 @@
     });
 }
 
+/** @brief Call to request more images from the datasource */
+- (void)fetchMoreImages
+{
+    [self.webVC scrollToNormalizedOffset:CGPointMake(0, 1)];
+}
+
 
 #pragma mark - Event Handlers
 
