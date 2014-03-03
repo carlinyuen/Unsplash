@@ -14,7 +14,9 @@
 
     #define URL_UNSPLASH @"http://unsplash.com/"
 
-@interface USViewController ()
+@interface USViewController () <
+    UIScrollViewDelegate
+>
 
     /** Main scrolling element */
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -56,6 +58,7 @@
 
     // Setup Scrollview
     self.scrollView.backgroundColor = [UIColor darkGrayColor];
+    self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = true;
     self.scrollView.directionalLockEnabled = true;
     self.scrollView.showsVerticalScrollIndicator = false;
@@ -95,11 +98,16 @@
 }
 
 
+#pragma mark - Setup
+
+
 #pragma mark - Class Methods
 
 /** @brief Fetches the image at index if it isn't already cached */
 - (void)fetchImageAtIndex:(NSInteger)index
 {
+    debugLog(@"fetchImageAtIndex: %i", index);
+
     UIImage *image = [self.datasource.imageCache objectAtIndex:index];
     if (!image || [image isEqual:[NSNull null]]) {
         [self.datasource downloadImageAtIndex:index];
