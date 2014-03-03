@@ -115,11 +115,10 @@
 }
 
 /** @brief Update scrollview based on content from datasource */
-- (void)updateScrollView
+- (void)updateScrollView:(CGRect)bounds
 {
     // Update scrollview content size based on number of imageurls
     NSArray *imageURLs = self.datasource.imageURLCache;
-    CGRect bounds = self.scrollView.bounds;
     self.scrollView.contentSize = CGSizeMake(
         CGRectGetWidth(bounds) * ([imageURLs count] + 1),   // +1 for intro
         CGRectGetHeight(bounds)
@@ -134,8 +133,7 @@
             (i + 1) * CGRectGetWidth(bounds), 0,
             CGRectGetWidth(bounds), CGRectGetHeight(bounds)
         );
-        button.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        button.backgroundColor = [UIColor blueColor];
+        button.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [button addTarget:self action:@selector(imageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.scrollView addSubview:button];
 
@@ -156,7 +154,7 @@
 /** @brief When new image urls are scraped from the page */
 - (void)imageURLsFetched:(NSNotification *)notification
 {
-    [self updateScrollView];
+    [self updateScrollView:self.scrollView.bounds];
 }
 
 /** @brief When new image has been loaded */
