@@ -81,13 +81,8 @@
 }
 
 /** @brief Scrolls to an offset that is normalized to 0-1 in reference to the total width / height of the page */
-- (BOOL)scrollToNormalizedOffset:(CGPoint)offset
+- (void)scrollToNormalizedOffset:(CGPoint)offset
 {
-    // Don't scroll if still loading
-    if (self.webView.isLoading) {
-        return false;
-    }
-
     // Only do height for now
     CGFloat yOffset = offset.y * self.webView.scrollView.contentSize.height;
 
@@ -96,25 +91,16 @@
         @"jQuery('html, body').animate({"
             @"scrollTop: %@"
         @"}, 200);", @(yOffset)] completion:nil];
-
-    return true;
 }
 
 /** @brief Scrolls to element on page */
-- (BOOL)scrollToElementId:(NSString *)elementID
+- (void)scrollToElementId:(NSString *)elementID
 {
-    // Don't scroll if still loading
-    if (self.webView.isLoading) {
-        return false;
-    }
-
     // Scroll to point
     [self executeJS:[NSString stringWithFormat:
         @"jQuery('html, body').animate({"
             @"scrollTop: jQuery('#%@').offset().top"
         @"}, 200);", elementID] completion:nil];
-
-    return true;
 }
 
 /** @brief Inject javascript from file into webpage */

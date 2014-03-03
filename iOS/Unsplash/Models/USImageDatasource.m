@@ -159,6 +159,8 @@
 /** @brief Call to request more images from the datasource */
 - (void)fetchMoreImages
 {
+    debugLog(@"fetchMoreImages");
+
     [self.webVC scrollToNormalizedOffset:CGPointMake(0, 1)];
 }
 
