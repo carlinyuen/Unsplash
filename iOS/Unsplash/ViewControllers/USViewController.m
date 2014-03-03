@@ -65,7 +65,6 @@
     self.scrollView.showsHorizontalScrollIndicator = true;
     [self.scrollView addObserver:self forKeyPath:@"contentSize"
         options:kNilOptions context:nil];   // For clean rotations
-    [self.scrollView addSubview:webVC.view]; // TODO: Remove at some point
 
     // Adding parallax effect for iOS 7
     if (!deviceOSVersionLessThan(iOS7))
