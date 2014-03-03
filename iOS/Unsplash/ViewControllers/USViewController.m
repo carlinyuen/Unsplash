@@ -37,6 +37,7 @@
     [super viewDidLoad];
 
     // Init
+    self.lastShownPage = 0;
     self.imageButtons = [NSMutableArray new];
 
     // Notification observer
@@ -53,8 +54,13 @@
     USWebViewController *webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
     self.datasource = [[USImageDatasource alloc] initWithWebView:webVC];
 
-    // TODO: Remove at some point
-    [self.scrollView addSubview:webVC.view];
+    // Setup Scrollview
+    self.scrollView.backgroundColor = [UIColor darkGrayColor];
+    self.scrollView.pagingEnabled = true;
+    self.scrollView.directionalLockEnabled = true;
+    self.scrollView.showsVerticalScrollIndicator = false;
+    self.scrollView.showsHorizontalScrollIndicator = true;
+    [self.scrollView addSubview:webVC.view]; // TODO: Remove at some point
 
     // Adding parallax effect for iOS 7
     if (!deviceOSVersionLessThan(iOS7))
@@ -91,6 +97,15 @@
 
 #pragma mark - Class Methods
 
+/** @brief Fetches the image at index if it isn't already cached */
+- (void)fetchImageAtIndex:(NSInteger)index
+{
+    UIImage *image = [self.datasource.imageCache objectAtIndex:index];
+    if (!image || [image isEqual:[NSNull null]]) {
+        [self.datasource downloadImageAtIndex:index];
+    }
+}
+
 /** @brief Update scrollview based on content from datasource */
 - (void)updateScrollView
 {
@@ -101,10 +116,34 @@
         CGRectGetWidth(bounds) * ([imageURLs count] + 1),   // +1 for intro
         CGRectGetHeight(bounds)
     );
+
+    // Add new placeholder images
+    for (NSInteger i = self.imageButtons.count; i < imageURLs.count; ++i)
+    {
+        // Create button for it
+        UIButton *button = [UIButton new];
+        button.frame = CGRectMake(
+            (i + 1) * CGRectGetWidth(bounds), 0,
+            CGRectGetWidth(bounds), CGRectGetHeight(bounds)
+        );
+        button.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        button.backgroundColor = [UIColor blueColor];
+        [button addTarget:self action:@selector(imageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [self.scrollView addSubview:button];
+
+        // Keep track of it
+        [self.imageButtons addObject:button];
+    }
 }
 
 
 #pragma mark - Event Handlers
+
+/** @brief When image button tapped */
+- (void)imageButtonTapped:(UIButton *)button
+{
+    debugLog(@"imageButtonTapped");
+}
 
 /** @brief When new image urls are scraped from the page */
 - (void)imageURLsFetched:(NSNotification *)notification
@@ -116,6 +155,13 @@
 - (void)imageLoaded:(NSNotification *)notification
 {
     NSInteger index = [notification.userInfo[@"index"] integerValue];
+    debugLog(@"imageLoaded: %i", index);
+    if (!index) {
+        NSLog(@"No index passed from imageLoaded notification!");
+        return;
+    }
+
+    // Get image button to show
     UIButton *imageButton = [self.imageButtons objectAtIndex:index];
 
     // Fade out button and add image
@@ -156,10 +202,7 @@
 	if (self.lastShownPage != page)
     {
         // If image cache doesn't have next image, start loading it
-        UIImage *image = [self.datasource.imageCache objectAtIndex:page];
-        if (!image || [image isEqual:[NSNull null]]) {
-            [self.datasource downloadImageAtIndex:page];
-        }
+        [self fetchImageAtIndex:page];
 
         self.lastShownPage = page;
 	}

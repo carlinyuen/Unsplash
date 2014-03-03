@@ -69,7 +69,7 @@
 /** @brief Scrape page for image elements */
 - (void)scrapePageForImages
 {
-    NSLog(@"scrapePageForImages");
+    debugLog(@"scrapePageForImages");
 
     // First set noConflict for jQuery
     [self.webVC executeJS:@"$.noConflict();" completion:nil];
@@ -77,7 +77,7 @@
     // Get list of img elements inside list of posts
     [self.webVC executeJS:@"JSON.stringify(jQuery('#posts').find('img').map(function() { return this.src; }).get())" completion:^(NSString *result)
     {
-        NSLog(@"Images: %@", result);
+        debugLog(@"Images: %@", result);
 
         // Parse json into array
         NSError *error;
@@ -112,7 +112,7 @@
 /** @brief Inject jQuery */
 - (void)injectJQueryWithCompletionHandler:(CompletionBlock)completion
 {
-    NSLog(@"Injecting jQuery");
+    debugLog(@"Injecting jQuery");
     [self.webVC injectJSFromURL:[NSURL URLWithString:URL_JQUERY] completion:completion];
 }
 
@@ -133,8 +133,17 @@
                 UIImage *image = [UIImage imageWithData:data];
                 if (image) {
                     dispatch_async(dispatch_get_main_queue(), ^(void) {
-                        if (this) {
+                        if (this)
+                        {
+                            // Replace spot in cache
                             [this.imageCache replaceObjectAtIndex:index withObject:image];
+                            
+                            // Notify that image was downloaded
+                            [[NSNotificationCenter defaultCenter]
+                                postNotificationName:NOTIFICATION_IMAGE_LOADED
+                                object:self userInfo:@{
+                                    @"index" : @(index)
+                                }];
                         }
                     });
                 } else {
