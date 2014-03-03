@@ -55,6 +55,8 @@
     // Setup datasource
     USWebViewController *webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
     self.datasource = [[USImageDatasource alloc] initWithWebView:webVC];
+    webVC.view.alpha = 0;
+    [self.scrollView addSubview:webVC.view];
 
     // Setup Scrollview
     self.scrollView.backgroundColor = [UIColor darkGrayColor];
@@ -236,11 +238,13 @@
 	// If page is not the same as lastShownPage, page is about to change
 	if (self.lastShownPage != page)
     {
-        // If image cache doesn't have next image, start loading it
-        [self fetchImageAtIndex:page];
+        debugLog(@"pageChange: %i to %i", self.lastShownPage, page);
 
         // Update last shown page number
         self.lastShownPage = page;
+
+        // If image cache doesn't have next image, start loading it
+        [self fetchImageAtIndex:page];
 
         // If page number is last page, ask for more images
         if (page == numImages - 1) {
