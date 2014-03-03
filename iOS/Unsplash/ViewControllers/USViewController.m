@@ -124,6 +124,15 @@
         CGRectGetHeight(bounds)
     );
 
+    // Reposition existing images
+    for (NSInteger i = 0; i < self.imageButtons.count; ++i)
+    {
+        [self.imageButtons[i] setFrame:CGRectMake(
+            (i + 1) * CGRectGetWidth(bounds), 0,
+            CGRectGetWidth(bounds), CGRectGetHeight(bounds)
+        )];
+    }
+
     // Add new placeholder images
     for (NSInteger i = self.imageButtons.count; i < imageURLs.count; ++i)
     {
@@ -133,7 +142,7 @@
             (i + 1) * CGRectGetWidth(bounds), 0,
             CGRectGetWidth(bounds), CGRectGetHeight(bounds)
         );
-        button.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        button.imageView.contentMode = UIViewContentModeScaleAspectFill;
         [button addTarget:self action:@selector(imageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.scrollView addSubview:button];
 
