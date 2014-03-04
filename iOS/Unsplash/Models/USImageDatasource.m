@@ -178,8 +178,6 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    debugLog(@"connectionRecievedResponse");
-
     // If for api connection, do nothing
     if (connection == self.apiConnection) {
         return;
@@ -196,8 +194,6 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    debugLog(@"connectionRecievedData");
-
     // If for api connection, just append data simply
     if (connection == self.apiConnection) {
         [self.apiConnectionData appendData:data];

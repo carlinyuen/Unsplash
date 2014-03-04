@@ -168,11 +168,12 @@
     for (NSInteger i = self.imageViews.count; i < imageURLs.count; ++i)
     {
         // Create loading indicator
-        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         loadingView.frame = CGRectMake(
             (i + 1) * CGRectGetWidth(bounds), 0,
             CGRectGetWidth(bounds), CGRectGetHeight(bounds)
         );
+        [loadingView startAnimating];
         [self.scrollView addSubview:loadingView];
 
         // Keep track of it
