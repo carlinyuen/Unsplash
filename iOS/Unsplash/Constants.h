@@ -21,6 +21,7 @@ extern NSString* const ONCE_KEY_APP_OPENED;
 extern NSString* const NOTIFICATION_PAGE_LOADED;
 extern NSString* const NOTIFICATION_IMAGE_URL_CACHE_UPDATED;
 extern NSString* const NOTIFICATION_IMAGE_LOADED;
+extern NSString* const NOTIFICATION_IMAGE_DOWNLOAD_PROGRESS;
 
 // Fonts
 extern NSString* const FONT_NAME_BRANDING;

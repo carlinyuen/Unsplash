@@ -9,11 +9,20 @@
 
 #import <Foundation/Foundation.h>
 
+    #define KEY_CONNECTION_DOWNLOAD_INDEX @"index"
+    #define KEY_CONNECTION_DOWNLOAD_PROGRESS @"progress"
+    
 @interface USImageDatasource : NSObject
+
+    /** Tumblr blog to pull posts from */
+    @property (copy, nonatomic) NSString *blogURLString;
 
     /** Cached array of images and urls */
     @property (nonatomic, strong, readonly) NSMutableArray *imageURLCache;
     @property (nonatomic, strong, readonly) NSMutableArray *imageCache;
+
+    /** @brief Convenience constructor for urlString */
+    - (id)initWithURLString:(NSString *)urlString;
 
     /** @brief Asynchronously download image and store into imageCache.
         @param index Index of */

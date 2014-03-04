@@ -12,7 +12,7 @@
 #import "USImageDatasource.h"
 #import "USImageViewController.h"
 
-    #define URL_UNSPLASH @"http://unsplash.com/"
+    #define URL_UNSPLASH @"http://unsplash.com"
 
 @interface USViewController () <
     UIScrollViewDelegate
@@ -22,7 +22,7 @@
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
     /** Array to keep track of images loaded */
-    @property (strong, nonatomic) NSMutableArray *imageButtons;
+    @property (strong, nonatomic) NSMutableArray *imageViews;
 
     /** Datasource to manage images */
     @property (strong, nonatomic) USImageDatasource *datasource;
@@ -40,7 +40,7 @@
 
     // Init
     self.lastShownPage = 0;
-    self.imageButtons = [NSMutableArray new];
+    self.imageViews = [NSMutableArray new];
 
     // Notification observer
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -54,7 +54,7 @@
 
     // Setup datasource - use Tumblr API instead
 //    USWebViewController *webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
-    self.datasource = [USImageDatasource new];
+    self.datasource = [[USImageDatasource alloc] initWithURLString:URL_UNSPLASH];
 
     // Setup Scrollview
     self.scrollView.backgroundColor = [UIColor darkGrayColor];
@@ -65,7 +65,36 @@
     self.scrollView.showsHorizontalScrollIndicator = true;
     [self.scrollView addObserver:self forKeyPath:@"contentSize"
         options:kNilOptions context:nil];   // For clean rotations
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    // Get images
+    if (self.datasource && self.lastShownPage >= self.imageViews.count - 1) {
+        [self.datasource fetchMoreImages];
+    }
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // Reposition images
+    [self updateScrollView:self.scrollView.bounds];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Setup
+
+/** @brief Add parallax effects */
+- (void)addParallaxToView:(UIView *)view
+{
     // Adding parallax effect for iOS 7
     if (!deviceOSVersionLessThan(iOS7))
     {
@@ -88,24 +117,9 @@
         group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
         
         // Add both effects to your view
-        [self.scrollView addMotionEffect:group];
+        [view addMotionEffect:group];
     }
 }
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    // Reposition images
-    [self updateScrollView:self.scrollView.bounds];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-#pragma mark - Setup
 
 
 #pragma mark - Class Methods
@@ -132,39 +146,37 @@
     );
 
     // Reposition existing images
-    for (NSInteger i = 0; i < self.imageButtons.count; ++i)
+    for (NSInteger i = 0; i < self.imageViews.count; ++i)
     {
-        [self.imageButtons[i] setFrame:CGRectMake(
+        [self.imageViews[i] setFrame:CGRectMake(
             (i + 1) * CGRectGetWidth(bounds), 0,
             CGRectGetWidth(bounds), CGRectGetHeight(bounds)
         )];
     }
 
     // Add new placeholder images
-    for (NSInteger i = self.imageButtons.count; i < imageURLs.count; ++i)
+    for (NSInteger i = self.imageViews.count; i < imageURLs.count; ++i)
     {
-        // Create button for it
-        UIButton *button = [UIButton new];
-        button.frame = CGRectMake(
+        // Create loading indicator
+        UIActivityIndicatorView *loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        loadingView.frame = CGRectMake(
             (i + 1) * CGRectGetWidth(bounds), 0,
             CGRectGetWidth(bounds), CGRectGetHeight(bounds)
         );
-        button.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        [button addTarget:self action:@selector(imageButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [self.scrollView addSubview:button];
+        [self.scrollView addSubview:loadingView];
 
         // Keep track of it
-        [self.imageButtons addObject:button];
+        [self.imageViews addObject:loadingView];
     }
 }
 
 
 #pragma mark - Event Handlers
 
-/** @brief When image button tapped */
-- (void)imageButtonTapped:(UIButton *)button
+/** @brief When screen is tapped */
+- (void)screenTapped:(UITapGestureRecognizer *)gesture
 {
-    debugLog(@"imageButtonTapped");
+    debugLog(@"screenTapped");
 }
 
 /** @brief When new image urls are scraped from the page */
@@ -182,27 +194,49 @@
 {
     NSInteger index = [notification.userInfo[@"index"] integerValue];
     debugLog(@"imageLoaded: %i", index);
-    if (index >= self.imageButtons.count) {
+    if (index >= self.imageViews.count) {
         NSLog(@"Index from imageLoaded notification out of bounds!");
         return;
     }
 
-    // Get image button to show
-    UIButton *imageButton = [self.imageButtons objectAtIndex:index];
+    // Get image view to show
+    UIActivityIndicatorView *view = [self.imageViews objectAtIndex:index];
 
-    // Fade out button and add image
+    // Only proceed if view is a loading indicator
+    if (!view || ![view isKindOfClass:[UIActivityIndicatorView class]]) {
+        return;
+    }
+
+    // Fade out view and add image
+    __block USViewController *this = self;
     [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
         options:UIViewAnimationOptionBeginFromCurrentState
         animations:^{
-            imageButton.alpha = 0;
+            view.alpha = 0;
         }
-        completion:^(BOOL finished) {
-            [imageButton setImage:[self.datasource.imageCache objectAtIndex:index] forState:UIControlStateNormal];
-            [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
-                options:UIViewAnimationOptionBeginFromCurrentState
-                animations:^{
-                    imageButton.alpha = 1;
-                } completion:nil];
+        completion:^(BOOL finished)
+        {
+            if (this)
+            {
+                // Add ImageView
+                UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.frame];
+                imageView.contentMode = UIViewContentModeScaleAspectFill;
+                imageView.backgroundColor = [UIColor clearColor];
+                [imageView setImage:[this.datasource.imageCache objectAtIndex:index]];
+
+                // Remove loading indicator
+                [view stopAnimating];
+                [view removeFromSuperview];
+
+                // Fade in imageview
+                imageView.alpha = 0;
+                [this.scrollView addSubview:imageView];
+                [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
+                    options:UIViewAnimationOptionBeginFromCurrentState
+                    animations:^{
+                        imageView.alpha = 1;
+                    } completion:nil];
+            }
         }];
 }
 
