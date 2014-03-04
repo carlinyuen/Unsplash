@@ -9,14 +9,13 @@
 /* Begin PBXBuildFile section */
 		223D565A18C6768900CE2C7B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D565918C6768900CE2C7B /* QuartzCore.framework */; };
 		223D565C18C6768F00CE2C7B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D565B18C6768F00CE2C7B /* Accelerate.framework */; };
+		223D565E18C68A5D00CE2C7B /* USViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223D565D18C68A5D00CE2C7B /* USViewController.xib */; };
 		2251689118BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		2251689318BE9F2400085AE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689218BE9F2400085AE8 /* CoreGraphics.framework */; };
 		2251689518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
 		2251689B18BE9F2400085AE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2251689918BE9F2400085AE8 /* InfoPlist.strings */; };
 		2251689D18BE9F2400085AE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2251689C18BE9F2400085AE8 /* main.m */; };
 		225168A118BE9F2400085AE8 /* USAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168A018BE9F2400085AE8 /* USAppDelegate.m */; };
-		225168A418BE9F2400085AE8 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225168A218BE9F2400085AE8 /* Main_iPhone.storyboard */; };
-		225168A718BE9F2400085AE8 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 225168A518BE9F2400085AE8 /* Main_iPad.storyboard */; };
 		225168AC18BE9F2400085AE8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 225168AB18BE9F2400085AE8 /* Images.xcassets */; };
 		225168B318BE9F2400085AE8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225168B218BE9F2400085AE8 /* XCTest.framework */; };
 		225168B418BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
@@ -49,6 +48,7 @@
 /* Begin PBXFileReference section */
 		223D565918C6768900CE2C7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		223D565B18C6768F00CE2C7B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		223D565D18C68A5D00CE2C7B /* USViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = USViewController.xib; sourceTree = "<group>"; };
 		2251688D18BE9F2400085AE8 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2251689018BE9F2400085AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2251689218BE9F2400085AE8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,8 +59,6 @@
 		2251689E18BE9F2400085AE8 /* Unsplash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unsplash-Prefix.pch"; sourceTree = "<group>"; };
 		2251689F18BE9F2400085AE8 /* USAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USAppDelegate.h; sourceTree = "<group>"; };
 		225168A018BE9F2400085AE8 /* USAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USAppDelegate.m; sourceTree = "<group>"; };
-		225168A318BE9F2400085AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		225168A618BE9F2400085AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		225168AB18BE9F2400085AE8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		225168B118BE9F2400085AE8 /* UnsplashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		225168B218BE9F2400085AE8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -158,8 +156,6 @@
 				225168AB18BE9F2400085AE8 /* Images.xcassets */,
 				225D8FD918C667090061E5CD /* Keys.h */,
 				225168CC18BEA2B400085AE8 /* Libraries */,
-				225168A518BE9F2400085AE8 /* Main_iPad.storyboard */,
-				225168A218BE9F2400085AE8 /* Main_iPhone.storyboard */,
 				225168DC18BEA85100085AE8 /* Models */,
 				2251689718BE9F2400085AE8 /* Supporting Files */,
 				2251689F18BE9F2400085AE8 /* USAppDelegate.h */,
@@ -208,6 +204,7 @@
 				225168EF18BFE3C100085AE8 /* USLoadingViewController.m */,
 				225168C918BEA29500085AE8 /* USViewController.h */,
 				225168CA18BEA29500085AE8 /* USViewController.m */,
+				223D565D18C68A5D00CE2C7B /* USViewController.xib */,
 				225168E218BF888700085AE8 /* USWebViewController.h */,
 				225168E318BF888700085AE8 /* USWebViewController.m */,
 				225168E418BF888700085AE8 /* USWebViewController.xib */,
@@ -322,12 +319,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				225168A718BE9F2400085AE8 /* Main_iPad.storyboard in Resources */,
 				225168AC18BE9F2400085AE8 /* Images.xcassets in Resources */,
 				225168D818BEA79F00085AE8 /* USImageViewController.xib in Resources */,
 				225168E618BF888700085AE8 /* USWebViewController.xib in Resources */,
-				225168A418BE9F2400085AE8 /* Main_iPhone.storyboard in Resources */,
 				2251689B18BE9F2400085AE8 /* InfoPlist.strings in Resources */,
+				223D565E18C68A5D00CE2C7B /* USViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,22 +381,6 @@
 				2251689A18BE9F2400085AE8 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		225168A218BE9F2400085AE8 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				225168A318BE9F2400085AE8 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		225168A518BE9F2400085AE8 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				225168A618BE9F2400085AE8 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		225168BB18BE9F2400085AE8 /* InfoPlist.strings */ = {

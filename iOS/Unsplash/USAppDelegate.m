@@ -12,9 +12,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
     // Hide status bar
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+
     
+    // Create base view controller
+    self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
+	self.window.rootViewController = self.viewController;
+
+    // Handle notifications
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (notification) {
+        [self application:application didReceiveLocalNotification:notification];
+    }
+
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							
@@ -43,6 +57,14 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+#pragma mark - Notifications
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    debugLog(@"receivedLocalNotification: %@", notification.userInfo);
 }
 
 @end
