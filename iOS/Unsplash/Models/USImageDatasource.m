@@ -83,8 +83,10 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:true];
 
     // Store connection data into map
-    [self.connectionMap setObject:[NSMutableDictionary new]
-        forKey:@([connection hash])];
+    NSMutableDictionary *info = [NSMutableDictionary new];
+    [info setObject:@(index) forKey:KEY_CONNECTION_DOWNLOAD_INDEX];
+    [self.connectionMap setObject:info
+        forKey:[self keyForConnection:connection]];
 }
 
 /** @brief Download image at index using GCD */
@@ -152,7 +154,13 @@
 - (void)cleanConnection:(NSURLConnection *)connection
 {
     // Clear it out
-    [self.connectionMap removeObjectForKey:@([connection hash])];
+    [self.connectionMap removeObjectForKey:[self keyForConnection:connection]];
+}
+
+/** @brief Returns key used in map for connection */
+- (NSString *)keyForConnection:(NSURLConnection *)connection
+{
+    return [NSString stringWithFormat:@"%i", [connection hash]];
 }
 
 
@@ -164,6 +172,8 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    debugLog(@"connectionRecievedResponse");
+
     // If for api connection, do nothing
     if (connection == self.apiConnection) {
         return;
@@ -171,7 +181,7 @@
 
     // Get connection info, create new mutable data storage
     NSMutableDictionary *connectionInfo
-        = self.connectionMap[@([connection hash])];
+        = self.connectionMap[[self keyForConnection:connection]];
     [connectionInfo setObject:[NSMutableData new]
         forKey:KEY_CONNECTION_DOWNLOAD_DATA];
     [connectionInfo setObject:@([response expectedContentLength])
@@ -180,6 +190,8 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+    debugLog(@"connectionRecievedData");
+
     // If for api connection, just append data simply
     if (connection == self.apiConnection) {
         [self.apiConnectionData appendData:data];
@@ -187,7 +199,7 @@
     }
 
     // Get connection info and update data / size
-    NSMutableDictionary *connectionInfo = self.connectionMap[@([connection hash])];
+    NSMutableDictionary *connectionInfo = self.connectionMap[[self keyForConnection:connection]];
 
     NSMutableData *totalData = connectionInfo[KEY_CONNECTION_DOWNLOAD_DATA];
     [totalData appendData: data];
@@ -234,15 +246,19 @@
                 if (photos) {
                     for (NSInteger j = 0; j < photos.count; ++j) {
                         NSArray *sizes = [photos[j] objectForKey:@"alt_sizes"];
-                        if (sizes) {
+                        if (sizes)
+                        {
                             NSDictionary *imageInfo = sizes[0];
                             [self.imageURLCache addObject:[imageInfo objectForKey:@"url"]];
+
+                            // Add NSNull to fill in image cache
+                            [self.imageCache addObject:[NSNull null]];
                         }
                     }
                 }
             }
             debugLog(@"Collected urls: %@", self.imageURLCache);
-
+            
             // Notify that cache is updated
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:NOTIFICATION_IMAGE_URL_CACHE_UPDATED
@@ -255,7 +271,7 @@
     else    // Store in cache and notify
     {
         // Get connection info
-        NSMutableDictionary *connectionInfo = self.connectionMap[@([connection hash])];
+        NSMutableDictionary *connectionInfo = self.connectionMap[[self keyForConnection:connection]];
         NSInteger index = [connectionInfo[KEY_CONNECTION_DOWNLOAD_INDEX] integerValue];
 
         // Create image

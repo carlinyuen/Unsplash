@@ -140,6 +140,8 @@
 /** @brief Update scrollview based on content from datasource */
 - (void)updateScrollView:(CGRect)bounds
 {
+    debugLog(@"updateScrollView");
+
     // Update scrollview content size based on number of imageurls
     NSArray *imageURLs = self.datasource.imageURLCache;
     self.scrollView.contentSize = CGSizeMake(
@@ -224,6 +226,7 @@
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.frame];
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
                 imageView.backgroundColor = [UIColor clearColor];
+                imageView.clipsToBounds = true;
                 [imageView setImage:[this.datasource.imageCache objectAtIndex:index]];
 
                 // Remove loading indicator
