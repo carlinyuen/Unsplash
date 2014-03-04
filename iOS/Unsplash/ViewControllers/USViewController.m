@@ -21,6 +21,9 @@
     UIScrollViewDelegate
 >
 
+    /** Title label */
+    @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
     /** Main scrolling element */
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="USViewController">
             <connections>
                 <outlet property="scrollView" destination="vey-Z1-m9N" id="8q8-BD-nVr"/>
+                <outlet property="titleLabel" destination="J3E-3k-Ikg" id="Mpc-Jt-GYq"/>
                 <outlet property="view" destination="1" id="7B4-TR-lf6"/>
             </connections>
         </placeholder>
@@ -20,13 +21,26 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </scrollView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNSPLASH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3E-3k-Ikg">
+                    <rect key="frame" x="20" y="128" width="280" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="OpB-94-79X"/>
+                        <constraint firstAttribute="width" constant="280" id="SL2-fF-zzX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-UltraLightItalic" family="Helvetica Neue" pointSize="55"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="vey-Z1-m9N" secondAttribute="bottom" id="1R1-hh-uxK"/>
+                <constraint firstItem="J3E-3k-Ikg" firstAttribute="top" secondItem="1" secondAttribute="top" constant="128" id="DUK-DC-Hii"/>
                 <constraint firstAttribute="trailing" secondItem="vey-Z1-m9N" secondAttribute="trailing" id="PsF-4N-XEO"/>
                 <constraint firstItem="vey-Z1-m9N" firstAttribute="top" secondItem="1" secondAttribute="top" id="ci8-nJ-rAJ"/>
                 <constraint firstItem="vey-Z1-m9N" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="kB8-Eu-Cbk"/>
+                <constraint firstItem="J3E-3k-Ikg" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="oJC-7Y-MMP"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
