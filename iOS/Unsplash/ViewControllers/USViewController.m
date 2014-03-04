@@ -71,8 +71,10 @@
 {
     [super viewWillAppear:animated];
 
-    // Get images
-    if (self.datasource && self.lastShownPage >= self.imageViews.count - 1) {
+    debugLog(@"viewWillAppear");
+
+    // Get images if on first page
+    if (self.datasource && !self.lastShownPage) {
         [self.datasource fetchMoreImages];
     }
 }

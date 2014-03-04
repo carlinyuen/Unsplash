@@ -11,7 +11,7 @@
 
 #import "Keys.h"
 
-    #define URL_API_TUMBLR_GET_POSTS @"api.tumblr.com/v2/blog/%@/posts/photo?api_key=%@&offset=%@"
+    #define URL_API_TUMBLR_GET_POSTS @"https://api.tumblr.com/v2/blog/%@/posts/photo?api_key=%@&offset=%@"
 
     #define KEY_CONNECTION_DOWNLOAD_SIZE @"size"
     #define KEY_CONNECTION_DOWNLOAD_DATA @"data"
@@ -225,19 +225,28 @@
             NSLog(@"Error Parsing API Response: %@", self.apiConnectionData);
             return;
         }
-        debugLog(@"API Response: %@", response);
 
         // Collect image urls and store into cache
         NSArray *posts = [[response objectForKey:@"response"] objectForKey:@"posts"];
         if (posts) {
             for (NSInteger i = 0; i < posts.count; ++i) {
-                NSArray *sizes = [posts[i] objectForKey:@"alt_sizes"];
-                if (sizes) {
-                    NSDictionary *imageInfo = sizes[0];
-                    [self.imageURLCache addObject:[imageInfo objectForKey:@"url"]];
+                NSArray *photos = [posts[i] objectForKey:@"photos"];
+                if (photos) {
+                    for (NSInteger j = 0; j < photos.count; ++j) {
+                        NSArray *sizes = [photos[j] objectForKey:@"alt_sizes"];
+                        if (sizes) {
+                            NSDictionary *imageInfo = sizes[0];
+                            [self.imageURLCache addObject:[imageInfo objectForKey:@"url"]];
+                        }
+                    }
                 }
             }
             debugLog(@"Collected urls: %@", self.imageURLCache);
+
+            // Notify that cache is updated
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:NOTIFICATION_IMAGE_URL_CACHE_UPDATED
+                object:self userInfo:nil];
         }
         else {
             NSLog(@"No posts returned!");

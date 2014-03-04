@@ -82,9 +82,9 @@
 		225168EC18BFD36400085AE8 /* Functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
 		225168EE18BFE3C100085AE8 /* USLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USLoadingViewController.h; sourceTree = "<group>"; };
 		225168EF18BFE3C100085AE8 /* USLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USLoadingViewController.m; sourceTree = "<group>"; };
-		225168F518C61E9F00085AE8 /* Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keys.h; sourceTree = "<group>"; };
 		225168F618C61FE400085AE8 /* USWebDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = USWebDatasource.h; path = Models/USWebDatasource.h; sourceTree = "<group>"; };
 		225168F718C61FE400085AE8 /* USWebDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = USWebDatasource.m; path = Models/USWebDatasource.m; sourceTree = "<group>"; };
+		225D8FD918C667090061E5CD /* Keys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keys.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,11 +144,11 @@
 		2251689618BE9F2400085AE8 /* Unsplash */ = {
 			isa = PBXGroup;
 			children = (
-				225168F518C61E9F00085AE8 /* Keys.h */,
 				225168EA18BFD36400085AE8 /* Constants.h */,
 				225168EB18BFD36400085AE8 /* Constants.m */,
 				225168EC18BFD36400085AE8 /* Functions.h */,
 				225168AB18BE9F2400085AE8 /* Images.xcassets */,
+				225D8FD918C667090061E5CD /* Keys.h */,
 				225168CC18BEA2B400085AE8 /* Libraries */,
 				225168A518BE9F2400085AE8 /* Main_iPad.storyboard */,
 				225168A218BE9F2400085AE8 /* Main_iPhone.storyboard */,
