@@ -62,6 +62,9 @@
 {
     [_imageCache removeAllObjects];
     [_imageURLCache removeAllObjects];
+    
+    // Remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

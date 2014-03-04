@@ -127,6 +127,12 @@
     return YES; // Hide status bar
 }
 
+- (void)dealloc
+{
+    // Remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 #pragma mark - Setup
 
@@ -228,7 +234,7 @@
     {
         self.initialLoad = false;
 
-        // Hide loading indicator, show welcome text
+        // Hide loading indicator, show title
         [UIView animateWithDuration:ANIMATION_DURATION_SLOW delay:0
             options:UIViewAnimationOptionBeginFromCurrentState
                 | UIViewAnimationOptionCurveEaseInOut
