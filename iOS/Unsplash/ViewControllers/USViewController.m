@@ -99,8 +99,6 @@
         }];
 
         [self.datasource fetchMoreImages];
-
-        self.initialLoad = false;
     }
 }
 
@@ -216,12 +214,18 @@
 /** @brief When new image urls are scraped from the page */
 - (void)imageURLsFetched:(NSNotification *)notification
 {
-    // Hide loading indicator
-    [UIView animateWithDuration:ANIMATION_DURATION_SLOW animations:^{
-        self.loadingIndicator.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self.loadingIndicator stopAnimating];
-    }];
+    // On first load
+    if (self.initialLoad)
+    {
+        self.initialLoad = false;
+
+        // Hide loading indicator, show welcome text
+        [UIView animateWithDuration:ANIMATION_DURATION_SLOW animations:^{
+            self.loadingIndicator.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.loadingIndicator stopAnimating];
+        }];
+    }
 
     // Resize scrollview contentsize
     [self updateScrollView:self.scrollView.bounds];
