@@ -14,6 +14,8 @@
 
     #define URL_UNSPLASH @"http://unsplash.com"
 
+    #define SIZE_BUFFER 2
+
 @interface USViewController () <
     UIScrollViewDelegate
 >
@@ -286,13 +288,14 @@
         self.lastShownPage = page;
 
         // Fetch following images as a buffer
-        [self fetchImageAtIndex:page];
-        if (page + 1 < numImages) {
-            [self fetchImageAtIndex:page + 1];
+        for (NSInteger i = 0; i < SIZE_BUFFER; ++i) {
+            if (page + i < numImages) {
+                [self fetchImageAtIndex:page + i];
+            }
         }
 
-        // If page number is last page, ask for more images
-        if (page == numImages - 1) {
+        // Ask for more images if we're near the end
+        if (page >= numImages - SIZE_BUFFER) {
             [self.datasource fetchMoreImages];
         }
 	}

@@ -153,8 +153,14 @@
 /** @brief Cleans up and removes connection data */
 - (void)cleanConnection:(NSURLConnection *)connection
 {
-    // Clear it out
-    [self.connectionMap removeObjectForKey:[self keyForConnection:connection]];
+    // Clear related connection info out if needed
+    if (connection == self.apiConnection) {
+        [self.apiConnection cancel];
+        self.apiConnection = nil;
+    } else {
+        [self.connectionMap removeObjectForKey:[self
+            keyForConnection:connection]];
+    }
 }
 
 /** @brief Returns key used in map for connection */
@@ -291,10 +297,10 @@
         else {
             NSLog(@"Could not create image with data from connection: %@", connection);
         }
-
-        // Delete connection info
-        [self cleanConnection:connection];
     }
+
+    // Delete connection info
+    [self cleanConnection:connection];
 }
 
 
