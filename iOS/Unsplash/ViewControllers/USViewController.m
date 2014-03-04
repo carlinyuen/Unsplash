@@ -52,11 +52,9 @@
         name:NOTIFICATION_IMAGE_LOADED
         object:nil];
 
-    // Setup datasource
-    USWebViewController *webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
-    self.datasource = [[USImageDatasource alloc] initWithWebView:webVC];
-    webVC.view.alpha = 0;
-    [self.scrollView addSubview:webVC.view];
+    // Setup datasource - use Tumblr API instead
+//    USWebViewController *webVC = [[USWebViewController alloc] initWithURLString:URL_UNSPLASH];
+    self.datasource = [USImageDatasource new];
 
     // Setup Scrollview
     self.scrollView.backgroundColor = [UIColor darkGrayColor];
