@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		223D565A18C6768900CE2C7B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D565918C6768900CE2C7B /* QuartzCore.framework */; };
+		223D565C18C6768F00CE2C7B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D565B18C6768F00CE2C7B /* Accelerate.framework */; };
 		2251689118BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		2251689318BE9F2400085AE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689218BE9F2400085AE8 /* CoreGraphics.framework */; };
 		2251689518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
@@ -45,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		223D565918C6768900CE2C7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		223D565B18C6768F00CE2C7B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2251688D18BE9F2400085AE8 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2251689018BE9F2400085AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2251689218BE9F2400085AE8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,6 +96,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				223D565C18C6768F00CE2C7B /* Accelerate.framework in Frameworks */,
+				223D565A18C6768900CE2C7B /* QuartzCore.framework in Frameworks */,
 				2251689318BE9F2400085AE8 /* CoreGraphics.framework in Frameworks */,
 				2251689518BE9F2400085AE8 /* UIKit.framework in Frameworks */,
 				2251689118BE9F2400085AE8 /* Foundation.framework in Frameworks */,
@@ -133,6 +139,8 @@
 		2251688F18BE9F2400085AE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				223D565B18C6768F00CE2C7B /* Accelerate.framework */,
+				223D565918C6768900CE2C7B /* QuartzCore.framework */,
 				2251689018BE9F2400085AE8 /* Foundation.framework */,
 				2251689218BE9F2400085AE8 /* CoreGraphics.framework */,
 				2251689418BE9F2400085AE8 /* UIKit.framework */,

@@ -148,6 +148,9 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     self.apiConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:true];
     self.apiConnectionData = [NSMutableData new];
+
+    // Show activity indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
 }
 
 /** @brief Cleans up and removes connection data */
@@ -269,6 +272,9 @@
         else {
             NSLog(@"No posts returned!");
         }
+
+        // Hide status bar activity indicator
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:false];
     }
     else    // Store in cache and notify
     {

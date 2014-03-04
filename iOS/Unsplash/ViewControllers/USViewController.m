@@ -8,7 +8,8 @@
 
 #import "USViewController.h"
 
-#import "USWebViewController.h"
+#import "UIERealTimeBlurView.h"
+
 #import "USImageDatasource.h"
 #import "USImageViewController.h"
 
@@ -32,6 +33,13 @@
 	/** Keep track of which page you're on */
 	@property (nonatomic, assign) NSInteger lastShownPage;
 
+    /** Fancy real-time blur view */
+    @property (nonatomic, strong) UIERealTimeBlurView *blurView;
+
+    /** Loading indicator for when datasource gets images */
+    @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
+    @property (nonatomic, assign) BOOL initialLoad;
+
 @end
 
 @implementation USViewController
@@ -43,6 +51,7 @@
     // Init
     self.lastShownPage = 0;
     self.imageViews = [NSMutableArray new];
+    self.initialLoad = true;
 
     // Notification observer
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -67,6 +76,11 @@
     self.scrollView.showsHorizontalScrollIndicator = true;
     [self.scrollView addObserver:self forKeyPath:@"contentSize"
         options:kNilOptions context:nil];   // For clean rotations
+        
+    // Loading indicator
+    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.loadingIndicator.alpha = 0;
+    [self.scrollView addSubview:self.loadingIndicator];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -75,9 +89,18 @@
 
     debugLog(@"viewWillAppear");
 
-    // Get images if on first page
-    if (self.datasource && !self.lastShownPage) {
+    // Get images if on initial load
+    if (self.datasource && self.initialLoad)
+    {
+        self.loadingIndicator.center = self.view.center;
+        [self.loadingIndicator startAnimating];
+        [UIView animateWithDuration:ANIMATION_DURATION_SLOW animations:^{
+            self.loadingIndicator.alpha = 1;
+        }];
+
         [self.datasource fetchMoreImages];
+
+        self.initialLoad = false;
     }
 }
 
@@ -193,6 +216,13 @@
 /** @brief When new image urls are scraped from the page */
 - (void)imageURLsFetched:(NSNotification *)notification
 {
+    // Hide loading indicator
+    [UIView animateWithDuration:ANIMATION_DURATION_SLOW animations:^{
+        self.loadingIndicator.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.loadingIndicator stopAnimating];
+    }];
+
     // Resize scrollview contentsize
     [self updateScrollView:self.scrollView.bounds];
 
