@@ -91,6 +91,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES; // Hide status bar
+}
+
 
 #pragma mark - Setup
 
@@ -280,8 +284,11 @@
         // Update last shown page number
         self.lastShownPage = page;
 
-        // If image cache doesn't have next image, start loading it
+        // Fetch following images as a buffer
         [self fetchImageAtIndex:page];
+        if (page + 1 < numImages) {
+            [self fetchImageAtIndex:page + 1];
+        }
 
         // If page number is last page, ask for more images
         if (page == numImages - 1) {
