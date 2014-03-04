@@ -31,4 +31,7 @@
     /** @brief Call to request more images from the datasource */
     - (void)fetchMoreImages;
 
+    /** @brief Trims down cache to save on memory */
+    - (void)trimCacheAroundIndex:(NSInteger)index;
+
 @end

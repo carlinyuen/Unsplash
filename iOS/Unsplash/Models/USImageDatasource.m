@@ -16,6 +16,8 @@
     #define KEY_CONNECTION_DOWNLOAD_SIZE @"size"
     #define KEY_CONNECTION_DOWNLOAD_DATA @"data"
 
+    #define SIZE_CACHE_BUFFER 4
+
 @interface USImageDatasource () <
     NSURLConnectionDelegate
     , NSURLConnectionDataDelegate
@@ -170,6 +172,18 @@
 - (NSString *)keyForConnection:(NSURLConnection *)connection
 {
     return [NSString stringWithFormat:@"%i", [connection hash]];
+}
+
+/** @brief Trims down cache to save on memory */
+- (void)trimCacheAroundIndex:(NSInteger)index
+{
+    for (NSInteger i = 0; i < self.imageCache.count; ++i)
+    {
+        // If not within cache buffer bounds, clear
+        if (i < index - SIZE_CACHE_BUFFER || i > index + SIZE_CACHE_BUFFER) {
+            [self.imageCache replaceObjectAtIndex:i withObject:[NSNull null]];
+        }
+    }
 }
 
 

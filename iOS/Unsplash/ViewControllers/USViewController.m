@@ -112,6 +112,9 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+
+    // Trim down cache for memory
+    [self.datasource trimCacheAroundIndex:self.lastShownPage];
 }
 
 - (BOOL)prefersStatusBarHidden {
