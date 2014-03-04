@@ -57,7 +57,7 @@
     self.datasource = [[USImageDatasource alloc] initWithURLString:URL_UNSPLASH];
 
     // Setup Scrollview
-    self.scrollView.backgroundColor = [UIColor darkGrayColor];
+    self.scrollView.backgroundColor = [UIColor blackColor];
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = true;
     self.scrollView.directionalLockEnabled = true;
@@ -226,16 +226,17 @@
         {
             if (this)
             {
-                // Add ImageView
+                // Create ImageView
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.frame];
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
                 imageView.backgroundColor = [UIColor clearColor];
                 imageView.clipsToBounds = true;
                 [imageView setImage:[this.datasource.imageCache objectAtIndex:index]];
 
-                // Remove loading indicator
+                // Remove loading indicator and replace with imageView
                 [view stopAnimating];
                 [view removeFromSuperview];
+                [this.imageViews replaceObjectAtIndex:index withObject:imageView];
 
                 // Fade in imageview
                 imageView.alpha = 0;
