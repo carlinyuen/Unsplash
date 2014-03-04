@@ -79,7 +79,10 @@
     self.scrollView.showsHorizontalScrollIndicator = true;
     [self.scrollView addObserver:self forKeyPath:@"contentSize"
         options:kNilOptions context:nil];   // For clean rotations
-        
+
+    // Setup title label
+    self.titleLabel.alpha = 0;
+
     // Loading indicator
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.loadingIndicator.alpha = 0;
@@ -226,11 +229,15 @@
         self.initialLoad = false;
 
         // Hide loading indicator, show welcome text
-        [UIView animateWithDuration:ANIMATION_DURATION_SLOW animations:^{
-            self.loadingIndicator.alpha = 0;
-        } completion:^(BOOL finished) {
-            [self.loadingIndicator stopAnimating];
-        }];
+        [UIView animateWithDuration:ANIMATION_DURATION_SLOW delay:0
+            options:UIViewAnimationOptionBeginFromCurrentState
+                | UIViewAnimationOptionCurveEaseInOut
+            animations:^{
+                self.loadingIndicator.alpha = 0;
+                self.titleLabel.alpha = 1;
+            } completion:^(BOOL finished) {
+                [self.loadingIndicator stopAnimating];
+            }];
     }
 
     // Resize scrollview contentsize
