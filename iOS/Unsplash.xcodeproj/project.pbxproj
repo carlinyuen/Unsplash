@@ -10,6 +10,7 @@
 		223D565A18C6768900CE2C7B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D565918C6768900CE2C7B /* QuartzCore.framework */; };
 		223D565C18C6768F00CE2C7B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D565B18C6768F00CE2C7B /* Accelerate.framework */; };
 		223D565E18C68A5D00CE2C7B /* USViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223D565D18C68A5D00CE2C7B /* USViewController.xib */; };
+		223D566218C690A400CE2C7B /* ParallaxScrollingFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 223D566118C690A400CE2C7B /* ParallaxScrollingFramework.m */; };
 		2251689118BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		2251689318BE9F2400085AE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689218BE9F2400085AE8 /* CoreGraphics.framework */; };
 		2251689518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
@@ -49,6 +50,8 @@
 		223D565918C6768900CE2C7B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		223D565B18C6768F00CE2C7B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		223D565D18C68A5D00CE2C7B /* USViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = USViewController.xib; sourceTree = "<group>"; };
+		223D566018C690A400CE2C7B /* ParallaxScrollingFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingFramework.h; sourceTree = "<group>"; };
+		223D566118C690A400CE2C7B /* ParallaxScrollingFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingFramework.m; sourceTree = "<group>"; };
 		2251688D18BE9F2400085AE8 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2251689018BE9F2400085AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2251689218BE9F2400085AE8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,6 +118,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		223D565F18C690A400CE2C7B /* ParallaxScrollingFramework */ = {
+			isa = PBXGroup;
+			children = (
+				223D566018C690A400CE2C7B /* ParallaxScrollingFramework.h */,
+				223D566118C690A400CE2C7B /* ParallaxScrollingFramework.m */,
+			);
+			name = ParallaxScrollingFramework;
+			path = Libraries/ParallaxScrollingFramework/ParallaxScrollingFramework;
+			sourceTree = "<group>";
+		};
 		2251688418BE9F2400085AE8 = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +228,7 @@
 		225168CC18BEA2B400085AE8 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				223D565F18C690A400CE2C7B /* ParallaxScrollingFramework */,
 				225168CD18BEA2C900085AE8 /* RealTimeBlur */,
 			);
 			name = Libraries;
@@ -349,6 +363,7 @@
 				225168E918BFD1DA00085AE8 /* USImageDatasource.m in Sources */,
 				225168D218BEA2D200085AE8 /* UIERealTimeBlurView.m in Sources */,
 				225168D318BEA2D200085AE8 /* UIImage+BoxBlur.m in Sources */,
+				223D566218C690A400CE2C7B /* ParallaxScrollingFramework.m in Sources */,
 				2251689D18BE9F2400085AE8 /* main.m in Sources */,
 				225168F818C61FE400085AE8 /* USWebDatasource.m in Sources */,
 				225168ED18BFD36400085AE8 /* Constants.m in Sources */,
