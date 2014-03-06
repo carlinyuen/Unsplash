@@ -273,15 +273,12 @@
 - (void)menuButtonTapped:(UIButton *)button
 {
     debugLog(@"menuButtonTapped");
-
-
 }
 
 /** @brief When blur view is tapped */
 - (void)blurViewTapped:(UITapGestureRecognizer *)gesture
 {
     debugLog(@"blurViewTapped");
-
 }
 
 /** @brief Connection timed out */
