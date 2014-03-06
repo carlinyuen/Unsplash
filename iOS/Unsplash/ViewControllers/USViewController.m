@@ -17,7 +17,7 @@
     #define URL_UNSPLASH @"http://unsplash.com"
 
     #define SIZE_BUFFER 2
-    #define SIZE_PARALLAX_MOTION 20
+    #define SIZE_PARALLAX_MOTION 32
 
 @interface USViewController () <
     UIScrollViewDelegate
