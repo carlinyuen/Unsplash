@@ -27,6 +27,9 @@
     @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
     @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 
+    /** Buttons */
+    @property (weak, nonatomic) IBOutlet UIButton *menuButton;
+
     /** Main scrolling element */
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -98,6 +101,9 @@
     self.authorLabel.alpha = 0;
     [self addParallaxToView:self.titleLabel];
     [self addParallaxToView:self.authorLabel];
+
+    // Setup buttons
+    [self.menuButton addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 
     // Loading indicator
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -261,6 +267,53 @@
 - (void)screenTapped:(UITapGestureRecognizer *)gesture
 {
     debugLog(@"screenTapped");
+}
+
+/** @brief When menu button is tapped */
+- (void)menuButtonTapped:(UIButton *)button
+{
+    debugLog(@"menuButtonTapped");
+
+    // Create blur view
+    CGRect frame = self.scrollView.bounds;
+    frame.origin.x = -CGRectGetWidth(frame);
+    self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:frame];
+
+    // Add tap gesture to dismiss
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
+
+    // Animate blur view in
+    frame.origin.x = 0;
+    [self.view addSubview:self.blurView];
+    __block USViewController *this = self;
+    [UIView animateWithDuration:ANIMATION_DURATION_MED delay:0
+        options:UIViewAnimationOptionBeginFromCurrentState
+            | UIViewAnimationOptionCurveEaseInOut
+        animations:^{
+            [[this blurView] setFrame:frame];
+        } completion:^(BOOL finished) {
+            [[this blurView] addGestureRecognizer:tap];
+        }];
+}
+
+/** @brief When blur view is tapped */
+- (void)blurViewTapped:(UITapGestureRecognizer *)gesture
+{
+    debugLog(@"blurViewTapped");
+
+    // Hide blur view and destroy
+    CGRect frame = self.blurView.frame;
+    frame.origin.x = 0;
+    __block USViewController *this = self;
+    [UIView animateWithDuration:ANIMATION_DURATION_MED delay:0
+        options:UIViewAnimationOptionBeginFromCurrentState
+            | UIViewAnimationOptionCurveEaseInOut
+        animations:^{
+            [[this blurView] setFrame:frame];
+        } completion:^(BOOL finished) {
+            [[this blurView] removeFromSuperview];
+            [this setBlurView:nil];
+        }];
 }
 
 /** @brief Connection timed out */
