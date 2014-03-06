@@ -18,6 +18,8 @@
 
     #define SIZE_CACHE_BUFFER 4
 
+    #define TIME_CONNECTION_TIMEOUT 6
+
 @interface USImageDatasource () <
     NSURLConnectionDelegate
     , NSURLConnectionDataDelegate
@@ -31,6 +33,9 @@
     @property (nonatomic, strong) NSURLConnection *apiConnection;
     @property (nonatomic, strong) NSMutableData *apiConnectionData;
     @property (nonatomic, strong) NSMutableDictionary *connectionMap;
+
+    /** Timer for timeouts */
+    @property (nonatomic, strong) NSTimer *connectionTimeout;
 
 @end
 
@@ -158,6 +163,12 @@
     self.apiConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:true];
     self.apiConnectionData = [NSMutableData new];
 
+    // Fire off timeout timer
+    self.connectionTimeout = [NSTimer
+        scheduledTimerWithTimeInterval:TIME_CONNECTION_TIMEOUT
+        target:self selector:@selector(connectionTimeoutTriggered:)
+        userInfo:nil repeats:false];
+
     // Show activity indicator
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:true];
 }
@@ -196,6 +207,14 @@
 
 
 #pragma mark - Event Handlers
+
+/** @brief When connection timeout happens */
+- (void)connectionTimeoutTriggered:(NSTimer *)timer
+{
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:NOTIFICATION_CONNECTION_TIMEOUT
+        object:self userInfo:nil];
+}
 
 
 #pragma mark - Protocols

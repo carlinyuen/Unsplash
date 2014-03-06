@@ -18,10 +18,11 @@ NSString* const CACHE_KEY_USER_SETTINGS = @"cacheUserSettings";
 NSString* const ONCE_KEY_APP_OPENED = @"onceAppOpened";
 
 // Notifications
-NSString* const NOTIFICATION_PAGE_LOADED = @"notificationPageLoaded";
-NSString* const NOTIFICATION_IMAGE_URL_CACHE_UPDATED = @"notificationImageUrlCacheUpdated";
-NSString* const NOTIFICATION_IMAGE_LOADED = @"notificationImageLoaded";
-NSString* const NOTIFICATION_IMAGE_DOWNLOAD_PROGRESS = @"notificationImageDownloadProgress";
+NSString* const NOTIFICATION_PAGE_LOADED = @"notifyPageLoaded";
+NSString* const NOTIFICATION_IMAGE_URL_CACHE_UPDATED = @"notifyImageUrlCacheUpdated";
+NSString* const NOTIFICATION_IMAGE_LOADED = @"notifyImageLoaded";
+NSString* const NOTIFICATION_IMAGE_DOWNLOAD_PROGRESS = @"notifyImageDownloadProgress";
+NSString* const NOTIFICATION_CONNECTION_TIMEOUT = @"notifyConnectionTimeout";
 
 // Fonts
 NSString* const FONT_NAME_BRANDING = @"Courier New";
