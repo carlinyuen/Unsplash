@@ -89,8 +89,9 @@
     // Setup Animator
 //    self.animator = [[ParallaxScrollingFramework alloc] initWithScrollView:self.scrollView];
 
-    // Setup title label
+    // Setup labels
     self.titleLabel.alpha = 0;
+    self.authorLabel.alpha = 0;
 
     // Loading indicator
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -267,6 +268,7 @@
             animations:^{
                 self.loadingIndicator.alpha = 0;
                 self.titleLabel.alpha = 1;
+                self.authorLabel.alpha = 1;
             } completion:^(BOOL finished) {
                 [self.loadingIndicator stopAnimating];
             }];
