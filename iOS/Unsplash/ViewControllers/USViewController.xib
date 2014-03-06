@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="USViewController">
             <connections>
+                <outlet property="authorLabel" destination="6LH-ze-fzq" id="35X-2D-iNF"/>
                 <outlet property="scrollView" destination="vey-Z1-m9N" id="8q8-BD-nVr"/>
                 <outlet property="titleLabel" destination="J3E-3k-Ikg" id="Mpc-Jt-GYq"/>
                 <outlet property="view" destination="1" id="7B4-TR-lf6"/>
@@ -32,13 +33,26 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="made by ooomf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LH-ze-fzq">
+                    <rect key="frame" x="20" y="260" width="280" height="48"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="G2k-7G-WH7"/>
+                        <constraint firstAttribute="width" constant="280" id="aDx-Ge-s5J"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="vey-Z1-m9N" secondAttribute="bottom" id="1R1-hh-uxK"/>
                 <constraint firstItem="J3E-3k-Ikg" firstAttribute="top" secondItem="1" secondAttribute="top" constant="120" id="DUK-DC-Hii"/>
+                <constraint firstAttribute="trailing" secondItem="6LH-ze-fzq" secondAttribute="trailing" constant="20" id="K3i-nF-aeq"/>
                 <constraint firstAttribute="trailing" secondItem="vey-Z1-m9N" secondAttribute="trailing" id="PsF-4N-XEO"/>
                 <constraint firstItem="vey-Z1-m9N" firstAttribute="top" secondItem="1" secondAttribute="top" id="ci8-nJ-rAJ"/>
+                <constraint firstAttribute="centerY" secondItem="6LH-ze-fzq" secondAttribute="centerY" id="jUf-i8-uug"/>
                 <constraint firstItem="vey-Z1-m9N" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="kB8-Eu-Cbk"/>
                 <constraint firstItem="J3E-3k-Ikg" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="oJC-7Y-MMP"/>
             </constraints>

@@ -9,6 +9,7 @@
 #import "USViewController.h"
 
 #import "UIERealTimeBlurView.h"
+#import "ParallaxScrollingFramework.h"
 
 #import "USImageDatasource.h"
 #import "USImageViewController.h"
@@ -21,8 +22,9 @@
     UIScrollViewDelegate
 >
 
-    /** Title label */
+    /** Labels */
     @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+    @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 
     /** Main scrolling element */
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -42,6 +44,10 @@
     /** Loading indicator for when datasource gets images */
     @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
     @property (nonatomic, assign) BOOL initialLoad;
+
+    /** Animator for parallax effects */
+    @property (nonatomic, strong) ParallaxScrollingFramework *animator;
+
 
 @end
 
@@ -80,6 +86,9 @@
     [self.scrollView addObserver:self forKeyPath:@"contentSize"
         options:kNilOptions context:nil];   // For clean rotations
 
+    // Setup Animator
+//    self.animator = [[ParallaxScrollingFramework alloc] initWithScrollView:self.scrollView];
+
     // Setup title label
     self.titleLabel.alpha = 0;
 
@@ -112,6 +121,11 @@
 {
     // Reposition images
     [self updateScrollView:self.scrollView.bounds];
+
+    // Reposition author label
+    self.authorLabel.textAlignment
+        = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
+            ? NSTextAlignmentRight : NSTextAlignmentCenter;
 }
 
 - (void)didReceiveMemoryWarning
@@ -215,6 +229,18 @@
         // Keep track of it
         [self.imageViews addObject:loadingView];
     }
+}
+
+/** @brief Displays splash screen (with title label and stuff) */
+- (void)displaySplashScreen:(BOOL)show
+{
+    [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
+        options:UIViewAnimationOptionCurveEaseInOut
+            | UIViewAnimationOptionBeginFromCurrentState
+        animations:^{
+            self.titleLabel.alpha = show;
+            self.authorLabel.alpha = show;
+        } completion:nil];
 }
 
 
@@ -337,6 +363,13 @@
 	if (self.lastShownPage != page)
     {
         debugLog(@"pageChange: %i to %i", self.lastShownPage, page);
+
+        // Actions to take when moving to/from first page
+        if (page == 1 && self.lastShownPage == 0) {
+            [self displaySplashScreen:false];
+        } else if (page == 0 && self.lastShownPage != 0) {
+            [self displaySplashScreen:true];
+        }
 
         // Update last shown page number
         self.lastShownPage = page;
