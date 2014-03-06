@@ -92,6 +92,8 @@
     // Setup labels
     self.titleLabel.alpha = 0;
     self.authorLabel.alpha = 0;
+    [self addParallaxToView:self.titleLabel];
+    [self addParallaxToView:self.authorLabel];
 
     // Loading indicator
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
