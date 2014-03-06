@@ -274,26 +274,7 @@
 {
     debugLog(@"menuButtonTapped");
 
-    // Create blur view
-    CGRect frame = self.scrollView.bounds;
-    frame.origin.x = -CGRectGetWidth(frame);
-    self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:frame];
 
-    // Add tap gesture to dismiss
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(blurViewTapped:)];
-
-    // Animate blur view in
-    frame.origin.x = 0;
-    [self.view addSubview:self.blurView];
-    __block USViewController *this = self;
-    [UIView animateWithDuration:ANIMATION_DURATION_MED delay:0
-        options:UIViewAnimationOptionBeginFromCurrentState
-            | UIViewAnimationOptionCurveEaseInOut
-        animations:^{
-            [[this blurView] setFrame:frame];
-        } completion:^(BOOL finished) {
-            [[this blurView] addGestureRecognizer:tap];
-        }];
 }
 
 /** @brief When blur view is tapped */
@@ -301,19 +282,6 @@
 {
     debugLog(@"blurViewTapped");
 
-    // Hide blur view and destroy
-    CGRect frame = self.blurView.frame;
-    frame.origin.x = 0;
-    __block USViewController *this = self;
-    [UIView animateWithDuration:ANIMATION_DURATION_MED delay:0
-        options:UIViewAnimationOptionBeginFromCurrentState
-            | UIViewAnimationOptionCurveEaseInOut
-        animations:^{
-            [[this blurView] setFrame:frame];
-        } completion:^(BOOL finished) {
-            [[this blurView] removeFromSuperview];
-            [this setBlurView:nil];
-        }];
 }
 
 /** @brief Connection timed out */
