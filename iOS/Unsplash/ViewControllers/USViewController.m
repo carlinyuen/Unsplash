@@ -49,7 +49,6 @@
     /** Animator for parallax effects */
     @property (nonatomic, strong) ParallaxScrollingFramework *animator;
 
-
 @end
 
 @implementation USViewController
@@ -71,6 +70,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(imageLoaded:)
         name:NOTIFICATION_IMAGE_LOADED
+        object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(connectionTimedOut:)
+        name:NOTIFICATION_CONNECTION_TIMEOUT
         object:nil];
 
     // Setup datasource - use Tumblr API instead
@@ -100,6 +103,10 @@
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.loadingIndicator.alpha = 0;
     [self.scrollView addSubview:self.loadingIndicator];
+
+    // Setup tap gesture
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
+    [self.scrollView addGestureRecognizer:tap];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -254,6 +261,12 @@
 - (void)screenTapped:(UITapGestureRecognizer *)gesture
 {
     debugLog(@"screenTapped");
+}
+
+/** @brief Connection timed out */
+- (void)connectionTimedOut:(NSNotification *)notification
+{
+    debugLog(@"connectionTimedOut");
 }
 
 /** @brief When new image urls are scraped from the page */
