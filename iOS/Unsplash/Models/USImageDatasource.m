@@ -79,9 +79,16 @@
 /** @brief Download image at index using NSURLConnection */
 - (void)downloadImageWithNSURLConnectionAtIndex:(NSInteger)index
 {
+    // Only make request if not already downloading
+    NSString *imageURL = [self.imageURLCache objectAtIndex:index];
+    if ([self.connectionMap objectForKey:imageURL]) {
+        debugLog(@"Already downloading image at index: %i!", index);
+        return;
+    }
+
     // Make download request
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL
-        URLWithString:[self.imageURLCache objectAtIndex:index]]];
+        URLWithString:imageURL]];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:true];
 
     // Store connection data into map
@@ -171,7 +178,8 @@
 /** @brief Returns key used in map for connection */
 - (NSString *)keyForConnection:(NSURLConnection *)connection
 {
-    return [NSString stringWithFormat:@"%i", [connection hash]];
+    return [[[connection currentRequest] URL] absoluteString];
+//    return [NSString stringWithFormat:@"%i", [connection hash]];
 }
 
 /** @brief Trims down cache to save on memory */
