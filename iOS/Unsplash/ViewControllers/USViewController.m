@@ -17,6 +17,7 @@
     #define URL_UNSPLASH @"http://unsplash.com"
 
     #define SIZE_BUFFER 2
+    #define SIZE_PARALLAX_MOTION 20
 
 @interface USViewController () <
     UIScrollViewDelegate
@@ -163,15 +164,15 @@
         UIInterpolatingMotionEffect *verticalMotionEffect
             = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y"
             type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-        verticalMotionEffect.minimumRelativeValue = @(-10);
-        verticalMotionEffect.maximumRelativeValue = @(10);
+        verticalMotionEffect.minimumRelativeValue = @(-SIZE_PARALLAX_MOTION);
+        verticalMotionEffect.maximumRelativeValue = @(SIZE_PARALLAX_MOTION);
         
         // Set horizontal effect 
         UIInterpolatingMotionEffect *horizontalMotionEffect
             = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x"
             type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-        horizontalMotionEffect.minimumRelativeValue = @(-10);
-        horizontalMotionEffect.maximumRelativeValue = @(10);
+        horizontalMotionEffect.minimumRelativeValue = @(-SIZE_PARALLAX_MOTION);
+        horizontalMotionEffect.maximumRelativeValue = @(SIZE_PARALLAX_MOTION);
         
         // Create group to combine both
         UIMotionEffectGroup *group = [UIMotionEffectGroup new];
