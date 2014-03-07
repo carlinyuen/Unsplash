@@ -113,6 +113,7 @@
     [self.scrollView addSubview:self.introView];
     if (!deviceOSVersionLessThan(iOS7)) {
         self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:self.scrollView.bounds];
+        self.blurView.tintColor = UIColorFromHex(COLOR_HEX_BLURVIEW);
         [self.scrollView insertSubview:self.blurView aboveSubview:self.introView];
     }
     [self addScrollingBackground:[UIImage imageNamed:IMG_INTRO_BG] duration:TIME_SCROLLING_BG direction:CGPointMake(1, 0) toView:self.introView];

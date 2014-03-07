@@ -25,8 +25,6 @@
 		225168BD18BE9F2400085AE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 225168BB18BE9F2400085AE8 /* InfoPlist.strings */; };
 		225168BF18BE9F2400085AE8 /* UnsplashTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168BE18BE9F2400085AE8 /* UnsplashTests.m */; };
 		225168CB18BEA29500085AE8 /* USViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168CA18BEA29500085AE8 /* USViewController.m */; };
-		225168D218BEA2D200085AE8 /* UIERealTimeBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168CF18BEA2D200085AE8 /* UIERealTimeBlurView.m */; };
-		225168D318BEA2D200085AE8 /* UIImage+BoxBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168D118BEA2D200085AE8 /* UIImage+BoxBlur.m */; };
 		225168D718BEA79F00085AE8 /* USImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168D518BEA79F00085AE8 /* USImageViewController.m */; };
 		225168D818BEA79F00085AE8 /* USImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225168D618BEA79F00085AE8 /* USImageViewController.xib */; };
 		225168E518BF888700085AE8 /* USWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168E318BF888700085AE8 /* USWebViewController.m */; };
@@ -72,10 +70,6 @@
 		225168BE18BE9F2400085AE8 /* UnsplashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnsplashTests.m; sourceTree = "<group>"; };
 		225168C918BEA29500085AE8 /* USViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USViewController.h; sourceTree = "<group>"; };
 		225168CA18BEA29500085AE8 /* USViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USViewController.m; sourceTree = "<group>"; };
-		225168CE18BEA2D200085AE8 /* UIERealTimeBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIERealTimeBlurView.h; path = Libraries/RealTimeBlur/RealTimeBlur/Classes/UIERealTimeBlurView.h; sourceTree = "<group>"; };
-		225168CF18BEA2D200085AE8 /* UIERealTimeBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIERealTimeBlurView.m; path = Libraries/RealTimeBlur/RealTimeBlur/Classes/UIERealTimeBlurView.m; sourceTree = "<group>"; };
-		225168D018BEA2D200085AE8 /* UIImage+BoxBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+BoxBlur.h"; path = "Libraries/RealTimeBlur/RealTimeBlur/Classes/UIImage+BoxBlur.h"; sourceTree = "<group>"; };
-		225168D118BEA2D200085AE8 /* UIImage+BoxBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+BoxBlur.m"; path = "Libraries/RealTimeBlur/RealTimeBlur/Classes/UIImage+BoxBlur.m"; sourceTree = "<group>"; };
 		225168D418BEA79F00085AE8 /* USImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USImageViewController.h; sourceTree = "<group>"; };
 		225168D518BEA79F00085AE8 /* USImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USImageViewController.m; sourceTree = "<group>"; };
 		225168D618BEA79F00085AE8 /* USImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = USImageViewController.xib; sourceTree = "<group>"; };
@@ -248,20 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				223D565F18C690A400CE2C7B /* ParallaxScrollingFramework */,
-				225168CD18BEA2C900085AE8 /* RealTimeBlur */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		225168CD18BEA2C900085AE8 /* RealTimeBlur */ = {
-			isa = PBXGroup;
-			children = (
-				225168CE18BEA2D200085AE8 /* UIERealTimeBlurView.h */,
-				225168CF18BEA2D200085AE8 /* UIERealTimeBlurView.m */,
-				225168D018BEA2D200085AE8 /* UIImage+BoxBlur.h */,
-				225168D118BEA2D200085AE8 /* UIImage+BoxBlur.m */,
-			);
-			name = RealTimeBlur;
 			sourceTree = "<group>";
 		};
 		225168DC18BEA85100085AE8 /* Models */ = {
@@ -381,8 +363,6 @@
 				225168A118BE9F2400085AE8 /* USAppDelegate.m in Sources */,
 				225168CB18BEA29500085AE8 /* USViewController.m in Sources */,
 				225168E918BFD1DA00085AE8 /* USImageDatasource.m in Sources */,
-				225168D218BEA2D200085AE8 /* UIERealTimeBlurView.m in Sources */,
-				225168D318BEA2D200085AE8 /* UIImage+BoxBlur.m in Sources */,
 				223D566218C690A400CE2C7B /* ParallaxScrollingFramework.m in Sources */,
 				2251689D18BE9F2400085AE8 /* main.m in Sources */,
 				225168F818C61FE400085AE8 /* USWebDatasource.m in Sources */,

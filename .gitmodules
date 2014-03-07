@@ -1,6 +1,3 @@
-[submodule "iOS/Unsplash/Libraries/RealTimeBlur"]
-	path = iOS/Unsplash/Libraries/RealTimeBlur
-	url = git@github.com:alexdrone/ios-realtimeblur.git
 [submodule "iOS/Unsplash/Libraries/ParallaxScrollingFramework"]
 	path = iOS/Unsplash/Libraries/ParallaxScrollingFramework
 	url = git@github.com:carlinyuen/ParallaxScrollingFramework.git
