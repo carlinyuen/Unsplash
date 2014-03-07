@@ -17,7 +17,7 @@
 
     #define IMG_INTRO_BG @"bg_intro.jpg"
 
-    #define TIME_SCROLLING_BG 30
+    #define TIME_SCROLLING_BG 45
 
     #define SIZE_BUFFER 2
     #define SIZE_PARALLAX_MOTION 32
@@ -108,8 +108,8 @@
     // Setup blur view and its background
     self.introView = [[UIView alloc] initWithFrame:self.scrollView.bounds];
     self.introView.backgroundColor = [UIColor clearColor];
+    self.introView.alpha = 0;
     [self.scrollView addSubview:self.introView];
-    [self addScrollingBackground:[UIImage imageNamed:IMG_INTRO_BG] duration:TIME_SCROLLING_BG direction:CGPointMake(1, 0) toView:self.introView];
 
     // Setup buttons
     [self.menuButton addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -204,7 +204,9 @@
     // Animate on repeat
     [container addSubview:iv];
     [UIView animateWithDuration:duration delay:0
-        options:UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveLinear
+        options:UIViewAnimationOptionRepeat
+            | UIViewAnimationOptionCurveLinear
+            | UIViewAnimationOptionAutoreverse
         animations:^{
             iv.frame = targetFrame;
         } completion:^(BOOL finished) {
@@ -344,6 +346,9 @@
     {
         self.initialLoad = false;
 
+        // Start scrolling background
+        [self addScrollingBackground:[UIImage imageNamed:IMG_INTRO_BG] duration:TIME_SCROLLING_BG direction:CGPointMake(1, 0) toView:self.introView];
+
         // Hide loading indicator, show title
         [UIView animateWithDuration:ANIMATION_DURATION_SLOW delay:0
             options:UIViewAnimationOptionBeginFromCurrentState
@@ -352,6 +357,7 @@
                 self.loadingIndicator.alpha = 0;
                 self.titleLabel.alpha = 1;
                 self.authorLabel.alpha = 1;
+                self.introView.alpha = 1;
             } completion:^(BOOL finished) {
                 [self.loadingIndicator stopAnimating];
             }];
