@@ -34,6 +34,7 @@
 
     /** Buttons */
     @property (weak, nonatomic) IBOutlet UIButton *menuButton;
+    @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
     /** Main scrolling element */
     @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -120,6 +121,9 @@
     [self.menuButton addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.menuButton.alpha = 0;
     [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_BUTTONS toView:self.menuButton];
+    [self.shareButton addTarget:self action:@selector(shareButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.shareButton.alpha = 0;
+    [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_BUTTONS toView:self.shareButton];
 
     // Loading indicator
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -335,11 +339,11 @@
             | UIViewAnimationOptionBeginFromCurrentState
         animations:^{
             [[this menuButton] setAlpha:show];
-
+            [[this shareButton] setAlpha:show];
         } completion:^(BOOL finished) {
             if (finished && show) {
                 [this setFadeActionButtonsTimer:[NSTimer scheduledTimerWithTimeInterval:TIME_SHOW_ACTION_FADE_DELAY
-                    target:self selector:@selector(fadeActionButtonsTimerTriggered:)
+                    target:this selector:@selector(fadeActionButtonsTimerTriggered:)
                     userInfo:nil repeats:false]];
             }
         }];
@@ -369,6 +373,12 @@
 - (void)menuButtonTapped:(UIButton *)button
 {
     debugLog(@"menuButtonTapped");
+}
+
+/** @brief When share button is tapped */
+- (void)shareButtonTapped:(UIButton *)button
+{
+    debugLog(@"shareButtonTapped");
 }
 
 /** @brief When blur view is tapped */

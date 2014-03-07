@@ -10,6 +10,7 @@
                 <outlet property="authorLabel" destination="6LH-ze-fzq" id="35X-2D-iNF"/>
                 <outlet property="menuButton" destination="74q-WP-9Fv" id="cxL-pt-bzW"/>
                 <outlet property="scrollView" destination="vey-Z1-m9N" id="8q8-BD-nVr"/>
+                <outlet property="shareButton" destination="pbC-3P-DvJ" id="LVB-Zh-HKI"/>
                 <outlet property="titleLabel" destination="J3E-3k-Ikg" id="Mpc-Jt-GYq"/>
                 <outlet property="view" destination="1" id="7B4-TR-lf6"/>
             </connections>
@@ -58,6 +59,16 @@
                     </state>
                     <state key="highlighted" image="button_menu_p"/>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbC-3P-DvJ">
+                    <rect key="frame" x="264" y="512" width="44" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="VFu-60-88Y"/>
+                        <constraint firstAttribute="width" constant="44" id="pAb-iq-Unm"/>
+                    </constraints>
+                    <state key="normal" image="button_share"/>
+                    <state key="highlighted" image="button_share_p"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -70,7 +81,9 @@
                 <constraint firstItem="vey-Z1-m9N" firstAttribute="top" secondItem="1" secondAttribute="top" id="ci8-nJ-rAJ"/>
                 <constraint firstAttribute="centerY" secondItem="6LH-ze-fzq" secondAttribute="centerY" id="jUf-i8-uug"/>
                 <constraint firstItem="vey-Z1-m9N" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="kB8-Eu-Cbk"/>
+                <constraint firstAttribute="bottom" secondItem="pbC-3P-DvJ" secondAttribute="bottom" constant="12" id="m4k-0R-pru"/>
                 <constraint firstItem="J3E-3k-Ikg" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="oJC-7Y-MMP"/>
+                <constraint firstAttribute="trailing" secondItem="pbC-3P-DvJ" secondAttribute="trailing" constant="12" id="vBy-xd-Zq0"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -79,5 +92,7 @@
     <resources>
         <image name="button_menu" width="44" height="44"/>
         <image name="button_menu_p" width="44" height="44"/>
+        <image name="button_share" width="44" height="44"/>
+        <image name="button_share_p" width="44" height="44"/>
     </resources>
 </document>
