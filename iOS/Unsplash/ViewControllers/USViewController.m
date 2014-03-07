@@ -183,28 +183,23 @@
     container.clipsToBounds = true;
 
     // Normalize direction
-    debugLog(@"Point: %@", NSStringFromCGPoint(direction));
     CGFloat length = sqrtf(direction.x * direction.x + direction.y * direction.y);
     CGPoint point = CGPointApplyAffineTransform(direction,
         CGAffineTransformMakeScale(1.0f / length, 1.0f / length));
-    debugLog(@"Normalized Point: %@", NSStringFromCGPoint(point));
 
     // Set background image to full size and position accordingly for direction
     UIImageView *iv = [[UIImageView alloc] initWithImage:image];
     iv.contentMode = UIViewContentModeScaleAspectFill;
     CGRect frame = iv.frame;
-    frame.origin.x = (point.x < 0) ? -CGRectGetWidth(frame)
-        : (point.x == 0 ? 0 : CGRectGetWidth(container.bounds));
-    frame.origin.y = (point.y > 0) ? -CGRectGetHeight(frame)
-        : (point.y == 0 ? 0 : CGRectGetHeight(container.bounds));
+    frame.origin.x = (point.x < 0) ? -CGRectGetWidth(frame) : 0;
+    frame.origin.y = (point.y > 0) ? -CGRectGetHeight(frame) : 0;
     iv.frame = frame;
 
-    debugLog(@"Original Rect: %@", NSStringFromCGRect(frame));
+    // Calculate target frame
     CGRect targetFrame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(
-            -point.x * CGRectGetWidth(frame) + frame.origin.x,
-            -point.y * CGRectGetHeight(frame) + frame.origin.y
+            -(point.x * CGRectGetWidth(frame) - point.x * CGRectGetWidth(container.bounds)),
+            -(point.y * CGRectGetHeight(frame) - point.y * CGRectGetHeight(container.bounds))
         ));
-    debugLog(@"Target Rect: %@", NSStringFromCGRect(targetFrame));
 
     // Animate on repeat
     [container addSubview:iv];
