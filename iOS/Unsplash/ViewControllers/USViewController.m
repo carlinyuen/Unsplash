@@ -17,7 +17,7 @@
 
     #define IMG_INTRO_BG @"bg_intro.jpg"
 
-    #define TIME_SCROLLING_BG 45
+    #define TIME_SCROLLING_BG 60
     #define TIME_SHOW_ACTION_FADE_DELAY 2
 
     #define SIZE_BUFFER 2
