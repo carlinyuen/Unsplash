@@ -197,8 +197,10 @@
     UIImageView *iv = [[UIImageView alloc] initWithImage:image];
     iv.contentMode = UIViewContentModeScaleAspectFill;
     CGRect frame = iv.frame;
-    frame.origin.x = (point.x >= 0) ? 0 : -CGRectGetWidth(frame);
-    frame.origin.y = (point.y > 0) ? -CGRectGetHeight(frame) : 0;
+    frame.origin.x = (point.x < 0) ? -CGRectGetWidth(frame)
+        : (point.x == 0 ? 0 : CGRectGetWidth(container.bounds));
+    frame.origin.y = (point.y > 0) ? -CGRectGetHeight(frame)
+        : (point.y == 0 ? 0 : CGRectGetHeight(container.bounds));
     iv.frame = frame;
 
     debugLog(@"Original Rect: %@", NSStringFromCGRect(frame));
