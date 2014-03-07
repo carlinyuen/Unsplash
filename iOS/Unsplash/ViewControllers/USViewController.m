@@ -20,7 +20,8 @@
     #define TIME_SCROLLING_BG 45
 
     #define SIZE_BUFFER 2
-    #define SIZE_PARALLAX_MOTION 32
+    #define SIZE_PARALLAX_DEPTH_TEXT 32
+    #define SIZE_PARALLAX_DEPTH_BUTTONS 16
 
 @interface USViewController () <
     UIScrollViewDelegate
@@ -102,8 +103,8 @@
     // Setup labels
     self.titleLabel.alpha = 0;
     self.authorLabel.alpha = 0;
-    [self addParallaxToView:self.titleLabel];
-    [self addParallaxToView:self.authorLabel];
+    [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_TEXT toView:self.titleLabel];
+    [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_TEXT toView:self.authorLabel];
 
     // Setup blur view and its background
     self.introView = [[UIView alloc] initWithFrame:self.scrollView.bounds];
@@ -113,6 +114,8 @@
 
     // Setup buttons
     [self.menuButton addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.menuButton.alpha = 0;
+    [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_BUTTONS toView:self.menuButton];
 
     // Loading indicator
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -214,7 +217,7 @@
 }
 
 /** @brief Add parallax effects */
-- (void)addParallaxToView:(UIView *)view
+- (void)addParallaxWithDepth:(CGFloat)depth toView:(UIView *)view
 {
     // Adding parallax effect for iOS 7
     if (!deviceOSVersionLessThan(iOS7))
@@ -223,15 +226,15 @@
         UIInterpolatingMotionEffect *verticalMotionEffect
             = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y"
             type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-        verticalMotionEffect.minimumRelativeValue = @(-SIZE_PARALLAX_MOTION);
-        verticalMotionEffect.maximumRelativeValue = @(SIZE_PARALLAX_MOTION);
+        verticalMotionEffect.minimumRelativeValue = @(-depth);
+        verticalMotionEffect.maximumRelativeValue = @(depth);
         
         // Set horizontal effect 
         UIInterpolatingMotionEffect *horizontalMotionEffect
             = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x"
             type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-        horizontalMotionEffect.minimumRelativeValue = @(-SIZE_PARALLAX_MOTION);
-        horizontalMotionEffect.maximumRelativeValue = @(SIZE_PARALLAX_MOTION);
+        horizontalMotionEffect.minimumRelativeValue = @(-depth);
+        horizontalMotionEffect.maximumRelativeValue = @(depth);
         
         // Create group to combine both
         UIMotionEffectGroup *group = [UIMotionEffectGroup new];
