@@ -357,6 +357,26 @@
         }];
 }
 
+/** @brief Displays loading indicator */
+- (void)displayLoadingIndicator:(BOOL)show
+{
+    __block USViewController *this = self;
+    if (show) {
+        [self.loadingIndicator startAnimating];
+    }
+    [UIView animateWithDuration:ANIMATION_DURATION_SLOW delay:0
+        options:UIViewAnimationOptionBeginFromCurrentState
+            | UIViewAnimationOptionCurveEaseInOut
+        animations:^{
+            [[this loadingIndicator] setAlpha:show];
+        } completion:^(BOOL finished) {
+            if (finished && !show) {
+                [[this loadingIndicator] stopAnimating];
+            }
+        }];
+
+}
+
 
 #pragma mark - Event Handlers
 
@@ -387,6 +407,16 @@
 - (void)shareButtonTapped:(UIButton *)button
 {
     debugLog(@"shareButtonTapped");
+
+    // Setup ActivityViewController
+    NSInteger index = self.lastShownPage;
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[
+        [self.datasource.imageCache objectAtIndex:index],       // Image
+        [NSURL URLWithString:[self.datasource.imageURLCache objectAtIndex:index]],    // URL
+    ] applicationActivities:nil];
+
+    // Show activity sheet
+    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
 /** @brief Connection timed out */
@@ -429,7 +459,9 @@
                 [[this introView] setAlpha:1];
                 [[this menuButton] setAlpha:1];
             } completion:^(BOOL finished) {
-                [[this loadingIndicator] stopAnimating];
+                if (finished) {
+                    [[this loadingIndicator] stopAnimating];
+                }
             }];
 
         // Cancel any local notifications remaining
