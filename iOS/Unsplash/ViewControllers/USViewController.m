@@ -18,6 +18,7 @@
     #define IMG_INTRO_BG @"bg_intro.jpg"
 
     #define TIME_SCROLLING_BG 45
+    #define TIME_SHOW_ACTION_FADE_DELAY 3
 
     #define SIZE_BUFFER 2
     #define SIZE_PARALLAX_DEPTH_TEXT 32
@@ -52,6 +53,9 @@
     /** Loading indicator for when datasource gets images */
     @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
     @property (nonatomic, assign) BOOL initialLoad;
+
+    /** Timer to keep track of when to fade shown actions */
+    @property (nonatomic, strong) NSTimer *fadeActionButtonsTimer;
 
     /** Animator for parallax effects */
 //    @property (nonatomic, strong) ParallaxScrollingFramework *animator;
@@ -305,22 +309,58 @@
 /** @brief Displays splash screen (with title label and stuff) */
 - (void)displaySplashScreen:(BOOL)show
 {
+    __block USViewController *this = self;
     [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
         options:UIViewAnimationOptionCurveEaseInOut
             | UIViewAnimationOptionBeginFromCurrentState
         animations:^{
-            self.titleLabel.alpha = show;
-            self.authorLabel.alpha = show;
+            [[this titleLabel] setAlpha:show];
+            [[this authorLabel] setAlpha:show];
+            [[this menuButton] setAlpha:show];
         } completion:nil];
+}
+
+/** @brief Displays image action options */
+- (void)displayActionButtons:(BOOL)show
+{
+    // Cancel fade timer if exists
+    if (self.fadeActionButtonsTimer) {
+        [self.fadeActionButtonsTimer invalidate];
+        self.fadeActionButtonsTimer = nil;
+    }
+
+    __block USViewController *this = self;
+    [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
+        options:UIViewAnimationOptionCurveEaseInOut
+            | UIViewAnimationOptionBeginFromCurrentState
+        animations:^{
+            [[this menuButton] setAlpha:show];
+
+        } completion:^(BOOL finished) {
+            if (finished && show) {
+                [this setFadeActionButtonsTimer:[NSTimer scheduledTimerWithTimeInterval:TIME_SHOW_ACTION_FADE_DELAY
+                    target:self selector:@selector(fadeActionButtonsTimerTriggered:)
+                    userInfo:nil repeats:false]];
+            }
+        }];
 }
 
 
 #pragma mark - Event Handlers
 
+/** @brief Action delay timer triggered */
+- (void)fadeActionButtonsTimerTriggered:(NSTimer *)timer
+{
+    [self displayActionButtons:false];
+}
+
 /** @brief When screen is tapped */
 - (void)screenTapped:(UITapGestureRecognizer *)gesture
 {
     debugLog(@"screenTapped");
+
+    // Show action buttons
+    [self displayActionButtons:true];
 }
 
 /** @brief When menu button is tapped */
@@ -361,6 +401,7 @@
                 self.titleLabel.alpha = 1;
                 self.authorLabel.alpha = 1;
                 self.introView.alpha = 1;
+                self.menuButton.alpha = 1;
             } completion:^(BOOL finished) {
                 [self.loadingIndicator stopAnimating];
             }];
@@ -463,8 +504,10 @@
         // Actions to take when moving to/from first page
         if (page == 1 && self.lastShownPage == 0) {
             [self displaySplashScreen:false];
-        } else if (page == 0 && self.lastShownPage != 0) {
+        } else if (page == 0) {     // Show splash screen
             [self displaySplashScreen:true];
+        } else {    // Hide action buttons when scrolling
+            [self displayActionButtons:false];
         }
 
         // Update last shown page number
