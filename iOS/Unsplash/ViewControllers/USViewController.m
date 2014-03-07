@@ -108,11 +108,13 @@
     [self addParallaxToView:self.authorLabel];
 
     // Setup blur view and its background
-    self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:self.scrollView.bounds];
     self.introView = [[UIView alloc] initWithFrame:self.scrollView.bounds];
     self.introView.backgroundColor = [UIColor clearColor];
     [self.scrollView addSubview:self.introView];
-//    [self.scrollView insertSubview:self.blurView aboveSubview:self.introView];
+    if (!deviceOSVersionLessThan(iOS7)) {
+        self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:self.scrollView.bounds];
+        [self.scrollView insertSubview:self.blurView aboveSubview:self.introView];
+    }
     [self addScrollingBackground:[UIImage imageNamed:IMG_INTRO_BG] duration:TIME_SCROLLING_BG direction:CGPointMake(1, 0) toView:self.introView];
 
     // Setup buttons
@@ -205,8 +207,9 @@
 
     debugLog(@"Original Rect: %@", NSStringFromCGRect(frame));
     CGRect targetFrame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(
-            -point.x * CGRectGetWidth(frame),
-            -point.y * CGRectGetHeight(frame)));
+            -point.x * CGRectGetWidth(frame) + frame.origin.x,
+            -point.y * CGRectGetHeight(frame) + frame.origin.y
+        ));
     debugLog(@"Target Rect: %@", NSStringFromCGRect(targetFrame));
 
     // Animate on repeat
