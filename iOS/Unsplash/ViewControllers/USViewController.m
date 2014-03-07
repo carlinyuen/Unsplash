@@ -94,13 +94,18 @@
         options:kNilOptions context:nil];   // For clean rotations
 
     // Setup Animator
-//    self.animator = [[ParallaxScrollingFramework alloc] initWithScrollView:self.scrollView];
+    self.animator = [[ParallaxScrollingFramework alloc] initWithScrollView:self.scrollView];
 
     // Setup labels
     self.titleLabel.alpha = 0;
     self.authorLabel.alpha = 0;
     [self addParallaxToView:self.titleLabel];
     [self addParallaxToView:self.authorLabel];
+
+    // Setup blur view
+    self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:self.scrollView.bounds];
+    self.blurView.tintColor = [UIColor blackColor];
+    [self.scrollView addSubview:self.blurView];
 
     // Setup buttons
     [self.menuButton addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -220,6 +225,11 @@
     self.scrollView.contentSize = CGSizeMake(
         CGRectGetWidth(bounds) * ([imageURLs count] + 1),   // +1 for intro
         CGRectGetHeight(bounds)
+    );
+
+    // Reposition blur view
+    self.blurView.frame = CGRectMake(
+        0, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds)
     );
 
     // Reposition existing images
@@ -344,21 +354,35 @@
         {
             if (this)
             {
+                UIImage *image = [this.datasource.imageCache objectAtIndex:index];
+
                 // Create ImageView
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:view.frame];
                 imageView.contentMode = UIViewContentModeScaleAspectFill;
                 imageView.backgroundColor = [UIColor clearColor];
                 imageView.clipsToBounds = true;
-                [imageView setImage:[this.datasource.imageCache objectAtIndex:index]];
+                [imageView setImage:image];
 
                 // Remove loading indicator and replace with imageView
                 [view stopAnimating];
                 [view removeFromSuperview];
                 [this.imageViews replaceObjectAtIndex:index withObject:imageView];
 
+                // If first image, add to animator
+                if (index == 0)
+                {
+                    [this.animator setKeyFrameWithOffset:0
+                        translate:CGPointMake(-CGRectGetWidth(view.frame), 0)
+                        scale:CGSizeMake(1, 1)
+                        rotate:0 alpha:1 forView:imageView];
+                    [this.animator setKeyFrameWithOffset:CGRectGetWidth(view.frame)
+                        translate:CGPointMake(0, 0) scale:CGSizeMake(1, 1)
+                        rotate:0 alpha:1 forView:imageView];
+                }
+
                 // Fade in imageview
                 imageView.alpha = 0;
-                [this.scrollView addSubview:imageView];
+                [this.scrollView insertSubview:imageView belowSubview:this.blurView];
                 [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
                     options:UIViewAnimationOptionBeginFromCurrentState
                     animations:^{
