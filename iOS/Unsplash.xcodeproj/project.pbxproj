@@ -11,6 +11,7 @@
 		223D565C18C6768F00CE2C7B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D565B18C6768F00CE2C7B /* Accelerate.framework */; };
 		223D565E18C68A5D00CE2C7B /* USViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 223D565D18C68A5D00CE2C7B /* USViewController.xib */; };
 		223D566218C690A400CE2C7B /* ParallaxScrollingFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 223D566118C690A400CE2C7B /* ParallaxScrollingFramework.m */; };
+		223D566618CA3A2F00CE2C7B /* bg_intro@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 223D566518CA3A2F00CE2C7B /* bg_intro@2x.jpg */; };
 		2251689118BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		2251689318BE9F2400085AE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689218BE9F2400085AE8 /* CoreGraphics.framework */; };
 		2251689518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
@@ -52,6 +53,7 @@
 		223D565D18C68A5D00CE2C7B /* USViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = USViewController.xib; sourceTree = "<group>"; };
 		223D566018C690A400CE2C7B /* ParallaxScrollingFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingFramework.h; sourceTree = "<group>"; };
 		223D566118C690A400CE2C7B /* ParallaxScrollingFramework.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingFramework.m; sourceTree = "<group>"; };
+		223D566518CA3A2F00CE2C7B /* bg_intro@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg_intro@2x.jpg"; sourceTree = "<group>"; };
 		2251688D18BE9F2400085AE8 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2251689018BE9F2400085AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2251689218BE9F2400085AE8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,6 +130,22 @@
 			path = Libraries/ParallaxScrollingFramework/ParallaxScrollingFramework;
 			sourceTree = "<group>";
 		};
+		223D566318CA3A2F00CE2C7B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				223D566418CA3A2F00CE2C7B /* images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		223D566418CA3A2F00CE2C7B /* images */ = {
+			isa = PBXGroup;
+			children = (
+				223D566518CA3A2F00CE2C7B /* bg_intro@2x.jpg */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		2251688418BE9F2400085AE8 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +190,7 @@
 				225168AB18BE9F2400085AE8 /* Images.xcassets */,
 				225168CC18BEA2B400085AE8 /* Libraries */,
 				225168DC18BEA85100085AE8 /* Models */,
+				223D566318CA3A2F00CE2C7B /* Resources */,
 				2251689718BE9F2400085AE8 /* Supporting Files */,
 				225168C818BEA29500085AE8 /* ViewControllers */,
 			);
@@ -335,6 +354,7 @@
 			files = (
 				225168AC18BE9F2400085AE8 /* Images.xcassets in Resources */,
 				225168D818BEA79F00085AE8 /* USImageViewController.xib in Resources */,
+				223D566618CA3A2F00CE2C7B /* bg_intro@2x.jpg in Resources */,
 				225168E618BF888700085AE8 /* USWebViewController.xib in Resources */,
 				2251689B18BE9F2400085AE8 /* InfoPlist.strings in Resources */,
 				223D565E18C68A5D00CE2C7B /* USViewController.xib in Resources */,

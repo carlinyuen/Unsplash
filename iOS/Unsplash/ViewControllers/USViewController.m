@@ -16,6 +16,10 @@
 
     #define URL_UNSPLASH @"http://unsplash.com"
 
+    #define IMG_INTRO_BG @"bg_intro.jpg"
+
+    #define TIME_SCROLLING_BG 30
+
     #define SIZE_BUFFER 2
     #define SIZE_PARALLAX_MOTION 32
 
@@ -44,13 +48,14 @@
 
     /** Fancy real-time blur view */
     @property (nonatomic, strong) UIERealTimeBlurView *blurView;
+    @property (nonatomic, strong) UIView *introView;
 
     /** Loading indicator for when datasource gets images */
     @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
     @property (nonatomic, assign) BOOL initialLoad;
 
     /** Animator for parallax effects */
-    @property (nonatomic, strong) ParallaxScrollingFramework *animator;
+//    @property (nonatomic, strong) ParallaxScrollingFramework *animator;
 
 @end
 
@@ -94,7 +99,7 @@
         options:kNilOptions context:nil];   // For clean rotations
 
     // Setup Animator
-    self.animator = [[ParallaxScrollingFramework alloc] initWithScrollView:self.scrollView];
+//    self.animator = [[ParallaxScrollingFramework alloc] initWithScrollView:self.scrollView];
 
     // Setup labels
     self.titleLabel.alpha = 0;
@@ -102,10 +107,13 @@
     [self addParallaxToView:self.titleLabel];
     [self addParallaxToView:self.authorLabel];
 
-    // Setup blur view
+    // Setup blur view and its background
     self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:self.scrollView.bounds];
-    self.blurView.tintColor = [UIColor blackColor];
-    [self.scrollView addSubview:self.blurView];
+    self.introView = [[UIView alloc] initWithFrame:self.scrollView.bounds];
+    self.introView.backgroundColor = [UIColor clearColor];
+    [self.scrollView addSubview:self.introView];
+//    [self.scrollView insertSubview:self.blurView aboveSubview:self.introView];
+    [self addScrollingBackground:[UIImage imageNamed:IMG_INTRO_BG] duration:TIME_SCROLLING_BG direction:CGPointMake(1, 0) toView:self.introView];
 
     // Setup buttons
     [self.menuButton addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
@@ -171,6 +179,43 @@
 
 
 #pragma mark - Setup
+
+/** @brief Add scrolling background image */
+- (void)addScrollingBackground:(UIImage *)image duration:(NSTimeInterval)duration direction:(CGPoint)direction toView:(UIView *)container
+{
+    // Frame the background
+    container.clipsToBounds = true;
+
+    // Normalize direction
+    debugLog(@"Point: %@", NSStringFromCGPoint(direction));
+    CGFloat length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+    CGPoint point = CGPointApplyAffineTransform(direction,
+        CGAffineTransformMakeScale(1.0f / length, 1.0f / length));
+    debugLog(@"Normalized Point: %@", NSStringFromCGPoint(point));
+
+    // Set background image to full size and position accordingly for direction
+    UIImageView *iv = [[UIImageView alloc] initWithImage:image];
+    iv.contentMode = UIViewContentModeScaleAspectFill;
+    CGRect frame = iv.frame;
+    frame.origin.x = (point.x >= 0) ? 0 : -CGRectGetWidth(frame);
+    frame.origin.y = (point.y > 0) ? -CGRectGetHeight(frame) : 0;
+    iv.frame = frame;
+
+    debugLog(@"Original Rect: %@", NSStringFromCGRect(frame));
+    CGRect targetFrame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(
+            -point.x * CGRectGetWidth(frame),
+            -point.y * CGRectGetHeight(frame)));
+    debugLog(@"Target Rect: %@", NSStringFromCGRect(targetFrame));
+
+    // Animate on repeat
+    [container addSubview:iv];
+    [UIView animateWithDuration:duration delay:0
+        options:UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveLinear
+        animations:^{
+            iv.frame = targetFrame;
+        } completion:^(BOOL finished) {
+        }];
+}
 
 /** @brief Add parallax effects */
 - (void)addParallaxToView:(UIView *)view
@@ -368,21 +413,9 @@
                 [view removeFromSuperview];
                 [this.imageViews replaceObjectAtIndex:index withObject:imageView];
 
-                // If first image, add to animator
-                if (index == 0)
-                {
-                    [this.animator setKeyFrameWithOffset:0
-                        translate:CGPointMake(-CGRectGetWidth(view.frame), 0)
-                        scale:CGSizeMake(1, 1)
-                        rotate:0 alpha:1 forView:imageView];
-                    [this.animator setKeyFrameWithOffset:CGRectGetWidth(view.frame)
-                        translate:CGPointMake(0, 0) scale:CGSizeMake(1, 1)
-                        rotate:0 alpha:1 forView:imageView];
-                }
-
                 // Fade in imageview
                 imageView.alpha = 0;
-                [this.scrollView insertSubview:imageView belowSubview:this.blurView];
+                [this.scrollView addSubview:imageView];
                 [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
                     options:UIViewAnimationOptionBeginFromCurrentState
                     animations:^{
