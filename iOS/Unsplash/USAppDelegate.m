@@ -8,6 +8,11 @@
 
 #import "USAppDelegate.h"
 
+    #define TEXT_NOTIFICATION_REMINDER_TEXT @"New beautiful free images hot off the press from ooomf!"
+    #define TEXT_NOTIFICATION_REMINDER_TITLE @"Check it out!"
+
+    #define TIME_NOTIFICATION_REMINDER_INTERVAL 10 * TIME_ONE_DAY
+
 @implementation USAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -17,7 +22,6 @@
     // Hide status bar
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 
-    
     // Create base view controller
     self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
 	self.window.rootViewController = self.viewController;
@@ -26,6 +30,25 @@
     UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (notification) {
         [self application:application didReceiveLocalNotification:notification];
+    }
+
+    // Create one-time local notification for reminder
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:ONCE_KEY_APP_OPENED])
+    {
+        debugLog(@"First-time use: setting monthly reminder");
+
+        // Set local notification for an update every 10 days (re:unsplash.com)
+        notification = [UILocalNotification new];
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.alertBody = TEXT_NOTIFICATION_REMINDER_TEXT;
+        notification.alertAction = TEXT_NOTIFICATION_REMINDER_TITLE;
+        notification.applicationIconBadgeNumber = 1;
+        notification.repeatInterval = NSCalendarUnitMonth;
+        notification.fireDate = [NSDate dateWithTimeInterval:TIME_NOTIFICATION_REMINDER_INTERVAL sinceDate:[NSDate date]];
+
+        // Update flag for one time setting
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:ONCE_KEY_APP_OPENED];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 
     [self.window makeKeyAndVisible];

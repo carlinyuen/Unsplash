@@ -18,7 +18,7 @@
     #define IMG_INTRO_BG @"bg_intro.jpg"
 
     #define TIME_SCROLLING_BG 45
-    #define TIME_SHOW_ACTION_FADE_DELAY 3
+    #define TIME_SHOW_ACTION_FADE_DELAY 2
 
     #define SIZE_BUFFER 2
     #define SIZE_PARALLAX_DEPTH_TEXT 32
@@ -405,6 +405,9 @@
             } completion:^(BOOL finished) {
                 [self.loadingIndicator stopAnimating];
             }];
+
+        // Cancel any local notifications remaining
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
     }
 
     // Resize scrollview contentsize
