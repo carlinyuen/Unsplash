@@ -110,7 +110,9 @@
 
     // Setup labels
     self.titleLabel.alpha = 0;
+    self.titleLabel.textColor = [UIColor whiteColor];
     self.infoLabel.alpha = 0;
+    self.infoLabel.textColor = [UIColor whiteColor];
     [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_TEXT toView:self.titleLabel];
     [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_TEXT toView:self.infoLabel];
 
