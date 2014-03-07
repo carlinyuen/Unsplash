@@ -8,7 +8,6 @@
 
 #import "USViewController.h"
 
-#import "UIERealTimeBlurView.h"
 #import "ParallaxScrollingFramework.h"
 
 #import "USImageDatasource.h"
@@ -46,8 +45,7 @@
 	/** Keep track of which page you're on */
 	@property (nonatomic, assign) NSInteger lastShownPage;
 
-    /** Fancy real-time blur view */
-    @property (nonatomic, strong) UIERealTimeBlurView *blurView;
+    /** Fancy background view */
     @property (nonatomic, strong) UIView *introView;
 
     /** Loading indicator for when datasource gets images */
@@ -111,11 +109,6 @@
     self.introView = [[UIView alloc] initWithFrame:self.scrollView.bounds];
     self.introView.backgroundColor = [UIColor clearColor];
     [self.scrollView addSubview:self.introView];
-    if (!deviceOSVersionLessThan(iOS7)) {
-        self.blurView = [[UIERealTimeBlurView alloc] initWithFrame:self.scrollView.bounds];
-        self.blurView.tintColor = UIColorFromHex(COLOR_HEX_BLURVIEW);
-        [self.scrollView insertSubview:self.blurView aboveSubview:self.introView];
-    }
     [self addScrollingBackground:[UIImage imageNamed:IMG_INTRO_BG] duration:TIME_SCROLLING_BG direction:CGPointMake(1, 0) toView:self.introView];
 
     // Setup buttons
@@ -278,8 +271,8 @@
         CGRectGetHeight(bounds)
     );
 
-    // Reposition blur view
-    self.blurView.frame = CGRectMake(
+    // Reposition intro screen view
+    self.introView.frame = CGRectMake(
         0, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds)
     );
 
