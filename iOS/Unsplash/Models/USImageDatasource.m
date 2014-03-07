@@ -163,7 +163,11 @@
     self.apiConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:true];
     self.apiConnectionData = [NSMutableData new];
 
-    // Fire off timeout timer
+    // Fire off timeout timer, kill it first if already exists
+    if (self.connectionTimeout) {
+        [self.connectionTimeout invalidate];
+        self.connectionTimeout = nil;
+    }
     self.connectionTimeout = [NSTimer
         scheduledTimerWithTimeInterval:TIME_CONNECTION_TIMEOUT
         target:self selector:@selector(connectionTimeoutTriggered:)
@@ -222,8 +226,12 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    // If for api connection, do nothing
+    // If for api connection, kill connection timer
     if (connection == self.apiConnection) {
+        if (self.connectionTimeout) {
+            [self.connectionTimeout invalidate];
+            self.connectionTimeout = nil;
+        }
         return;
     }
 

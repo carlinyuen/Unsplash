@@ -24,13 +24,16 @@
     #define SIZE_PARALLAX_DEPTH_TEXT 32
     #define SIZE_PARALLAX_DEPTH_BUTTONS 16
 
+    #define TEXT_AUTHOR @"made by ooomf"
+    #define TEXT_ERROR_CONNECTION @"no connection"
+
 @interface USViewController () <
     UIScrollViewDelegate
 >
 
     /** Labels */
     @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-    @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+    @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 
     /** Buttons */
     @property (weak, nonatomic) IBOutlet UIButton *menuButton;
@@ -107,9 +110,9 @@
 
     // Setup labels
     self.titleLabel.alpha = 0;
-    self.authorLabel.alpha = 0;
+    self.infoLabel.alpha = 0;
     [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_TEXT toView:self.titleLabel];
-    [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_TEXT toView:self.authorLabel];
+    [self addParallaxWithDepth:SIZE_PARALLAX_DEPTH_TEXT toView:self.infoLabel];
 
     // Setup blur view and its background
     self.introView = [[UIView alloc] initWithFrame:self.scrollView.bounds];
@@ -141,14 +144,17 @@
 
     debugLog(@"viewWillAppear");
 
-    // Get images if on initial load
+    // Get images if on initial load and haven't loaded yet
     if (self.datasource && self.initialLoad)
     {
         self.loadingIndicator.center = self.view.center;
         [self.loadingIndicator startAnimating];
-        [UIView animateWithDuration:ANIMATION_DURATION_SLOW animations:^{
-            self.loadingIndicator.alpha = 1;
-        }];
+        [UIView animateWithDuration:ANIMATION_DURATION_SLOW delay:0
+            options:UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+            animations:^{
+                self.loadingIndicator.alpha = 1;
+                self.infoLabel.alpha = 0;   // Hide errors that were shown before
+            } completion:nil];
 
         [self.datasource fetchMoreImages];
     }
@@ -160,7 +166,7 @@
     [self updateScrollView:self.scrollView.bounds];
 
     // Reposition author label
-    self.authorLabel.textAlignment
+    self.infoLabel.textAlignment
         = UIInterfaceOrientationIsLandscape(toInterfaceOrientation)
             ? NSTextAlignmentRight : NSTextAlignmentCenter;
 }
@@ -319,7 +325,7 @@
             | UIViewAnimationOptionBeginFromCurrentState
         animations:^{
             [[this titleLabel] setAlpha:show];
-            [[this authorLabel] setAlpha:show];
+            [[this infoLabel] setAlpha:show];
             [[this menuButton] setAlpha:show];
         } completion:nil];
 }
@@ -381,16 +387,20 @@
     debugLog(@"shareButtonTapped");
 }
 
-/** @brief When blur view is tapped */
-- (void)blurViewTapped:(UITapGestureRecognizer *)gesture
-{
-    debugLog(@"blurViewTapped");
-}
-
 /** @brief Connection timed out */
 - (void)connectionTimedOut:(NSNotification *)notification
 {
     debugLog(@"connectionTimedOut");
+
+    // Use info label to display connection error
+    self.infoLabel.text = TEXT_ERROR_CONNECTION;
+
+    // Animate to show
+    [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
+        options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
+        animations:^{
+            self.infoLabel.alpha = 1;
+        } completion:nil];
 }
 
 /** @brief When new image urls are scraped from the page */
@@ -404,18 +414,20 @@
         // Start scrolling background
         [self addScrollingBackground:[UIImage imageNamed:IMG_INTRO_BG] duration:TIME_SCROLLING_BG direction:CGPointMake(1, 0) toView:self.introView];
 
-        // Hide loading indicator, show title
+        // Hide loading indicator, show title and info labels
+        self.infoLabel.text = TEXT_AUTHOR;
+        __block USViewController *this = self;
         [UIView animateWithDuration:ANIMATION_DURATION_SLOW delay:0
             options:UIViewAnimationOptionBeginFromCurrentState
                 | UIViewAnimationOptionCurveEaseInOut
             animations:^{
-                self.loadingIndicator.alpha = 0;
-                self.titleLabel.alpha = 1;
-                self.authorLabel.alpha = 1;
-                self.introView.alpha = 1;
-                self.menuButton.alpha = 1;
+                [[this loadingIndicator] setAlpha:0];
+                [[this titleLabel] setAlpha:1];
+                [[this infoLabel] setAlpha:1];
+                [[this introView] setAlpha:1];
+                [[this menuButton] setAlpha:1];
             } completion:^(BOOL finished) {
-                [self.loadingIndicator stopAnimating];
+                [[this loadingIndicator] stopAnimating];
             }];
 
         // Cancel any local notifications remaining
