@@ -359,8 +359,10 @@
 {
     debugLog(@"screenTapped");
 
-    // Show action buttons
-    [self displayActionButtons:true];
+    // Toggle action buttons if not on first screen
+    if (self.lastShownPage > 0) {
+        [self displayActionButtons:(self.menuButton.alpha == 0)];
+    }
 }
 
 /** @brief When menu button is tapped */
