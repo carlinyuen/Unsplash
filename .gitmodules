@@ -7,3 +7,6 @@
 [submodule "iOS/Unsplash/Libraries/GPUImage"]
 	path = iOS/Unsplash/Libraries/GPUImage
 	url = git@github.com:BradLarson/GPUImage.git
+[submodule "iOS/Unsplash/Libraries/UISidebarViewController"]
+	path = iOS/Unsplash/Libraries/UISidebarViewController
+	url = git@github.com:carlinyuen/UISidebarViewController.git

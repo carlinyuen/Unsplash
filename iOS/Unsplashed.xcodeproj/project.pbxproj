@@ -17,8 +17,8 @@
 		223D56B118D1704F00CE2C7B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D56B018D1704F00CE2C7B /* OpenGLES.framework */; };
 		223D56B318D1706000CE2C7B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D56B218D1706000CE2C7B /* CoreVideo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		223D56C018D1722D00CE2C7B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D56BB18D1708700CE2C7B /* libGPUImage.a */; };
-		223D56C318D1734A00CE2C7B /* UISidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223D56C218D1734A00CE2C7B /* UISidebarViewController.m */; };
 		223D56C818D1890200CE2C7B /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 223D56C718D1890200CE2C7B /* MMDrawerBarButtonItem.m */; };
+		223D575118D19AE900CE2C7B /* UISidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223D575018D19AE900CE2C7B /* UISidebarViewController.m */; };
 		2251689118BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		2251689318BE9F2400085AE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689218BE9F2400085AE8 /* CoreGraphics.framework */; };
 		2251689518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
@@ -85,10 +85,10 @@
 		223D56B018D1704F00CE2C7B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		223D56B218D1706000CE2C7B /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		223D56B418D1708500CE2C7B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = Libraries/GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
-		223D56C118D1734A00CE2C7B /* UISidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UISidebarViewController.h; path = Unsplash/Libraries/UISidebarViewController/UISidebarViewController.h; sourceTree = SOURCE_ROOT; };
-		223D56C218D1734A00CE2C7B /* UISidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UISidebarViewController.m; path = Unsplash/Libraries/UISidebarViewController/UISidebarViewController.m; sourceTree = SOURCE_ROOT; };
 		223D56C618D1890200CE2C7B /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMDrawerBarButtonItem.h; path = Libraries/MMDrawerController/MMDrawerController/MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		223D56C718D1890200CE2C7B /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMDrawerBarButtonItem.m; path = Libraries/MMDrawerController/MMDrawerController/MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
+		223D574F18D19AE900CE2C7B /* UISidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UISidebarViewController.h; path = Unsplash/Libraries/UISidebarViewController/UISidebarViewController/UISidebarViewController.h; sourceTree = SOURCE_ROOT; };
+		223D575018D19AE900CE2C7B /* UISidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UISidebarViewController.m; path = Unsplash/Libraries/UISidebarViewController/UISidebarViewController/UISidebarViewController.m; sourceTree = SOURCE_ROOT; };
 		2251688D18BE9F2400085AE8 /* Unsplashed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplashed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2251689018BE9F2400085AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2251689218BE9F2400085AE8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -194,8 +194,8 @@
 		223D56C418D1734F00CE2C7B /* UISidebarViewController */ = {
 			isa = PBXGroup;
 			children = (
-				223D56C118D1734A00CE2C7B /* UISidebarViewController.h */,
-				223D56C218D1734A00CE2C7B /* UISidebarViewController.m */,
+				223D574F18D19AE900CE2C7B /* UISidebarViewController.h */,
+				223D575018D19AE900CE2C7B /* UISidebarViewController.m */,
 			);
 			name = UISidebarViewController;
 			path = ViewControllers;
@@ -468,11 +468,11 @@
 				225168CB18BEA29500085AE8 /* USViewController.m in Sources */,
 				225168E918BFD1DA00085AE8 /* USImageDatasource.m in Sources */,
 				223D566218C690A400CE2C7B /* ParallaxScrollingFramework.m in Sources */,
+				223D575118D19AE900CE2C7B /* UISidebarViewController.m in Sources */,
 				2251689D18BE9F2400085AE8 /* main.m in Sources */,
 				225168F818C61FE400085AE8 /* USWebDatasource.m in Sources */,
 				225168ED18BFD36400085AE8 /* Constants.m in Sources */,
 				225168F018BFE3C100085AE8 /* USLoadingViewController.m in Sources */,
-				223D56C318D1734A00CE2C7B /* UISidebarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
