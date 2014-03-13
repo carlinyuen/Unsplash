@@ -424,15 +424,17 @@
 {
     debugLog(@"connectionTimedOut");
 
-    // Use info label to display connection error
-    self.infoLabel.text = TEXT_ERROR_CONNECTION;
-
-    // Animate to show
+    // Animate to show error message / hide loading indicator
+    __block USViewController *this = self;
     [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
         options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut
         animations:^{
-            self.infoLabel.alpha = 1;
-        } completion:nil];
+            [[this loadingIndicator] setAlpha:0];
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [[this loadingIndicator] stopAnimating];
+            }
+        }];
 }
 
 /** @brief When new image urls are scraped from the page */

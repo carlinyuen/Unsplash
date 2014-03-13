@@ -1,3 +1,9 @@
 [submodule "iOS/Unsplash/Libraries/ParallaxScrollingFramework"]
 	path = iOS/Unsplash/Libraries/ParallaxScrollingFramework
 	url = git@github.com:carlinyuen/ParallaxScrollingFramework.git
+[submodule "iOS/Unsplash/Libraries/MMDrawerController"]
+	path = iOS/Unsplash/Libraries/MMDrawerController
+	url = git@github.com:mutualmobile/MMDrawerController.git
+[submodule "iOS/Unsplash/Libraries/GPUImage"]
+	path = iOS/Unsplash/Libraries/GPUImage
+	url = git@github.com:BradLarson/GPUImage.git
