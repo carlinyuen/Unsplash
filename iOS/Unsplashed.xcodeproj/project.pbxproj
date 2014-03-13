@@ -29,7 +29,7 @@
 		225168B418BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		225168B518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
 		225168BD18BE9F2400085AE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 225168BB18BE9F2400085AE8 /* InfoPlist.strings */; };
-		225168BF18BE9F2400085AE8 /* UnsplashTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168BE18BE9F2400085AE8 /* UnsplashTests.m */; };
+		225168BF18BE9F2400085AE8 /* UnsplashedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168BE18BE9F2400085AE8 /* UnsplashedTests.m */; };
 		225168CB18BEA29500085AE8 /* USViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168CA18BEA29500085AE8 /* USViewController.m */; };
 		225168D718BEA79F00085AE8 /* USImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168D518BEA79F00085AE8 /* USImageViewController.m */; };
 		225168D818BEA79F00085AE8 /* USImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 225168D618BEA79F00085AE8 /* USImageViewController.xib */; };
@@ -101,7 +101,7 @@
 		225168B218BE9F2400085AE8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		225168BA18BE9F2400085AE8 /* UnsplashedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnsplashedTests-Info.plist"; sourceTree = "<group>"; };
 		225168BC18BE9F2400085AE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		225168BE18BE9F2400085AE8 /* UnsplashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnsplashTests.m; sourceTree = "<group>"; };
+		225168BE18BE9F2400085AE8 /* UnsplashedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnsplashedTests.m; sourceTree = "<group>"; };
 		225168C918BEA29500085AE8 /* USViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USViewController.h; sourceTree = "<group>"; };
 		225168CA18BEA29500085AE8 /* USViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USViewController.m; sourceTree = "<group>"; };
 		225168D418BEA79F00085AE8 /* USImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USImageViewController.h; sourceTree = "<group>"; };
@@ -201,8 +201,8 @@
 		2251688418BE9F2400085AE8 = {
 			isa = PBXGroup;
 			children = (
-				2251689618BE9F2400085AE8 /* Unsplash */,
-				225168B818BE9F2400085AE8 /* UnsplashTests */,
+				2251689618BE9F2400085AE8 /* Unsplashed */,
+				225168B818BE9F2400085AE8 /* UnsplashedTests */,
 				2251688F18BE9F2400085AE8 /* Frameworks */,
 				2251688E18BE9F2400085AE8 /* Products */,
 			);
@@ -234,7 +234,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2251689618BE9F2400085AE8 /* Unsplash */ = {
+		2251689618BE9F2400085AE8 /* Unsplashed */ = {
 			isa = PBXGroup;
 			children = (
 				225D8FD918C667090061E5CD /* Keys.h */,
@@ -250,6 +250,7 @@
 				2251689718BE9F2400085AE8 /* Supporting Files */,
 				225168C818BEA29500085AE8 /* ViewControllers */,
 			);
+			name = Unsplashed;
 			path = Unsplash;
 			sourceTree = "<group>";
 		};
@@ -264,12 +265,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		225168B818BE9F2400085AE8 /* UnsplashTests */ = {
+		225168B818BE9F2400085AE8 /* UnsplashedTests */ = {
 			isa = PBXGroup;
 			children = (
-				225168BE18BE9F2400085AE8 /* UnsplashTests.m */,
+				225168BE18BE9F2400085AE8 /* UnsplashedTests.m */,
 				225168B918BE9F2400085AE8 /* Supporting Files */,
 			);
+			name = UnsplashedTests;
 			path = UnsplashTests;
 			sourceTree = "<group>";
 		};
@@ -464,7 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				225168BF18BE9F2400085AE8 /* UnsplashTests.m in Sources */,
+				225168BF18BE9F2400085AE8 /* UnsplashedTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,7 +625,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Unsplash.app/Unsplash";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Unsplashed.app/Unsplashed";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -646,7 +648,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Unsplash.app/Unsplash";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Unsplashed.app/Unsplashed";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
