@@ -8,6 +8,7 @@
 
 #import "USAppDelegate.h"
 
+#import "UISidebarViewController.h"
 #import "USViewController.h"
 
     #define TEXT_NOTIFICATION_REMINDER_TEXT @"New beautiful free images hot off the press from ooomf!"
@@ -26,7 +27,7 @@
 
     // Create base view controller
 //    self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
-    self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
+    self.viewController = [[UISidebarViewController alloc] initWithCenterViewController:nil andSidebarViewController:nil];
 	self.window.rootViewController = self.viewController;
 
     // Handle notifications
