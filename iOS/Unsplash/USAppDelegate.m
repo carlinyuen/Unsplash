@@ -27,8 +27,9 @@
     // Create base view controller
 //    self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
 
-    UIViewController *centerVC = [UIViewController new];
-    centerVC.view.backgroundColor = [UIColor whiteColor];
+    UIViewController *newVC = [UIViewController new];
+    newVC.view.backgroundColor = [UIColor whiteColor];
+    UIViewController *centerVC = [[UINavigationController alloc] initWithRootViewController:newVC];
     UISidebarViewController *sidebarVC = [[UISidebarViewController alloc]
         initWithCenterViewController:centerVC
         andSidebarViewController:nil];
@@ -36,7 +37,7 @@
     [button setTitle:@"MENU" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button addTarget:sidebarVC action:@selector(toggleSidebar:) forControlEvents:UIControlEventTouchUpInside];
-    [centerVC.view addSubview:button];
+    [newVC.view addSubview:button];
     self.viewController = sidebarVC;
 
 	self.window.rootViewController = self.viewController;
