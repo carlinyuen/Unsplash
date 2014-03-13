@@ -12,7 +12,7 @@
 
     #define TIME_ANIMATION_DURATION 0.2
 
-    #define SIZE_MARGIN_OFFSET 44
+    #define SIZE_DEFAULT_SIDEBAR_WIDTH 270
 
 @interface UISidebarViewController () <
     UIGestureRecognizerDelegate
@@ -48,7 +48,7 @@
         // Default Preferences
         _direction = UISidebarViewControllerDirectionLeft;
         _animationDuration = TIME_ANIMATION_DURATION;
-        _sidebarOffset = SIZE_MARGIN_OFFSET;
+        _sidebarWidth = SIZE_DEFAULT_SIDEBAR_WIDTH;
         _sidebarIsShowing = false;
     }
     return self;
@@ -86,31 +86,28 @@
     CGRect sFrame = self.sidebarVC.view.frame;
     CGRect cFrame = self.centerVC.view.frame;
     CGRect bounds = self.view.bounds;
-
-    // Special case if sidebar is showing / overlapping center
-    if (CGRectIntersectsRect(sFrame, cFrame))
+   
+    // Special case if sidebar is showing
+    if (self.sidebarIsShowing)
     {
-        // Find horizontal offset
-        CGFloat offset = CGRectGetWidth(CGRectIntersection(sFrame, cFrame));
-
         self.sidebarVC.view.frame = CGRectMake(
             (self.direction == UISidebarViewControllerDirectionLeft
-                ? -(CGRectGetHeight(sFrame) - (CGRectGetWidth(bounds) - offset))
-                : offset),
+                ? -CGRectGetWidth(sFrame) + self.sidebarWidth
+                : CGRectGetWidth(bounds) - self.sidebarWidth),
             0,
-            CGRectGetHeight(sFrame),
-            CGRectGetWidth(sFrame)
+            CGRectGetWidth(sFrame),
+            CGRectGetHeight(sFrame)
         );
     }
-    else    // Not overlapping / showing, just rotate and readjust
+    else    // Not showing, just shift over (frames already rotated!)
     {
         self.sidebarVC.view.frame = CGRectMake(
             (self.direction == UISidebarViewControllerDirectionLeft
-                ? -CGRectGetHeight(sFrame)
+                ? -CGRectGetWidth(sFrame)
                 : CGRectGetWidth(bounds)),
             0,
-            CGRectGetHeight(sFrame),
-            CGRectGetWidth(sFrame)
+            CGRectGetWidth(sFrame),
+            CGRectGetHeight(sFrame)
         );
     }
     self.centerVC.view.frame = bounds;
@@ -213,8 +210,8 @@
     {
         // Set frame
         targetFrame.origin.x = (self.direction == UISidebarViewControllerDirectionLeft)
-            ? -(CGRectGetWidth(targetFrame) - (CGRectGetWidth(self.view.bounds) - self.sidebarOffset))
-            : self.sidebarOffset;
+            ? -CGRectGetWidth(targetFrame) + self.sidebarWidth
+            : CGRectGetWidth(self.view.bounds) - self.sidebarWidth;
 
         // Set animations
         if (!animations) {

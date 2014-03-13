@@ -28,8 +28,8 @@
     /** Duration of slide animation when displaySidebar is called */
     @property (nonatomic, assign) CGFloat animationDuration;
 
-    /** Margin for sidebar to slide to */
-    @property (nonatomic, assign) CGFloat sidebarOffset;
+    /** Width for sidebar to slide to */
+    @property (nonatomic, assign) CGFloat sidebarWidth;
 
     /** Custom animation and completion blocks for showing and hiding the sidebar */
     @property (nonatomic, copy) AnimationBlock showSidebarAnimation;
