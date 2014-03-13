@@ -9,7 +9,6 @@
 #import "USAppDelegate.h"
 
 #import "UISidebarViewController.h"
-#import "USViewController.h"
 
     #define TEXT_NOTIFICATION_REMINDER_TEXT @"New beautiful free images hot off the press from ooomf!"
     #define TEXT_NOTIFICATION_REMINDER_TITLE @"Check it out!"
@@ -27,7 +26,20 @@
 
     // Create base view controller
 //    self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
-    self.viewController = [[UISidebarViewController alloc] initWithCenterViewController:nil andSidebarViewController:nil];
+
+    UIViewController *centerVC = [UIViewController new];
+    centerVC.view.backgroundColor = [UIColor grayColor];
+    UISidebarViewController *sidebarVC = [[UISidebarViewController alloc]
+        initWithCenterViewController:centerVC
+        andSidebarViewController:nil];
+    UIButton *button = [[UIButton alloc] initWithFrame:centerVC.view.bounds];
+    [button setTitle:@"MENU" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button addTarget:sidebarVC action:@selector(toggleSidebar:) forControlEvents:UIControlEventTouchUpInside];
+    button.center = centerVC.view.center;
+    [centerVC.view addSubview:button];
+    self.viewController = sidebarVC;
+
 	self.window.rootViewController = self.viewController;
 
     // Handle notifications

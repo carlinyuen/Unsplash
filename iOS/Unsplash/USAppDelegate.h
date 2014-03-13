@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "USViewController.h"
+
 @interface USAppDelegate : UIResponder <UIApplicationDelegate>
 
     @property (strong, nonatomic) UIWindow *window;
