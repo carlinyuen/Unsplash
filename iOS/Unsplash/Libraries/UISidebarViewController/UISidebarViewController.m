@@ -25,6 +25,9 @@
     /** For detecting pan gesture for sidebar */
     @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 
+    /** For detecting tap on center when sidebar is showing */
+    @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+
     /** Flag for whether or not sidebar is in process of showing or is shown */
     @property (nonatomic, assign, readwrite) BOOL sidebarIsShowing;
 
@@ -62,6 +65,19 @@
     [self setupCenterView];
     [self setupSidebarView];
     [self setupGestures];
+
+    // Attach pan gesture to center view
+    [self.centerVC.view addGestureRecognizer:self.panGesture];
+}
+
+/** This may be called when coming back from background */
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    // Tell view controllers that they will appear
+    [[self centerVC] viewWillAppear:animated];
+    [[self sidebarVC] viewWillAppear:animated];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -141,7 +157,7 @@
     if (!self.sidebarVC)
     {
         self.sidebarVC = [UIViewController new];
-        self.sidebarVC.view.backgroundColor = [UIColor darkGrayColor];
+        self.sidebarVC.view.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.5];
         self.sidebarVC.view.frame = self.view.bounds;
     }
 
@@ -161,12 +177,6 @@
 /** @brief Creates and sets up a whole new gesture recognizer and attaches it to the centerVC view */
 - (void)setupGestures
 {
-    // If old gesture exists, remove it
-    if (self.panGesture) {
-        [self.panGesture removeTarget:self action:@selector(sidebarPanned:)];
-        self.panGesture = nil;
-    }
-
     // Regular UIPanGestureRecognizer for < iOS 7
     if (deviceOSVersionLessThan(iOS7)) {
         self.panGesture = [[UIPanGestureRecognizer alloc]
@@ -175,7 +185,7 @@
     else    // UIScreenEdgePanGestureRecognizer
     {
         UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc]
-            initWithTarget:self action:@selector(sidebarPanned:)];
+            initWithTarget:self action:@selector(viewPanned:)];
         edgePan.edges = UIRectEdgeLeft | UIRectEdgeRight;
         self.panGesture = edgePan;
     }
@@ -185,8 +195,8 @@
     [self.panGesture setMaximumNumberOfTouches:1];
     [self.panGesture setDelegate:self];
 
-    // Attach gesture to center view
-    [self.centerVC.view addGestureRecognizer:self.panGesture];
+    // Tap gesture - don't add to center view till sidebar is shown
+    self.tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
 }
 
 
@@ -201,15 +211,36 @@
     CGRect targetFrame = self.sidebarVC.view.frame;
     if (show)   // Showing sidebar
     {
+        // Set frame
         targetFrame.origin.x = (self.direction == UISidebarViewControllerDirectionLeft)
             ? -(CGRectGetWidth(targetFrame) - (CGRectGetWidth(self.view.bounds) - self.sidebarOffset))
             : self.sidebarOffset;
+
+        // Set animations
+        if (!animations) {
+            animations = self.showSidebarAnimation;
+        }
+        if (!completion) {
+            completion = self.showSidebarCompletion;
+        }
     }
     else    // Hiding sidebar
     {
+        // Set frame
         targetFrame.origin.x = (self.direction == UISidebarViewControllerDirectionLeft)
             ? -CGRectGetWidth(targetFrame)
             : CGRectGetWidth(self.view.bounds);
+            
+        // Set animations
+        if (!animations) {
+            animations = self.hideSidebarAnimation;
+        }
+        if (!completion) {
+            completion = self.hideSidebarCompletion;
+        }
+
+        // Remove tap gesture from center view
+        [self.centerVC.view removeGestureRecognizer:self.tapGesture];
     }
 
     // Animate with custom options
@@ -226,10 +257,14 @@
             }
         }
         completion:^(BOOL finished) {
+            if (finished) {
+                if (show) {
+                    // Add tap gesture to dismiss view
+                    [[[this centerVC] view] addGestureRecognizer:[this tapGesture]];
+                }
+            }
             if (completion) {
                 completion(finished);       // Call custom completion if given
-            }
-            if (finished) {
             }
         }];
 }
@@ -243,11 +278,23 @@
 
 #pragma mark - Event Handlers
 
-/** @brief Pan gesture recognized on main view */
-- (void)sidebarPanned:(UIPanGestureRecognizer *)gesture
+/** @brief Pan gesture recognized */
+- (void)viewPanned:(UIPanGestureRecognizer *)gesture
 {
     CGPoint translatedPoint = [gesture translationInView:self.view];
     CGPoint velocity = [gesture velocityInView:[gesture view]];
+}
+
+/** @brief Tap gesture recognized */
+- (void)viewTapped:(UITapGestureRecognizer *)gesture
+{
+    // This should only happen on the centerVC view, when the sidebar is shown
+    if (gesture.view == self.centerVC.view && self.sidebarIsShowing) {
+        [self displaySidebar:false animations:nil completion:nil];
+    }
+    else {  // Weird state, notify user
+        NSLog(@"Warning: tap gesture fired in bad state!");
+    }
 }
 
 
