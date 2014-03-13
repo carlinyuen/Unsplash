@@ -8,6 +8,8 @@
 
 #import "USAppDelegate.h"
 
+#import "USViewController.h"
+
     #define TEXT_NOTIFICATION_REMINDER_TEXT @"New beautiful free images hot off the press from ooomf!"
     #define TEXT_NOTIFICATION_REMINDER_TITLE @"Check it out!"
 
@@ -23,6 +25,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 
     // Create base view controller
+//    self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
     self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
 	self.window.rootViewController = self.viewController;
 

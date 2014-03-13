@@ -16,6 +16,8 @@
 		223D56AF18D1704600CE2C7B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D56AE18D1704600CE2C7B /* AVFoundation.framework */; };
 		223D56B118D1704F00CE2C7B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D56B018D1704F00CE2C7B /* OpenGLES.framework */; };
 		223D56B318D1706000CE2C7B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D56B218D1706000CE2C7B /* CoreVideo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		223D56C018D1722D00CE2C7B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 223D56BB18D1708700CE2C7B /* libGPUImage.a */; };
+		223D56C318D1734A00CE2C7B /* UISidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 223D56C218D1734A00CE2C7B /* UISidebarViewController.m */; };
 		2251689118BE9F2400085AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689018BE9F2400085AE8 /* Foundation.framework */; };
 		2251689318BE9F2400085AE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689218BE9F2400085AE8 /* CoreGraphics.framework */; };
 		2251689518BE9F2400085AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2251689418BE9F2400085AE8 /* UIKit.framework */; };
@@ -82,20 +84,22 @@
 		223D56B018D1704F00CE2C7B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		223D56B218D1706000CE2C7B /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		223D56B418D1708500CE2C7B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = Libraries/GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
-		2251688D18BE9F2400085AE8 /* Unsplash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		223D56C118D1734A00CE2C7B /* UISidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UISidebarViewController.h; path = Unsplash/Libraries/UISidebarViewController/UISidebarViewController.h; sourceTree = SOURCE_ROOT; };
+		223D56C218D1734A00CE2C7B /* UISidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UISidebarViewController.m; path = Unsplash/Libraries/UISidebarViewController/UISidebarViewController.m; sourceTree = SOURCE_ROOT; };
+		2251688D18BE9F2400085AE8 /* Unsplashed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unsplashed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2251689018BE9F2400085AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2251689218BE9F2400085AE8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2251689418BE9F2400085AE8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		2251689818BE9F2400085AE8 /* Unsplash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unsplash-Info.plist"; sourceTree = "<group>"; };
+		2251689818BE9F2400085AE8 /* Unsplashed-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Unsplashed-Info.plist"; sourceTree = "<group>"; };
 		2251689A18BE9F2400085AE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2251689C18BE9F2400085AE8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2251689E18BE9F2400085AE8 /* Unsplash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unsplash-Prefix.pch"; sourceTree = "<group>"; };
+		2251689E18BE9F2400085AE8 /* Unsplashed-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unsplashed-Prefix.pch"; sourceTree = "<group>"; };
 		2251689F18BE9F2400085AE8 /* USAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USAppDelegate.h; sourceTree = "<group>"; };
 		225168A018BE9F2400085AE8 /* USAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USAppDelegate.m; sourceTree = "<group>"; };
 		225168AB18BE9F2400085AE8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		225168B118BE9F2400085AE8 /* UnsplashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		225168B118BE9F2400085AE8 /* UnsplashedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnsplashedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		225168B218BE9F2400085AE8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		225168BA18BE9F2400085AE8 /* UnsplashTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnsplashTests-Info.plist"; sourceTree = "<group>"; };
+		225168BA18BE9F2400085AE8 /* UnsplashedTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnsplashedTests-Info.plist"; sourceTree = "<group>"; };
 		225168BC18BE9F2400085AE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		225168BE18BE9F2400085AE8 /* UnsplashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnsplashTests.m; sourceTree = "<group>"; };
 		225168C918BEA29500085AE8 /* USViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USViewController.h; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 				223D56B318D1706000CE2C7B /* CoreVideo.framework in Frameworks */,
 				223D56B118D1704F00CE2C7B /* OpenGLES.framework in Frameworks */,
 				223D56AF18D1704600CE2C7B /* AVFoundation.framework in Frameworks */,
+				223D56C018D1722D00CE2C7B /* libGPUImage.a in Frameworks */,
 				223D56AD18D1703D00CE2C7B /* CoreMedia.framework in Frameworks */,
 				223D565C18C6768F00CE2C7B /* Accelerate.framework in Frameworks */,
 				223D565A18C6768900CE2C7B /* QuartzCore.framework in Frameworks */,
@@ -183,6 +188,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		223D56C418D1734F00CE2C7B /* UISidebarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				223D56C118D1734A00CE2C7B /* UISidebarViewController.h */,
+				223D56C218D1734A00CE2C7B /* UISidebarViewController.m */,
+			);
+			name = UISidebarViewController;
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		2251688418BE9F2400085AE8 = {
 			isa = PBXGroup;
 			children = (
@@ -196,8 +211,8 @@
 		2251688E18BE9F2400085AE8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2251688D18BE9F2400085AE8 /* Unsplash.app */,
-				225168B118BE9F2400085AE8 /* UnsplashTests.xctest */,
+				2251688D18BE9F2400085AE8 /* Unsplashed.app */,
+				225168B118BE9F2400085AE8 /* UnsplashedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,10 +256,10 @@
 		2251689718BE9F2400085AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2251689818BE9F2400085AE8 /* Unsplash-Info.plist */,
+				2251689818BE9F2400085AE8 /* Unsplashed-Info.plist */,
 				2251689918BE9F2400085AE8 /* InfoPlist.strings */,
 				2251689C18BE9F2400085AE8 /* main.m */,
-				2251689E18BE9F2400085AE8 /* Unsplash-Prefix.pch */,
+				2251689E18BE9F2400085AE8 /* Unsplashed-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -261,7 +276,7 @@
 		225168B918BE9F2400085AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				225168BA18BE9F2400085AE8 /* UnsplashTests-Info.plist */,
+				225168BA18BE9F2400085AE8 /* UnsplashedTests-Info.plist */,
 				225168BB18BE9F2400085AE8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -288,6 +303,7 @@
 		225168CC18BEA2B400085AE8 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				223D56C418D1734F00CE2C7B /* UISidebarViewController */,
 				223D56B418D1708500CE2C7B /* GPUImage.xcodeproj */,
 				223D565F18C690A400CE2C7B /* ParallaxScrollingFramework */,
 			);
@@ -308,9 +324,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2251688C18BE9F2400085AE8 /* Unsplash */ = {
+		2251688C18BE9F2400085AE8 /* Unsplashed */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 225168C218BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "Unsplash" */;
+			buildConfigurationList = 225168C218BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "Unsplashed" */;
 			buildPhases = (
 				2251688918BE9F2400085AE8 /* Sources */,
 				2251688A18BE9F2400085AE8 /* Frameworks */,
@@ -321,14 +337,14 @@
 			dependencies = (
 				223D56BF18D170B600CE2C7B /* PBXTargetDependency */,
 			);
-			name = Unsplash;
+			name = Unsplashed;
 			productName = Unsplash;
-			productReference = 2251688D18BE9F2400085AE8 /* Unsplash.app */;
+			productReference = 2251688D18BE9F2400085AE8 /* Unsplashed.app */;
 			productType = "com.apple.product-type.application";
 		};
-		225168B018BE9F2400085AE8 /* UnsplashTests */ = {
+		225168B018BE9F2400085AE8 /* UnsplashedTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 225168C518BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "UnsplashTests" */;
+			buildConfigurationList = 225168C518BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "UnsplashedTests" */;
 			buildPhases = (
 				225168AD18BE9F2400085AE8 /* Sources */,
 				225168AE18BE9F2400085AE8 /* Frameworks */,
@@ -339,9 +355,9 @@
 			dependencies = (
 				225168B718BE9F2400085AE8 /* PBXTargetDependency */,
 			);
-			name = UnsplashTests;
+			name = UnsplashedTests;
 			productName = UnsplashTests;
-			productReference = 225168B118BE9F2400085AE8 /* UnsplashTests.xctest */;
+			productReference = 225168B118BE9F2400085AE8 /* UnsplashedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -359,7 +375,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2251688818BE9F2400085AE8 /* Build configuration list for PBXProject "Unsplash" */;
+			buildConfigurationList = 2251688818BE9F2400085AE8 /* Build configuration list for PBXProject "Unsplashed" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -378,8 +394,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				2251688C18BE9F2400085AE8 /* Unsplash */,
-				225168B018BE9F2400085AE8 /* UnsplashTests */,
+				2251688C18BE9F2400085AE8 /* Unsplashed */,
+				225168B018BE9F2400085AE8 /* UnsplashedTests */,
 			);
 		};
 /* End PBXProject section */
@@ -440,6 +456,7 @@
 				225168F818C61FE400085AE8 /* USWebDatasource.m in Sources */,
 				225168ED18BFD36400085AE8 /* Constants.m in Sources */,
 				225168F018BFE3C100085AE8 /* USLoadingViewController.m in Sources */,
+				223D56C318D1734A00CE2C7B /* UISidebarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,7 +478,7 @@
 		};
 		225168B718BE9F2400085AE8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2251688C18BE9F2400085AE8 /* Unsplash */;
+			target = 2251688C18BE9F2400085AE8 /* Unsplashed */;
 			targetProxy = 225168B618BE9F2400085AE8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -525,7 +542,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/Unsplash/Libraries/GPUImage/framework/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "E907CEC3-3A5A-4071-B5FF-2C9418AA5906";
 				SDKROOT = iphoneos;
@@ -566,7 +583,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/Unsplash/Libraries/GPUImage/framework/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PROVISIONING_PROFILE = "39F9E1B9-453C-4221-89CE-E23ADD3EF652";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -580,10 +597,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unsplash/Unsplash-Prefix.pch";
-				INFOPLIST_FILE = "Unsplash/Unsplash-Info.plist";
+				GCC_PREFIX_HEADER = "Unsplash/Unsplashed-Prefix.pch";
+				INFOPLIST_FILE = "Unsplash/Unsplashed-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Unsplashed;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -594,10 +611,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Unsplash/Unsplash-Prefix.pch";
-				INFOPLIST_FILE = "Unsplash/Unsplash-Info.plist";
+				GCC_PREFIX_HEADER = "Unsplash/Unsplashed-Prefix.pch";
+				INFOPLIST_FILE = "Unsplash/Unsplashed-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Unsplashed;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -618,8 +635,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "UnsplashTests/UnsplashTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "UnsplashTests/UnsplashedTests-Info.plist";
+				PRODUCT_NAME = UnsplashedTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -637,8 +654,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Unsplash/Unsplash-Prefix.pch";
-				INFOPLIST_FILE = "UnsplashTests/UnsplashTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "UnsplashTests/UnsplashedTests-Info.plist";
+				PRODUCT_NAME = UnsplashedTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -647,7 +664,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2251688818BE9F2400085AE8 /* Build configuration list for PBXProject "Unsplash" */ = {
+		2251688818BE9F2400085AE8 /* Build configuration list for PBXProject "Unsplashed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				225168C018BE9F2400085AE8 /* Debug */,
@@ -656,7 +673,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		225168C218BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "Unsplash" */ = {
+		225168C218BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "Unsplashed" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				225168C318BE9F2400085AE8 /* Debug */,
@@ -665,7 +682,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		225168C518BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "UnsplashTests" */ = {
+		225168C518BE9F2400085AE8 /* Build configuration list for PBXNativeTarget "UnsplashedTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				225168C618BE9F2400085AE8 /* Debug */,
