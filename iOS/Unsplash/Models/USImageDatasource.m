@@ -302,6 +302,7 @@
                         NSArray *sizes = [photos[j] objectForKey:@"alt_sizes"];
                         if (sizes)
                         {
+                            // Always download largest resolution
                             NSDictionary *imageInfo = sizes[0];
                             [self.imageURLCache addObject:[imageInfo objectForKey:@"url"]];
 

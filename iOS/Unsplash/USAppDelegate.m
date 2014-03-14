@@ -26,12 +26,12 @@
 
     // Create base view controller
     USViewController *centerVC = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
+    self.window.rootViewController = centerVC;
 
-    self.viewController = [[UISidebarViewController alloc]
-        initWithCenterViewController:centerVC
-        andSidebarViewController:nil];
-
-	self.window.rootViewController = self.viewController;
+//    self.viewController = [[UISidebarViewController alloc]
+//        initWithCenterViewController:centerVC
+//        andSidebarViewController:nil];
+//    self.window.rootViewController = self.viewController;
 
     // Handle notifications
     UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];

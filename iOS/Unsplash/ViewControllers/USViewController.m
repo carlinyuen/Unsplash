@@ -404,7 +404,9 @@
 {
     debugLog(@"menuButtonTapped");
 
-    [AppDelegate.viewController toggleSidebar:button];
+    if ([[AppDelegate viewController] respondsToSelector:@selector(toggleSidebar:)]) {
+        [[AppDelegate viewController] toggleSidebar:button];
+    }
 }
 
 /** @brief When share button is tapped */
