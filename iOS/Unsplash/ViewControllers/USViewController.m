@@ -10,6 +10,7 @@
 
 #import "ParallaxScrollingFramework.h"
 
+#import "USAppDelegate.h"
 #import "USImageDatasource.h"
 #import "USImageViewController.h"
 
@@ -29,6 +30,7 @@
 
 @interface USViewController () <
     UIScrollViewDelegate
+    , UIAlertViewDelegate
 >
 
     /** Labels */
@@ -401,6 +403,8 @@
 - (void)menuButtonTapped:(UIButton *)button
 {
     debugLog(@"menuButtonTapped");
+
+    [AppDelegate.viewController toggleSidebar:button];
 }
 
 /** @brief When share button is tapped */
@@ -434,6 +438,11 @@
             if (finished) {
                 [[this loadingIndicator] stopAnimating];
             }
+
+            // Show alert dialog
+            [[[UIAlertView alloc] initWithTitle:@"No Connection!"
+                message:@"Please try again later." delegate:self
+                cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
         }];
 }
 
@@ -588,6 +597,15 @@
             [self.datasource fetchMoreImages];
         }
 	}
+}
+
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Retry connection
+    [self viewWillAppear:false];
 }
 
 

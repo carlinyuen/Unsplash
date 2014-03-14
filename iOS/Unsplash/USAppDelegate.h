@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-#import "USViewController.h"
+#import "UISidebarViewController.h"
+
+    #define AppDelegate ((USAppDelegate *)[[UIApplication sharedApplication] delegate])
 
 @interface USAppDelegate : UIResponder <UIApplicationDelegate>
 
     @property (strong, nonatomic) UIWindow *window;
 
-	@property (strong, nonatomic) UIViewController *viewController;
+	@property (strong, nonatomic) UISidebarViewController *viewController;
 @end

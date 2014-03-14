@@ -317,10 +317,10 @@
 		225168CC18BEA2B400085AE8 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				223D56C518D188D900CE2C7B /* MMDrawerController */,
-				223D56C418D1734F00CE2C7B /* UISidebarViewController */,
 				223D56B418D1708500CE2C7B /* GPUImage.xcodeproj */,
+				223D56C518D188D900CE2C7B /* MMDrawerController */,
 				223D565F18C690A400CE2C7B /* ParallaxScrollingFramework */,
+				223D56C418D1734F00CE2C7B /* UISidebarViewController */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";

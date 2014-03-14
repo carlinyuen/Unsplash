@@ -8,7 +8,7 @@
 
 #import "USAppDelegate.h"
 
-#import "UISidebarViewController.h"
+#import "USViewController.h"
 
     #define TEXT_NOTIFICATION_REMINDER_TEXT @"New beautiful free images hot off the press from ooomf!"
     #define TEXT_NOTIFICATION_REMINDER_TITLE @"Check it out!"
@@ -25,20 +25,11 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 
     // Create base view controller
-//    self.viewController = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
+    USViewController *centerVC = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
 
-    UIViewController *newVC = [UIViewController new];
-    newVC.view.backgroundColor = [UIColor whiteColor];
-    UIViewController *centerVC = [[UINavigationController alloc] initWithRootViewController:newVC];
-    UISidebarViewController *sidebarVC = [[UISidebarViewController alloc]
+    self.viewController = [[UISidebarViewController alloc]
         initWithCenterViewController:centerVC
         andSidebarViewController:nil];
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 44)];
-    [button setTitle:@"MENU" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button addTarget:sidebarVC action:@selector(toggleSidebar:) forControlEvents:UIControlEventTouchUpInside];
-    [newVC.view addSubview:button];
-    self.viewController = sidebarVC;
 
 	self.window.rootViewController = self.viewController;
 
