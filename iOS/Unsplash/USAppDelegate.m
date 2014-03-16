@@ -25,13 +25,13 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 
     // Create base view controller
-    USViewController *centerVC = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
-    self.window.rootViewController = centerVC;
+//    USViewController *centerVC = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
+//    self.window.rootViewController = centerVC;
 
-//    self.viewController = [[UISidebarViewController alloc]
-//        initWithCenterViewController:centerVC
-//        andSidebarViewController:nil];
-//    self.window.rootViewController = self.viewController;
+    self.viewController = [[UISidebarViewController alloc]
+        initWithCenterViewController:nil
+        andSidebarViewController:nil];
+    self.window.rootViewController = self.viewController;
 
     // Handle notifications
     UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
