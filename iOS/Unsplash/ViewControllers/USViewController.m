@@ -11,7 +11,6 @@
 #import "ParallaxScrollingFramework.h"
 
 #import "USAppDelegate.h"
-#import "USMenuViewController.h"
 #import "USImageDatasource.h"
 #import "USImageViewController.h"
 
@@ -32,7 +31,6 @@
 @interface USViewController () <
     UIScrollViewDelegate
     , UIAlertViewDelegate
-    , USMenuViewControllerDelegate
 >
 
     /** Labels */

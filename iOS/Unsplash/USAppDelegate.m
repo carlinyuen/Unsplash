@@ -28,10 +28,12 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 
     // Create base view controller
-    USViewController *rootVC = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
+    USViewController *rootVC = [[USViewController alloc]
+        initWithNibName:@"USViewController" bundle:nil];
 
     // Create menu sidebar controller
-    USMenuViewController *menuVC = [[USMenuViewController alloc] initWithNibName:@"USMenuViewController" bundle:nil];
+    USMenuViewController *menuVC = [[USMenuViewController alloc]
+        initWithNibName:@"USMenuViewController" bundle:nil];
     menuVC.delegate = rootVC;
 
     self.viewController = [[UISidebarViewController alloc]
