@@ -200,6 +200,8 @@
 /** @brief Trims down cache to save on memory */
 - (void)trimCacheAroundIndex:(NSInteger)index
 {
+    debugLog(@"trimCacheAroundIndex: %i", index);
+
     for (NSInteger i = 0; i < self.imageCache.count; ++i)
     {
         // If not within cache buffer bounds, clear
