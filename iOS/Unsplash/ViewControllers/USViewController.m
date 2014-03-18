@@ -217,9 +217,13 @@
     iv.frame = frame;
 
     // Calculate target frame
+    CGFloat largestSide = MAX(
+        CGRectGetHeight(container.bounds),
+        CGRectGetWidth(container.bounds)
+    );
     CGRect targetFrame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(
-            -(point.x * CGRectGetWidth(frame) - point.x * CGRectGetWidth(container.bounds)),
-            -(point.y * CGRectGetHeight(frame) - point.y * CGRectGetHeight(container.bounds))
+            -(point.x * CGRectGetWidth(frame) - point.x * largestSide),
+            -(point.y * CGRectGetHeight(frame) - point.y * largestSide)
         ));
 
     // Animate on repeat
@@ -230,8 +234,7 @@
             | UIViewAnimationOptionAutoreverse
         animations:^{
             iv.frame = targetFrame;
-        } completion:^(BOOL finished) {
-        }];
+        } completion:nil];
 }
 
 /** @brief Add parallax effects */
