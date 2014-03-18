@@ -25,7 +25,7 @@
     #define SIZE_PARALLAX_DEPTH_TEXT 32
     #define SIZE_PARALLAX_DEPTH_BUTTONS 16
 
-    #define TEXT_AUTHOR @"made by ooomf"
+    #define TEXT_AUTHOR @"inspired by ooomf"
     #define TEXT_ERROR_CONNECTION @"no connection"
 
 @interface USViewController () <

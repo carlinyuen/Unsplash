@@ -14,6 +14,8 @@
     #define TEXT_NOTIFICATION_REMINDER_TEXT @"New beautiful free images hot off the press from ooomf!"
     #define TEXT_NOTIFICATION_REMINDER_TITLE @"Check it out!"
 
+    #define SIZE_SIDEBAR_WIDTH 240
+
     #define TIME_NOTIFICATION_REMINDER_INTERVAL 10 * TIME_ONE_DAY
 
 @implementation USAppDelegate
@@ -34,6 +36,7 @@
     self.viewController = [[UISidebarViewController alloc]
         initWithCenterViewController:rootVC
         andSidebarViewController:menuVC];
+    self.viewController.sidebarWidth = SIZE_SIDEBAR_WIDTH;
     self.window.rootViewController = self.viewController;
 
     // Handle notifications
