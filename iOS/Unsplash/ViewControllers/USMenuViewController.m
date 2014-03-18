@@ -34,6 +34,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    // Update frame to match
+    CGRect frame = self.view.frame;
+    frame.size.height = CGRectGetHeight(self.view.superview.bounds);
+    self.view.frame = frame;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
