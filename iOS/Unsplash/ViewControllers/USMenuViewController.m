@@ -17,7 +17,9 @@
 
     #define TEXT_FEEDBACK_EMAIL_SUBJECT @"About Unsplashed"
     #define TEXT_FEEDBACK_SENT_TITLE @"Message Sent"
-    #define TEXT_FEEDBACK_SENT_MESSAGE @"Thanks for your feedback, and have a great day!"
+    #define TEXT_FEEDBACK_SENT_MESSAGE @"Thanks for your feedback\nand have a great day! :o)"
+    #define TEXT_ERROR_TITLE @"Oops!"
+    #define TEXT_ERROR_OPENURL @"It looks like your device can't open this url. Check that you have a web browser enabled."
 
 @interface USMenuViewController () <
     MFMailComposeViewControllerDelegate
@@ -55,11 +57,21 @@
 
 - (IBAction)rateButtonTapped:(id)sender
 {
-    [NSURL URLWithString:[NSString
+    NSURL *url = [NSURL URLWithString:[NSString
         stringWithFormat:(deviceOSVersionLessThan(iOS7)
             ? URL_FORMAT_APP_STORE : URL_FORMAT_APP_STORE_IOS7),
                 @(ID_APP_STORE)
     ]];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    } else {
+        [[[UIAlertView alloc]
+            initWithTitle:TEXT_ERROR_TITLE
+            message:TEXT_ERROR_OPENURL
+            delegate:nil
+            cancelButtonTitle:@"Ok"
+            otherButtonTitles:nil] show];
+    }
 }
 
 /** Feedback button tapped */
@@ -80,15 +92,16 @@
           didFinishWithResult:(MFMailComposeResult)result 
                         error:(NSError*)error;
 {
-  [self dismissViewControllerAnimated:true completion:^{
-      if (result == MFMailComposeResultSent) {
-          [[[UIAlertView alloc] initWithTitle:TEXT_FEEDBACK_SENT_TITLE
-            message:TEXT_FEEDBACK_SENT_MESSAGE
-            delegate:nil
-            cancelButtonTitle:@"Ok"
-            otherButtonTitles:nil] show];
-      }  
-  }];
+    [self dismissViewControllerAnimated:true completion:^{
+        if (result == MFMailComposeResultSent) {
+            [[[UIAlertView alloc]
+                initWithTitle:TEXT_FEEDBACK_SENT_TITLE
+                message:TEXT_FEEDBACK_SENT_MESSAGE
+                delegate:nil
+                cancelButtonTitle:@"Ok"
+                otherButtonTitles:nil] show];
+        }
+    }];
 }
 
 @end
