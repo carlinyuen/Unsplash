@@ -87,7 +87,7 @@
     // Only make request if not already downloading
     NSString *imageURL = [self.imageURLCache objectAtIndex:index];
     if ([self.connectionMap objectForKey:imageURL]) {
-        debugLog(@"Already downloading image at index: %i!", index);
+        debugLog(@"Already downloading image at index: %li!", (long)index);
         return;
     }
 
@@ -200,7 +200,7 @@
 /** @brief Trims down cache to save on memory */
 - (void)trimCacheAroundIndex:(NSInteger)index
 {
-    debugLog(@"trimCacheAroundIndex: %i with buffer: %i", index, SIZE_CACHE_BUFFER);
+    debugLog(@"trimCacheAroundIndex: %li with buffer: %i", (long)index, SIZE_CACHE_BUFFER);
 
     for (NSInteger i = 0; i < self.imageCache.count; ++i)
     {
