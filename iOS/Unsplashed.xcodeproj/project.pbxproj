@@ -40,6 +40,8 @@
 		225168F818C61FE400085AE8 /* USWebDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = 225168F718C61FE400085AE8 /* USWebDatasource.m */; };
 		22B0B16718D8D6FB00FEE60E /* USMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B0B16518D8D6FB00FEE60E /* USMenuViewController.m */; };
 		22B0B16818D8D6FB00FEE60E /* USMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B0B16618D8D6FB00FEE60E /* USMenuViewController.xib */; };
+		22B0B16D18D8EFD300FEE60E /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22B0B16A18D8EFD300FEE60E /* iRate.bundle */; };
+		22B0B16E18D8EFD300FEE60E /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B0B16C18D8EFD300FEE60E /* iRate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,9 @@
 		22B0B16418D8D6FB00FEE60E /* USMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USMenuViewController.h; sourceTree = "<group>"; };
 		22B0B16518D8D6FB00FEE60E /* USMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USMenuViewController.m; sourceTree = "<group>"; };
 		22B0B16618D8D6FB00FEE60E /* USMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = USMenuViewController.xib; sourceTree = "<group>"; };
+		22B0B16A18D8EFD300FEE60E /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
+		22B0B16B18D8EFD300FEE60E /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		22B0B16C18D8EFD300FEE60E /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +285,7 @@
 		225168CC18BEA2B400085AE8 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				22B0B16918D8EFD300FEE60E /* iRate */,
 				223D565F18C690A400CE2C7B /* ParallaxScrollingFramework */,
 				223D56C418D1734F00CE2C7B /* UISidebarViewController */,
 			);
@@ -295,6 +301,17 @@
 				225168F718C61FE400085AE8 /* USWebDatasource.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		22B0B16918D8EFD300FEE60E /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				22B0B16A18D8EFD300FEE60E /* iRate.bundle */,
+				22B0B16B18D8EFD300FEE60E /* iRate.h */,
+				22B0B16C18D8EFD300FEE60E /* iRate.m */,
+			);
+			name = iRate;
+			path = Libraries/iRate/iRate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B0B16818D8D6FB00FEE60E /* USMenuViewController.xib in Resources */,
+				22B0B16D18D8EFD300FEE60E /* iRate.bundle in Resources */,
 				225168AC18BE9F2400085AE8 /* Images.xcassets in Resources */,
 				225168D818BEA79F00085AE8 /* USImageViewController.xib in Resources */,
 				223D566618CA3A2F00CE2C7B /* bg_intro@2x.jpg in Resources */,
@@ -406,6 +424,7 @@
 				22B0B16718D8D6FB00FEE60E /* USMenuViewController.m in Sources */,
 				225168D718BEA79F00085AE8 /* USImageViewController.m in Sources */,
 				225168A118BE9F2400085AE8 /* USAppDelegate.m in Sources */,
+				22B0B16E18D8EFD300FEE60E /* iRate.m in Sources */,
 				225168CB18BEA29500085AE8 /* USViewController.m in Sources */,
 				225168E918BFD1DA00085AE8 /* USImageDatasource.m in Sources */,
 				223D566218C690A400CE2C7B /* ParallaxScrollingFramework.m in Sources */,
