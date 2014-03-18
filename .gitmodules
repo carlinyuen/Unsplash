@@ -4,3 +4,6 @@
 [submodule "iOS/Unsplash/Libraries/UISidebarViewController"]
 	path = iOS/Unsplash/Libraries/UISidebarViewController
 	url = git@github.com:carlinyuen/UISidebarViewController.git
+[submodule "iOS/Unsplash/Libraries/iRate"]
+	path = iOS/Unsplash/Libraries/iRate
+	url = git@github.com:nicklockwood/iRate.git
