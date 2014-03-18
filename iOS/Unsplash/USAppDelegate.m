@@ -9,6 +9,7 @@
 #import "USAppDelegate.h"
 
 #import "USViewController.h"
+#import "USMenuViewController.h"
 
     #define TEXT_NOTIFICATION_REMINDER_TEXT @"New beautiful free images hot off the press from ooomf!"
     #define TEXT_NOTIFICATION_REMINDER_TITLE @"Check it out!"
@@ -25,12 +26,14 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 
     // Create base view controller
-    USViewController *centerVC = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
-    self.window.rootViewController = centerVC;
+    USViewController *rootVC = [[USViewController alloc] initWithNibName:@"USViewController" bundle:nil];
+
+    // Create menu sidebar controller
+    USMenuViewController *menuVC = [[USMenuViewController alloc] initWithNibName:@"USMenuViewController" bundle:nil];
 
     self.viewController = [[UISidebarViewController alloc]
-        initWithCenterViewController:centerVC
-        andSidebarViewController:nil];
+        initWithCenterViewController:rootVC
+        andSidebarViewController:menuVC];
     self.window.rootViewController = self.viewController;
 
     // Handle notifications
