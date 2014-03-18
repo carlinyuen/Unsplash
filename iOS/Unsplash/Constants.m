@@ -31,6 +31,7 @@ NSString* const FONT_NAME_THIN = @"HelveticaNeue-Thin";
 NSString* const FONT_NAME_LIGHT = @"HelveticaNeue-Light";
 NSString* const FONT_NAME_THINNEST = @"HelveticaNeue-UltraLight";
 float const FONT_SIZE_TITLE = 33;
+float const FONT_SIZE_MENU = 18;
 
 // Time
 int const TIME_ONE_MINUTE = 60;

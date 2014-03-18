@@ -31,6 +31,7 @@ extern NSString* const FONT_NAME_THIN;
 extern NSString* const FONT_NAME_LIGHT;
 extern NSString* const FONT_NAME_THINNEST;
 extern float const FONT_SIZE_TITLE;
+extern float const FONT_SIZE_MENU;
 
 // Time
 extern int const TIME_ONE_MINUTE;

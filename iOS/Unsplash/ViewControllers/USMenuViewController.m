@@ -31,9 +31,9 @@
 
     // Setup view
 
-
     // Setup information data
     self.info = [NSMutableArray new];
+    [self.info addObject:@"a Carlin Creation"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -75,6 +75,15 @@
     cell.backgroundColor
         = cell.contentView.backgroundColor
         = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.adjustsFontSizeToFitWidth = true;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font = [UIFont fontWithName:FONT_NAME_THIN size:FONT_SIZE_MENU];
+    cell.textLabel.text = self.info[indexPath.row];
 
     return cell;
 }
