@@ -148,6 +148,9 @@
 
     debugLog(@"viewWillAppear");
 
+    // Readjust intro view in case of bounds shift
+    self.introView.bounds = self.scrollView.bounds;
+
     // Get images if on initial load and haven't loaded yet
     if (self.datasource && self.initialLoad)
     {
@@ -208,10 +211,24 @@
     CGPoint point = CGPointApplyAffineTransform(direction,
         CGAffineTransformMakeScale(1.0f / length, 1.0f / length));
 
-    // Set background image to full size and position accordingly for direction
+    // Set background image, scale to fill container, and position accordingly for direction
     UIImageView *iv = [[UIImageView alloc] initWithImage:image];
     iv.contentMode = UIViewContentModeScaleAspectFill;
     CGRect frame = iv.frame;
+    if (frame.size.width < container.bounds.size.width) {
+        CGFloat multiplier = container.bounds.size.width / frame.size.width;
+        frame.size.width *= multiplier;
+        frame.size.height *= multiplier;
+    }
+    if (frame.size.height < container.bounds.size.height) {
+        CGFloat multiplier = container.bounds.size.height / frame.size.height;
+        frame.size.width *= multiplier;
+        frame.size.height *= multiplier;
+    }
+    iv.frame = frame;
+
+    // Position image for direction it'll be starting with
+    frame = iv.frame;
     frame.origin.x = (point.x < 0) ? -CGRectGetWidth(frame) : 0;
     frame.origin.y = (point.y > 0) ? -CGRectGetHeight(frame) : 0;
     iv.frame = frame;
