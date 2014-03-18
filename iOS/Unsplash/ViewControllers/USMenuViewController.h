@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface USMenuViewController : UITableViewController
+@interface USMenuViewController : UIViewController
 
 @end
