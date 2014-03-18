@@ -12,7 +12,7 @@
 @protocol USMenuViewControllerDelegate <NSObject>
 
     @optional
-    - (void)menuVC:(USMenuViewController *)vc jumpToFirstButtonTapped:(UIButton *)sender;
+    - (void)menuVC:(USMenuViewController *)vc jumpToBeginning:(UIButton *)sender;
 
 @end
 

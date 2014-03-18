@@ -616,9 +616,24 @@
 
 #pragma mark - USMenuViewControllerDelegate
 
-- (void)menuVC:(USMenuViewController *)vc jumpToFirstButtonTapped:(UIButton *)sender
+- (void)menuVC:(USMenuViewController *)vc jumpToBeginning:(UIButton *)sender
 {
-    [self.scrollView setContentOffset:CGPointZero animated:true];
+    // If not on first page
+    if (self.lastShownPage > 0) {
+        [self.scrollView setContentOffset:CGPointZero animated:true];
+    } else {    // Scroll over a little to tempt user
+        [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0
+            options:UIViewAnimationOptionBeginFromCurrentState
+                | UIViewAnimationOptionCurveEaseOut
+            animations:^{
+            [self.scrollView setContentOffset:CGPointMake(SIZE_MIN_TOUCH, 0)];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:ANIMATION_DURATION_FAST delay:0 options:UIViewAnimationOptionCurveEaseIn
+                    animations:^{
+                        [self.scrollView setContentOffset:CGPointZero];
+                    } completion:nil];
+            }];
+    }
 }
 
 

@@ -29,7 +29,7 @@
 
     - (IBAction)rateButtonTapped:(id)sender;
     - (IBAction)feedbackButtonTapped:(id)sender;
-    - (IBAction)jumpToFirstButtonTapped:(id)sender;
+    - (IBAction)jumpToBeginningButtonTapped:(id)sender;
 
 @end
 
@@ -89,10 +89,10 @@
     [self presentViewController:mailController animated:true completion:nil];
 }
 
-- (IBAction)jumpToFirstButtonTapped:(id)sender
+- (IBAction)jumpToBeginningButtonTapped:(id)sender
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(menuVC:jumpToFirstButtonTapped:)]) {
-        [self.delegate menuVC:self jumpToFirstButtonTapped:sender];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(menuVC:jumpToBeginning:)]) {
+        [self.delegate menuVC:self jumpToBeginning:sender];
     }
 }
 
