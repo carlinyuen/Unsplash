@@ -16,24 +16,43 @@
             <rect key="frame" x="0.0" y="0.0" width="240" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOa-S6-QqZ">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOa-S6-QqZ">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCd-I0-StO">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KCd-I0-StO">
                             <rect key="frame" x="20" y="20" width="200" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="LqU-ZX-NFk"/>
+                                <constraint firstAttribute="width" constant="200" id="RYT-Ft-P38"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="Georgia-Italic" family="Georgia" pointSize="23"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ste-LO-0Mi">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ste-LO-0Mi">
                             <rect key="frame" x="20" y="72" width="200" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.25" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="cJ8-xl-EFF"/>
+                                <constraint firstAttribute="width" constant="200" id="k3n-VY-Qgq"/>
+                            </constraints>
                         </view>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Images from unsplash.com, made by ooomf and maintained by mikael cho" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="aK1-DL-lHw">
-                            <rect key="frame" x="20" y="81" width="200" height="87"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="images from unsplash.com, made by ooomf, maintained by mikael cho" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="aK1-DL-lHw">
+                            <rect key="frame" x="20" y="104" width="200" height="87"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="05r-ca-seb"/>
+                                <constraint firstAttribute="height" constant="87" id="8xr-Vd-bMP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="a Carlin Creation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="8et-4c-d4j">
+                            <rect key="frame" x="20" y="199" width="200" height="87"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -41,6 +60,17 @@
                         </label>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="KCd-I0-StO" secondAttribute="trailing" constant="20" id="2Zu-ZE-19r"/>
+                        <constraint firstAttribute="trailing" secondItem="aK1-DL-lHw" secondAttribute="trailing" constant="20" id="8MO-Xx-nhC"/>
+                        <constraint firstItem="KCd-I0-StO" firstAttribute="leading" secondItem="kOa-S6-QqZ" secondAttribute="leading" constant="20" id="BMm-d0-ap3"/>
+                        <constraint firstItem="aK1-DL-lHw" firstAttribute="top" secondItem="Ste-LO-0Mi" secondAttribute="bottom" constant="31" id="MvD-Bu-9Yu"/>
+                        <constraint firstItem="aK1-DL-lHw" firstAttribute="leading" secondItem="kOa-S6-QqZ" secondAttribute="leading" constant="20" id="NKU-zj-JSX"/>
+                        <constraint firstItem="Ste-LO-0Mi" firstAttribute="top" secondItem="KCd-I0-StO" secondAttribute="bottom" constant="8" id="Otk-ZP-kbZ"/>
+                        <constraint firstItem="KCd-I0-StO" firstAttribute="top" secondItem="kOa-S6-QqZ" secondAttribute="top" constant="20" id="o87-DN-3Rk"/>
+                        <constraint firstItem="Ste-LO-0Mi" firstAttribute="leading" secondItem="kOa-S6-QqZ" secondAttribute="leading" constant="20" id="puE-17-n2T"/>
+                        <constraint firstAttribute="trailing" secondItem="Ste-LO-0Mi" secondAttribute="trailing" constant="20" id="tjn-x2-tsx"/>
+                    </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
