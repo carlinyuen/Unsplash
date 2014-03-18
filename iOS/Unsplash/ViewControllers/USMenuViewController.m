@@ -29,6 +29,7 @@
 
     - (IBAction)rateButtonTapped:(id)sender;
     - (IBAction)feedbackButtonTapped:(id)sender;
+    - (IBAction)jumpToFirstButtonTapped:(id)sender;
 
 @end
 
@@ -54,6 +55,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - Event Handlers
 
 - (IBAction)rateButtonTapped:(id)sender
 {
@@ -83,6 +87,13 @@
     [mailController setSubject:TEXT_FEEDBACK_EMAIL_SUBJECT];
     [mailController setToRecipients:@[FEEDBACK_EMAIL]];
     [self presentViewController:mailController animated:true completion:nil];
+}
+
+- (IBAction)jumpToFirstButtonTapped:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(menuVC:jumpToFirstButtonTapped:)]) {
+        [self.delegate menuVC:self jumpToFirstButtonTapped:sender];
+    }
 }
 
 

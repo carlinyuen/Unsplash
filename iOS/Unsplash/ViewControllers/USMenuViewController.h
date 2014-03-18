@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class USMenuViewController;
+@protocol USMenuViewControllerDelegate <NSObject>
+
+    @optional
+    - (void)menuVC:(USMenuViewController *)vc jumpToFirstButtonTapped:(UIButton *)sender;
+
+@end
+
 @interface USMenuViewController : UIViewController
+
+    @property (weak, nonatomic) id<USMenuViewControllerDelegate> delegate;
 
 @end

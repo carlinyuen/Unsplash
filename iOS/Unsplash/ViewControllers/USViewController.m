@@ -11,6 +11,7 @@
 #import "ParallaxScrollingFramework.h"
 
 #import "USAppDelegate.h"
+#import "USMenuViewController.h"
 #import "USImageDatasource.h"
 #import "USImageViewController.h"
 
@@ -31,6 +32,7 @@
 @interface USViewController () <
     UIScrollViewDelegate
     , UIAlertViewDelegate
+    , USMenuViewControllerDelegate
 >
 
     /** Labels */
@@ -604,13 +606,19 @@
 	}
 }
 
-
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // Retry connection
     [self viewWillAppear:false];
+}
+
+#pragma mark - USMenuViewControllerDelegate
+
+- (void)menuVC:(USMenuViewController *)vc jumpToFirstButtonTapped:(UIButton *)sender
+{
+    [self.scrollView setContentOffset:CGPointZero animated:true];
 }
 
 

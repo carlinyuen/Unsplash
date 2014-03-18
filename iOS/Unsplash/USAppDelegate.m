@@ -32,6 +32,7 @@
 
     // Create menu sidebar controller
     USMenuViewController *menuVC = [[USMenuViewController alloc] initWithNibName:@"USMenuViewController" bundle:nil];
+    menuVC.delegate = rootVC;
 
     self.viewController = [[UISidebarViewController alloc]
         initWithCenterViewController:rootVC
