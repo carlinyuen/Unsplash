@@ -200,7 +200,7 @@
 /** @brief Trims down cache to save on memory */
 - (void)trimCacheAroundIndex:(NSInteger)index
 {
-    debugLog(@"trimCacheAroundIndex: %i", index);
+    debugLog(@"trimCacheAroundIndex: %i with buffer: %i", index, SIZE_CACHE_BUFFER);
 
     for (NSInteger i = 0; i < self.imageCache.count; ++i)
     {
