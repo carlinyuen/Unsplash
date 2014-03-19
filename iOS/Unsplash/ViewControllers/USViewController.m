@@ -289,7 +289,7 @@
 /** @brief Fetches the image at index if it isn't already cached */
 - (void)fetchImageAtIndex:(NSInteger)index
 {
-    debugLog(@"fetchImageAtIndex: %i", index);
+    debugLog(@"fetchImageAtIndex: %li", (long)index);
 
     UIImage *image = [self.datasource.imageCache objectAtIndex:index];
     if (!image || [image isEqual:[NSNull null]]) {
@@ -512,7 +512,7 @@
 - (void)imageLoaded:(NSNotification *)notification
 {
     NSInteger index = [notification.userInfo[@"index"] integerValue];
-    debugLog(@"imageLoaded: %i", index);
+    debugLog(@"imageLoaded: %li", (long)index);
     if (index >= self.imageViews.count) {
         NSLog(@"Index from imageLoaded notification out of bounds!");
         return;
@@ -580,7 +580,7 @@
 	// Change page control accordingly:
 	//	Update the page when more than 50% of the previous/next page is visible
     CGFloat pageSize = CGRectGetWidth(scrollView.bounds);
-    int page = floor((scrollView.contentOffset.x - pageSize / 2) / pageSize) + 1;
+    NSInteger page = floor((scrollView.contentOffset.x - pageSize / 2) / pageSize) + 1;
 
 	// Bound page limits
     NSInteger numImages = [self.datasource.imageURLCache count];
@@ -593,7 +593,7 @@
 	// If page is not the same as lastShownPage, page is about to change
 	if (self.lastShownPage != page)
     {
-        debugLog(@"pageChange: %i to %i", self.lastShownPage, page);
+        debugLog(@"pageChange: %li to %li", (long)self.lastShownPage, (long)page);
 
         // Actions to take when moving to/from first page
         if (page == 1 && self.lastShownPage == 0) {
